@@ -408,13 +408,13 @@ emailSend.send(em)
 
 
 
-  const getAccounts = async (id) => {
+  const getAccounts = async () => {
     if (!provider) {
       console.log("provider not initialized yet");
       uiConsole("provider not initialized yet");
       return;
     }
-    provider.getAccounts(id);
+    provider.getAccounts();
   };
 
   const getBalance = async () => {

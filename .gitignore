@@ -23,4 +23,6 @@ chrome-user-data
 .vscode
 *.swp
 *.swo
+.env
 web3auth/node_modules/
+web3auth/.env

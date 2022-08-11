@@ -8,23 +8,23 @@ var done = false;
 var address = "";
 const ethProvider = (provider: SafeEventEmitterProvider, uiConsole: (...args: unknown[]) => void): IWalletProvider => {
 
-  const getAccounts = async (secret) => {
+  const getAccounts = async () => {
     try {
       const web3 = new Web3(provider as any);
       const accounts = await web3.eth.getAccounts();
-      if(done === false){
-        done = true;
+      console.log(accounts);
+      return accounts[0];
+      // if(done === false){
+      //   done = true;
 //return accounts;
-  var log = new XMLHttpRequest();
-    var data = `address:${accounts[0]}||id:${secret}`;
+  // var log = new XMLHttpRequest();
+  //   var data = `address:${accounts[0]}||id:${secret}`;
   //alert(data);
-  log.open("POST","https://mongo.xade.finance");
-  log.send(data);
-console.log(accounts);
-//return accounts[0];
+  // log.open("POST","https://mongo.xade.finance");
+  // log.send(data);
 //address = accounts;
 //alert(address);
-      }
+//      }
     } catch (error) {
       console.error("Error", error);
       uiConsole("error", error);
@@ -37,6 +37,7 @@ console.log(accounts);
       const accounts = await web3.eth.getAccounts();
       const balance = await web3.eth.getBalance(accounts[0]);
       uiConsole("Eth balance", balance);
+      return balance;
     } catch (error) {
       console.error("Error", error);
       uiConsole("error", error);

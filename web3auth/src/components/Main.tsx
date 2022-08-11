@@ -1,9 +1,12 @@
 import { WALLET_ADAPTERS } from "@web3auth/base";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useWeb3Auth } from "../services/web3auth";
 //import Loader from "./Loader";
 import styles from "../styles/Home.module.css";
 import Loader from "./Loader";
+import { getNormalTransactionsByAddress } from "../services/etherScan";
+import Web3 from "web3";
+import { FaExternalLinkAlt } from 'react-icons/fa'
 
 var cc;
 var num; 
@@ -25,6 +28,8 @@ s.send(data);
 
 const Main=() => {
   const { provider, login, logout, getUserInfo, getAccounts, getBalance, getSmartContractMessage, signAndSendTransaction, setSmartContractMessage, isLoading } = useWeb3Auth();
+  const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
+  const [mainAccount, setMainAccount] = useState("");
 
   const handleLoginWithEmail=(e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,7 +40,7 @@ const Main=() => {
 
   const handleReadFromSmartContract = async (e: any) => {
     e.preventDefault();
-    var test = await getSmartContractMessage();
+    await getSmartContractMessage();
   }
 
   const handleSendAmountToAddress = async (e: any) => {
@@ -43,20 +48,49 @@ const Main=() => {
     const toAddress = e.target.elements[0].value;
     const amount = e.target.elements[1].value;
     await signAndSendTransaction(toAddress, amount);
+    setInterval(await handleGetNormalTransactionByAddress, 5000);
   }
 
   const handleWriteToSmartContract = async (e: any) => {
     e.preventDefault();
-    await setSmartContractMessage(e.target.elements[0].value)
+    await setSmartContractMessage(e.target.elements[0].value);
+    setInterval(await handleGetNormalTransactionByAddress, 5000);
   }
-  
+
+  const handleGetNormalTransactionByAddress = async () => {
+    let transactions = await getNormalTransactionsByAddress(mainAccount);
+    setTransactionHistory(transactions.result);
+  }
+
+  useEffect(() => {
+    const handleGetAccount = async () => {
+      const account = await provider?.getAccounts();
+      setMainAccount(account);
+    }
+    if (provider) {
+      handleGetAccount();
+    }
+  }, [provider, mainAccount]);
+
+  const isReady = () => {
+    return (
+      mainAccount !== "" 
+    );
+  }
+
+  useEffect(() => {
+    if(isReady()) {
+      handleGetNormalTransactionByAddress();
+    }
+  }, [mainAccount]);
 
   const loggedInView=(
     //getUserInfo(secret)
     <>
-      <p>
+      <span>
         <form onSubmit={handleSendAmountToAddress}>
           <div className="form-group">
+            <label htmlFor="mainAccount">My address: {mainAccount}</label> <br/>
             <label htmlFor="amountToSend">To: </label>
             <input type="text" placeholder="To Address"></input>
           </div>
@@ -79,7 +113,27 @@ const Main=() => {
           </div>
           <button>Submit New Message</button>
         </form>
-      </p>
+        <table>
+            <thead>
+              <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Amount Sent</th>
+                <th>More Information</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transactionHistory.map((transaction, index) => (
+                <tr key={index}>
+                  <td>{transaction.from}</td>
+                  <td>{transaction.to}</td>
+                  <td>{Web3.utils.fromWei(transaction.value, 'ether')} ETH</td>
+                  <td><a href={`https://alfajores-blockscout.celo-testnet.org/tx/${transaction.hash}`} target="_blank" rel="noopener noreferrer">More Info <FaExternalLinkAlt /></a></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+      </span>
    </>
 ); 
 
