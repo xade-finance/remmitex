@@ -48,13 +48,19 @@ const Main=() => {
     const toAddress = e.target.elements[0].value;
     const amount = e.target.elements[1].value;
     await signAndSendTransaction(toAddress, amount);
-    setInterval(await handleGetNormalTransactionByAddress, 5000);
+    let intervalID = setInterval(await handleGetNormalTransactionByAddress, 5000);
+    setTimeout(() => {
+      clearInterval(intervalID);
+    }, 11000);
   }
 
   const handleWriteToSmartContract = async (e: any) => {
     e.preventDefault();
     await setSmartContractMessage(e.target.elements[0].value);
-    setInterval(await handleGetNormalTransactionByAddress, 5000);
+    let intervalID = setInterval(await handleGetNormalTransactionByAddress, 5000);
+    setTimeout(() => {
+      clearInterval(intervalID);
+    }, 11000);
   }
 
   const handleGetNormalTransactionByAddress = async () => {
