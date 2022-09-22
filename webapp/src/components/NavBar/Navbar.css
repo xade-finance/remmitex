@@ -17,7 +17,7 @@
   z-index: 999;
   /* border-bottom: 5px solid red; */
   border-bottom: 5px solid;
-  border-image: linear-gradient(var(--angle), #c3092d, #7400c3, #222221) 1;
+/*  border-image: linear-gradient(var(--angle), #c3092d, #7400c3, #222221) 1;*/
   animation: 10s rotate linear infinite;
     
   }

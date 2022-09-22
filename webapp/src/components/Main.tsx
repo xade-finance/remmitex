@@ -35,6 +35,7 @@ import styles3 from './send.module.css'
 import { WALLET_ADAPTERS } from "@web3auth/base";
 import { useWeb3Auth } from "../services/web3auth";
 import Saving from '../Savings'
+import tickStyles from './tickStyles.module.css'
 
 var cc;
 var num; 
@@ -80,15 +81,67 @@ const settings = {
 
 
 const Send = () => {
-    let [current, setCurrent] = React.useState(true); // Phone number accept
-    
+  
+    let [current, setCurrent] = React.useState(0); // Phone number accept
+    let [address, setAddress] = React.useState('');
     let [cc, setCC] = React.useState(0);
     let [num, setNum] = React.useState(0);
     let [amount, setAmount] = React.useState(0);
+    let [error, setError] = React.useState({'message': '', 'style': {'color':'rgba(251, 251, 251, 0.6)'}, 'error': false})
+    const { signAndSendTransaction } = useWeb3Auth();
+
+
+    const handleSendAmountToAddress = async (e:any) => {
+      e.preventDefault();
+    if(amount <= 0) 
+    {
+      setError({...error, 'message': 'Please enter a valid amount', 'style': {'color': 'red'}, 'error': true})
+      return 
+    }
+    //alert(`Address: ${address} | Amt: ${amount}`);
+    setCurrent(2);
+  await signAndSendTransaction(address, amount.toString()); 
+  }
+
+
+    function retrieveAddr(e:any)  
+    {
+      e.preventDefault();
+        if(cc == 0)
+        {
+          setError({...error, 'message': 'Please select a valid country code', 'style': {'color': 'red'}, 'error': true}) 
+        } 
+        else if(num.toString().length != 10)
+        {
+          setError({...error, 'message': 'Please select a valid phone number', 'style': {'color': 'red'}, 'error': true}) 
+        }
+        else 
+        {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+    if (xhr.status == 404 || xhr.status == 500)
+    {
+            setError({...error, 'message': 'Please select a valid phone number', 'style': {'color': 'red'}, 'error': true}) 
+    }
+    else
+    {
+        setAddress(xhr.responseText);
+        setCurrent(1);
+        setError({'error': false, 'message': '', style: {'color': 'rgba(251, 251, 251, 0.6)'}})
+    }
+}
+
+    }
+xhr.open('GET', `https://mobile.api.xade.finance?phone=${String(cc)+String(num)}`, true);
+xhr.send(null);
+        }
+
+    }
 
     return (
       <div style = {{"margin": '5px'}}>
-      {(current == true)?
+      {(current == 0)?
       <>
                   <br />
                           <br />
@@ -97,10 +150,11 @@ const Send = () => {
                           <br />
                           <br />
       <h1 className = {styles3.element}>Enter mobile number</h1>
+                        <p id="error" style = {error.style}className={styles.error}>{error.message}</p>
 
 
     <div className={styles.number_input}  id="phonenums">
-                <form onSubmit = {() => setCurrent(false)} className={styles.number_form}>
+                <form onSubmit = {(e) => retrieveAddr(e)} className={styles.number_form}>
                     <div className={styles.flexContainer}>
                         <section className={styles.countryCode}>
                                     <div className={styles.flexContainerCountry}>
@@ -155,7 +209,7 @@ const Send = () => {
                </form></div>
                </>
                
-               : 
+               : (current == 1)? 
     
                <>
                            <br />
@@ -165,8 +219,11 @@ const Send = () => {
                           <br />
                           <br />
                 <h1 className = {styles3.element}>Enter amount</h1>
-                <form onSubmit = {() => {
+                <p id="error" style = {error.style}className={styles.error}>{error.message}</p>
+
+                <form onSubmit = {(e) => {
                       // Some web3auth function
+                      handleSendAmountToAddress(e);
                 }}>
                      <section className={styles.phoneNumber}>
                              <div className={styles.flexContainerCountry}>
@@ -184,11 +241,24 @@ const Send = () => {
                           <br />
    
                                    <div className = {styles3.submitSection}>
-                        <button type = "submit" className = {styles3.submitButton}>Confirm transaction</button>
+                        <button type = "submit" className = {styles3.submitButton2}>Confirm transaction</button>
               
                     </div>
                 </form>
-               </>}
+
+                <button></button>
+               </>
+               
+              :
+              <>
+              <div className={tickStyles.wrapper}> <svg className={tickStyles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className ={tickStyles.checkmark__circle} cx="26" cy="26" r="25" fill="none"/> <path className={tickStyles.checkmark__check} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+            </div>  
+
+            <div className = {tickStyles.and}>Transaction successful! </div>
+</>
+              }
+
       </div>
     );
   }
@@ -281,6 +351,7 @@ const Main=() => {
 
     var toAddr = document.getElementById("toAddr").value;
     var amt = document.getElementById("amount").value;
+    console.log("trying");
   await signAndSendTransaction(toAddr, amt); 
   }
 

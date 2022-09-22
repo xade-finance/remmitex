@@ -33,7 +33,7 @@ const CarouselCard = () => {
           Stable Deposit Rate
         </div>
       </div>
-      {/* <div className="rectangle" id="6">
+      <div className="rectangle" id="6">
 
         <div className='textHolder'>
           <div className="holding">
@@ -48,7 +48,7 @@ const CarouselCard = () => {
           </div>
           <br></br>$0.000
         </div>
-      </div> */}
+      </div>
     </div>
     // </Container>
   )

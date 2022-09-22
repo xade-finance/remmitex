@@ -57,14 +57,14 @@
   text-align: center
 }
 
-.buttonHolder {
+/* .buttonHolder {
   display: flex;
   justify-content: space-between;
   width: 100%;
 
-}
+} */
 
-.learnMore {
+/* .learnMore {
   height: 40px;
   width: 150px;
   display: flex;
@@ -76,4 +76,4 @@
 
     6px 5px 8px rgba(0, 0, 0, 0.7),
     -6px -5px 8px rgba(53, 53, 53, 0.2);
-}
+} */

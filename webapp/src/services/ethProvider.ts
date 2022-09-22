@@ -77,7 +77,7 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
       });
       uiConsole("txRes", txRes);
     } catch (error) {
-      alert("Could not process transaction!")
+      console.log("Could not process transaction!")
       console.log("error", error);
       
     }

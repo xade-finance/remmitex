@@ -84,9 +84,9 @@ body{
     border-radius: 20px;
     background:#1c1d1e;
     box-shadow: 
-      inset 5px 5px 7px rgba(0, 0, 0, 0.1),
-      6px 5px 16px rgba(0, 0, 0, 0.3),
-      -6px -5px 16px rgba(53, 53, 53, 0.7);
+      inset 5px 5px 7px rgb(0, 0, 0),
+      6px 5px 16px rgb(0,0,0),
+      -6px -5px 16px rgb(67,14,239);
       font-size: 1.1rem;
       color: #fff;
       font-weight: 500;

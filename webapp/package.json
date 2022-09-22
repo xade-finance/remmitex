@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@mui/material": "^5.10.4",
-    "@transak/transak-sdk": "^1.2.1",
+    "@transak/transak-sdk": "^1.2.2",
     "@types/express": "^4.17.13",
     "@types/mongoose": "^5.11.97",
     "@types/node-fetch": "^2.6.1",

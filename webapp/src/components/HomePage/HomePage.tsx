@@ -90,10 +90,10 @@ const HomePage = (props: Props) => {
             <div className='utilityButtons'>
                 <div className='buttonHolder'>
                     <div className='paymentsButton'>
-                        <Link to = '/send'><p style = {{'color': '#fff', 'textDecoration': 'none' }}>Send</p></Link>
+                        <Link to = '/send'><a style = {{'color': '#fff', 'textDecoration': 'none' }}>Send</a></Link>
                     </div>
                     <div className='paymentsButton'>
-                        Request
+                        <a>Request</a>
                     </div>
                     <Link
                       to='/qr'
