@@ -76,10 +76,17 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
         maxFeePerGas: "6000000000000", // Max fee per gas
       });
       uiConsole("txRes", txRes);
+      if (txRes.status == '0x1' || txRes.status == 1) {
+        console.log(`${txRes.status} Transaction Success`);
+        return true;
+      } else {
+        console.log(`${txRes.status} Transaction Failed`);
+        return false;
+      }
     } catch (error) {
       console.log("Could not process transaction!")
       console.log("error", error);
-      
+      return false;
     }
   };
 
