@@ -6,7 +6,7 @@ Send Payments To Your Loved Ones All Around The Globe Instantly With Close To Ze
 
 ## Team 
 
-- Arav Budhiraja (@arav06)
+- Arnav Jhajharia (@Arnav-Jhajharia)
 - Andrew Alisa (@andrewalisa)
 - Tanishq Sharma (@SharmaTanishq)
 - Anshuman Tekriwal (@Ansh3101)
