@@ -15,28 +15,37 @@
 // import { WALLET_ADAPTERS } from "@web3auth/base";
 // import { useWeb3Auth } from "../services/web3auth";
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
+import React from 'react'
 import styles from "../styles/Home.module.css";
 import Loader from "./Loader";
 import styles2 from './Payments.module.css'
-import CarouselCard from './CarouselCard/CarouselCard'
-import HomePage from './HomePage/HomePage'
-import QrCodePage from './HomePage/QrCodePage'
-import { Layout } from './Layout'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { FormEvent, useEffect, useState } from "react";
 import Investments from './INVESTMENTS'
 import ComingSoon from './ComingSoon'
-import React from 'react'
 import styles3 from './send.module.css'
 import { WALLET_ADAPTERS } from "@web3auth/base";
 import { useWeb3Auth } from "../services/web3auth";
-import Saving from './Savings'
+import Saving from '../Savings'
 import tickStyles from './tickStyles.module.css'
 import RegisterBox from './register'
+import "./QrPage.css";
+import { ImCross } from "react-icons/im";
+import { FiShare } from "react-icons/fi";
+import { Link } from 'react-router-dom'
+// import { Avatar } from 'web3uikit'
+import QRCode from "react-qr-code";
+import QRScanner from "./QRScan";
+import CarouselCard from './CarouselCard/CarouselCard'
+import Popup from 'reactjs-popup'
+import { Layout } from './Layout'
+import './HomePage.css'
+import { TbQrcode } from "react-icons/tb";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 var cc;
 var num; 
@@ -279,7 +288,7 @@ s.send(data);
 }
 
 const Main=() => {
-  const { provider, login, logout, getUserInfo, getAccounts, getBalance,isLoading,signAndSendTransaction } = useWeb3Auth();
+  const { provider, login, logout, getUserInfo, getAccounts, readAddress, getBalance,isLoading,signAndSendTransaction } = useWeb3Auth();
   const handleLoginWithEmail=(e: FormEvent<HTMLFormElement>) => {
   //     var error = document.getElementById("error");
   // cc = document.getElementById("cc").value;
@@ -310,6 +319,105 @@ const Main=() => {
         // }
 
   }
+  const HomePage = (props: Props) => {
+type Props = {}
+
+const settings = {
+    dots: true,
+    infinite: true,
+    
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    arrows:false,
+    responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            initialSlide: 1
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+  };
+    let symbol = 'CELO';
+    let value = '0.00';
+   
+  const [amount, setAmt] = useState(0);
+
+  useEffect(() => {
+    const handleGetBalance = async () => {
+      const bal = await provider?.getBalance();
+      setAmt(bal);
+    }
+    if (provider) {
+      handleGetBalance();
+    }
+  }, [provider, amount]);
+
+  return (
+      
+        <div className='container'>
+            <div className='carouselHolder'>
+                <Slider {...settings}>
+                      <CarouselCard/>
+                      <CarouselCard/>
+                      <CarouselCard/>
+                </Slider>
+            </div>
+            <div className='myActivity'>
+                <div className='totalBalance'>
+                    <p className='label'>Checking Account</p>
+                    <p className='value'>{symbol} {amount}</p>
+                </div>
+                <div className='activityContent'>
+                    YOUR ACTIVITY APPEARS HERE
+                </div>
+            </div>
+            <div className='utilityButtons'>
+                <div className='buttonHolder'>
+                    <div className='paymentsButton'>
+                        <Link to = '/send'><p style = {{'color': '#fff', 'textDecoration': 'none' }}>Send</p></Link>
+                    </div>
+                    <div className='paymentsButton'>
+                        Request
+                    </div>
+  <div>
+
+                    <Link
+                      to='/qr'
+                    >
+                    <div className='scanner'>
+                        <TbQrcode />
+                    </div>
+                    </Link>
+                </div>
+                </div>
+            </div>
+            
+        </div>
+    
+  )
+}
+
 
     const handleLoginWithEmail2=(e: FormEvent<HTMLFormElement>) => {
       var error = document.getElementById("error");
@@ -347,6 +455,109 @@ const Main=() => {
   }
 }
 
+const [mainAccount, setMainAccount] = useState("");
+
+  useEffect(() => {
+    const handleGetAccount = async () => {
+      const account = await provider?.readAddress();
+      setMainAccount(account);
+    }
+    if (provider) {
+      handleGetAccount();
+    }
+  }, [provider, mainAccount]);
+
+    const [username, setUser] = useState("");
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+    if (xhr.status == 200)
+{
+        setUser(xhr.responseText);
+    
+}
+else{
+    setUser("User");
+}
+}
+
+    }
+xhr.open('GET', `https://user.api.xade.finance?address=${mainAccount}`, true);
+xhr.send(null);
+
+    // const [phoneNum, setPhone] = useState("");
+
+//     var xhr = new XMLHttpRequest();
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState == XMLHttpRequest.DONE) {
+//     if (xhr.status == 200)
+// {
+//         setPhone(xhr.responseText);
+    
+// }
+// else{
+//     setPhone("Phone Number");
+// }
+// }
+
+//     }
+// xhr.open('GET', `https://mobile.api.xade.finance?address=0x6f994FcccBd601D164E3743714F5D0D315Eda41b`, true);
+// xhr.send(null);
+
+const QRCodeValue = `${mainAccount}+${username}`;
+
+const QrCodePage = (props: Props) => {
+
+    const [isActive, setActive] = useState(false);
+
+    const showReader = () => {
+        if (isActive)
+            return (
+                <div className={'mainContent' + 'active'}>
+                    <div className={"contentWrapper"}>
+                        <QRScanner />
+                    </div>
+                </div>
+            )
+
+    }
+    return (
+        <div className='containerQrPage'>
+            <div className='topBar'>
+                <Link to='/'>
+                    <div className='goBack'><ImCross /></div>
+                </Link>
+                <div className='buttonHolderQrPage'>
+                    <div className={'qrButtonLeft ' + (isActive ? 'active' : 'inActive')} onClick={() => setActive(!isActive)} >My Code</div>
+                    <div className={'qrButtonRight ' + (isActive ? 'inActive' : 'active')} onClick={() => setActive(!isActive)} >Scan</div>
+                </div>
+
+                <div className='share'><FiShare /></div>
+
+            </div>
+            <div className={'mainContent ' + (isActive ? 'myInfoInActive' : 'myInfoActive')}>
+                <div className='contentWrapper'>
+                    <div className='infoHolder'>
+
+                                  <div><h1>{username}</h1></div>
+                        <div><h4>{mainAccount}</h4></div>
+                        <div><h4>Celo Alfajores Testnet</h4></div>
+                    </div>
+                    <div className='QrHolder'>
+                        <div className='QrWrapper'>
+                            <QRCode value={QRCodeValue} />
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            {showReader()}
+
+        </div>
+    )
+}
 
   const handleSendAmountToAddress = async () => {
 
@@ -413,6 +624,7 @@ function registerSocial(social:string){
         }
 
 }
+
 
 
 
@@ -743,3 +955,4 @@ window.location.href="/login";
 };
 
 export default Main;
+

@@ -25,6 +25,7 @@ export interface IWeb3AuthContext {
   getAccounts: () => Promise<any>;
   getBalance: () => Promise<any>;
     signAndSendTransaction: (toAddress: string, amount: string) => Promise<any>;
+    readAddress: () => Promise<any>;
 
 }
 
@@ -40,6 +41,7 @@ export const Web3AuthContext = createContext<IWeb3AuthContext>({
   getAccounts: async () => {},
   getBalance: async () => {},
     signAndSendTransaction: async () => {},
+    readAddress: async () => {}
 
 });
 
@@ -465,3 +467,4 @@ emailSend.send(em)
   };
   return <Web3AuthContext.Provider value={contextProvider}>{children}</Web3AuthContext.Provider>;
 };
+
