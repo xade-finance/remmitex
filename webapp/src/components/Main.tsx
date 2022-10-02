@@ -748,7 +748,7 @@ const QrCodePage = (props: Props) => {
 
                                   <div><h1>{username}</h1></div>
                         <div><h4>{mainAccount}</h4></div>
-                        <div><h4>Celo Alfajores Testnet</h4></div>
+                        <div><h4>🟢 Celo Alfajores Testnet</h4></div>
                     </div>
                     <div className='QrHolder'>
                         <div className='QrWrapper'>
