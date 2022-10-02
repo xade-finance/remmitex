@@ -1,3 +1,19 @@
+// import { WALLET_ADAPTERS } from "@web3auth/base";
+// import { useWeb3Auth } from "../services/web3auth";
+// //import Loader from "./Loader";
+// import styles from "../styles/Home.module.css";
+// import Loader from "./Loader";
+// import styles2 from './Payments.module.css'
+// import CarouselCard from './CarouselCard/CarouselCard'
+// import { Layout } from './Layout'
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+// import Popup from 'reactjs-popup';
+// import 'reactjs-popup/dist/index.css';
+// import { FormEvent, useEffect, useState } from "react";
+// import { WALLET_ADAPTERS } from "@web3auth/base";
+// import { useWeb3Auth } from "../services/web3auth";
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import React from 'react'
 import styles from "../styles/Home.module.css";
@@ -19,11 +35,10 @@ import RegisterBox from './register'
 import "./QrPage.css";
 import { ImCross } from "react-icons/im";
 import { FiShare } from "react-icons/fi";
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import { Avatar } from 'web3uikit'
 import QRCode from "react-qr-code";
-import "./qrscan.css";
-import { Html5QrcodeScanner } from "html5-qrcode";
+import QRScanner from "./QRScan";
 import CarouselCard from './CarouselCard/CarouselCard'
 import Popup from 'reactjs-popup'
 import { Layout } from './Layout'
@@ -73,8 +88,6 @@ const settings = {
         }
       ]
   };
-
-
 
 
 const Send = () => {
@@ -387,6 +400,16 @@ const settings = {
                     <div className='paymentsButton'>
                         Request
                     </div>
+  <div>
+
+                    <Link
+                      to='/qr'
+                    >
+                    <div className='scanner'>
+                        <TbQrcode />
+                    </div>
+                    </Link>
+                </div>
                 </div>
             </div>
             
@@ -482,129 +505,7 @@ xhr.send(null);
 // xhr.open('GET', `https://mobile.api.xade.finance?address=0x6f994FcccBd601D164E3743714F5D0D315Eda41b`, true);
 // xhr.send(null);
 
-const SendQR = () => {
-  const params = useParams();
-  let [current, setCurrent] = React.useState(0); // Phone number accept
-
-  let [amount, setAmount] = React.useState(0);
-  let [error, setError] = React.useState({'message': '', 'style': {'color':'rgba(251, 251, 251, 0.6)'}, 'error': false})
-  const handleSendAmountToAddress = async (e:any) => {
-    e.preventDefault();
-    const addr = params.address;
-
-  if(amount <= 0) 
-  {
-    setError({...error, 'message': 'Please enter a valid amount', 'style': {'color': 'red'}, 'error': true})
-    return 
-  }
-  alert(`Address: ${addr} | Amt: ${amount}`);
-  setCurrent(1);
-await signAndSendTransaction(addr, amount.toString()); 
-}
- return(
-  
-<div>
-{(current == 0)?
-<>
-  <br />
-  <br />
-  <br />
-  <br />
-<h1 className = {styles3.element}>Enter amount</h1>
-<p id="error" style = {error.style}className={styles.error}>{error.message}</p>
-
-<form onSubmit = {(e) => {
-// Some web3auth function
-handleSendAmountToAddress(e);
-}}>
-<section className={styles.phoneNumber}>
-       <div className={styles.flexContainerCountry}>
-          <section className={styles.callingCodeTitle}>
-              Amount <a className={styles.red}>*</a>
-          </section>    
-
-          <section>
-              <input id='num' onChange = {(e) => setAmount(parseInt(e.target.value))} value = {amount} className={styles.inputForm} type='number' autoFocus/>
-          </section>
-      </div>
-  </section>
-    <br />
-    <br />
-    <br />
-
-             <div className = {styles3.submitSection}>
-  <button type = "submit" className = {styles3.submitButton2}>Confirm transaction</button>
-
-</div>
-</form>
-</>
-:
-<>
-<div className={tickStyles.wrapper}> <svg className={tickStyles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className ={tickStyles.checkmark__circle} cx="26" cy="26" r="25" fill="none"/> <path className={tickStyles.checkmark__check} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-          </svg>
-            </div>  
-
-            <div className = {tickStyles.and}>Transaction successful! </div>
-</>
-}
-</div>
-  );
-};
-
-const QRCodeValue = `${username}@${mainAccount}`;
-
-const QRScanner = () => {
-  const [scannedCodes, setScannedCodes] = useState([]);
-var error = "";
-  function activateLasers() {
-    var decodedText = "asdf";
-    var decodedResult = "asdfasdfasdf";
-    console.log(scannedCodes);
-
-    setScannedCodes(scannedCodes.concat([{ decodedText, decodedResult }]));
-  }
-
-  useEffect(() => {
-    function onScanSuccess(decodedText, decodedResult) {
-window.stop();     
- // handle the scanned code as you like, for example:
-      console.log(`Code matched = ${decodedText}`, decodedResult);
-   // setScannedCodes(scannedCodes.concat([{ decodedText, decodedResult }]));
-const walletAddr = decodedText.split("@")[1]
-window.location.href="/sendQR/"+walletAddr;
-}
-
-    function onScanFailure(error) {
-      // handle scan failure, usually better to ignore and keep scanning.
-      // for example:
-      console.warn(`Code scan error = ${error}`);
-    }
-
-    let html5QrcodeScanner = new Html5QrcodeScanner(
-      "reader",
-      { fps: 10, qrbox: { width: 250, height: 250 } },
-      /* verbose= */ false
-    );
-    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-  });
-//alert(scannedCodes);
-  return (
-    <div>
-    <br />
-     <br />
-      <br />
-          <br />
-     <br />
-      <br />
-          <br />
-     <br />
-      <br />
-      <div id="reader" width="600px"></div>
-   <a>{error}</a>
-    </div>
-  );
-};
-
+const QRCodeValue = `${mainAccount}+${username}`;
 
 const QrCodePage = (props: Props) => {
 
@@ -688,7 +589,6 @@ const balance = getBalance();
          <Route path="/qr" element={<Layout><QrCodePage /></Layout>} />
 <Route path="/savings" element={<Layout><Saving /></Layout>} />
 	         <Route path="/send" element={<Send />} />
-           <Route path="/sendQR/:address" element={<SendQR />} />
 
 
        </Routes>
@@ -1027,7 +927,7 @@ window.location.href="/login";
      /> 
  <Route path= "/register" element={<Box/>}/> 
  <Route path="/login" element={<Box2 />}/> 
-<Route path="/qrscan" element={<QRScanner />}/> 
+
 
 
         </Routes> 
