@@ -278,8 +278,21 @@ s.send(data);
 }
 
 const Main=() => {
-  const { provider, login, logout, getUserInfo, getAccounts, readAddress, getBalance,isLoading,signAndSendTransaction } = useWeb3Auth();
+  const { provider, login, logout, getUserInfo, getAccounts, readAddress,userData, getBalance,isLoading,signAndSendTransaction } = useWeb3Auth();
 const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
+
+const[username, setUsername] = useState("");
+
+  useEffect(() => {
+    const handleGetUser = async () => {
+      const user = await userData();
+      setUsername(user);
+    }
+    if (provider) {
+      handleGetUser();
+    }
+  }, [provider, username]);
+
 const [mainAccount, setMainAccount] = useState("");
 
   const handleGetNormalTransactionByAddress = async () => {
@@ -494,7 +507,7 @@ const amtStr = amount.toString();
   }
 }
 
-    const [username, setUser] = useState("");
+    /*const [username, setUser] = useState("");
 
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
@@ -512,7 +525,7 @@ else{
     }
 xhr.open('GET', `https://user.api.xade.finance?address=${mainAccount}`, true);
 xhr.send(null);
-
+*/
     // const [phoneNum, setPhone] = useState("");
 
 //     var xhr = new XMLHttpRequest();
