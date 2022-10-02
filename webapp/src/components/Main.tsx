@@ -281,6 +281,19 @@ const Main=() => {
   const { provider, login, logout, getUserInfo, getAccounts, readAddress,userData, getBalance,isLoading,signAndSendTransaction } = useWeb3Auth();
 const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
 
+
+
+
+
+ 
+
+
+
+ 
+ 
+ 
+
+
 const[username, setUsername] = useState("");
 
   useEffect(() => {
@@ -406,8 +419,39 @@ const settings = {
       handleGetBalance();
     }
   }, [provider, amount]);
-const amtStr = amount.toString();
-  return (
+const amountStr = amount.toString();
+const [price,setPrice] = useState(0);
+var donezo = false;
+ /* useEffect(() => {
+    const handleGetCelo = async () => {
+      var xhr2 = new XMLHttpRequest();
+  xhr2.onreadystatechange=function(){
+ if(xhr2.readyState==XMLHttpRequest.DONE){
+if(xhr2.status == 200){
+setPrice(xhr2.responseText);
+}
+}
+}
+    }
+   
+  }, [price]);
+
+*/
+
+var xhr2 = new XMLHttpRequest();
+  xhr2.onreadystatechange=function(){
+ if(xhr2.readyState==XMLHttpRequest.DONE){
+if(xhr2.status == 200){
+  setPrice(xhr2.responseText);
+}
+}
+}
+
+  xhr2.open('GET', "https://celo.api.xade.finance")
+  xhr2.send() 
+const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString().substring(0, 4);;
+//const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
+return (
       
         <div className='container'>
             <div className='carouselHolder'>
@@ -420,7 +464,7 @@ const amtStr = amount.toString();
             <div className='myActivity'>
                 <div className='totalBalance'>
                     <p className='label'>Checking Account</p>
-                    <p className='value'>CELO {Web3.utils.fromWei(amtStr, 'ether')}</p>
+                    <p className='value'>USD  {usdBal}</p>
                 </div>
       <div className='activityContent'>
    <table>
