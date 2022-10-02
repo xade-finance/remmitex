@@ -1,3 +1,6 @@
+import Web3 from "web3";
+import { FaExternalLinkAlt } from 'react-icons/fa'
+import { getNormalTransactionsByAddress } from "../services/celoScan";
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import React from 'react'
 import styles from "../styles/Home.module.css";
@@ -276,7 +279,38 @@ s.send(data);
 
 const Main=() => {
   const { provider, login, logout, getUserInfo, getAccounts, readAddress, getBalance,isLoading,signAndSendTransaction } = useWeb3Auth();
-  const handleLoginWithEmail=(e: FormEvent<HTMLFormElement>) => {
+const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
+const [mainAccount, setMainAccount] = useState("");
+
+  const handleGetNormalTransactionByAddress = async () => {
+    let transactions = await getNormalTransactionsByAddress(mainAccount);
+    setTransactionHistory(transactions.result);
+  }
+
+  useEffect(() => {
+    const handleGetAccount = async () => {
+      const account = await provider?.readAddress();
+      setMainAccount(account);
+    }
+    if (provider) {
+      handleGetAccount();
+    }
+  }, [provider, mainAccount]);
+
+  const isReady = () => {
+    return (
+      mainAccount !== "" 
+    );
+  }
+
+  useEffect(() => {
+    if(isReady()) {
+      handleGetNormalTransactionByAddress();
+    }
+  }, [mainAccount]);
+
+  
+const handleLoginWithEmail=(e: FormEvent<HTMLFormElement>) => {
   //     var error = document.getElementById("error");
   // cc = document.getElementById("cc").value;
   // num = document.getElementById("num").value;
@@ -359,7 +393,7 @@ const settings = {
       handleGetBalance();
     }
   }, [provider, amount]);
-
+const amtStr = amount.toString();
   return (
       
         <div className='container'>
@@ -373,20 +407,48 @@ const settings = {
             <div className='myActivity'>
                 <div className='totalBalance'>
                     <p className='label'>Checking Account</p>
-                    <p className='value'>{symbol} {amount}</p>
+                    <p className='value'>CELO {Web3.utils.fromWei(amtStr, 'ether')}</p>
                 </div>
-                <div className='activityContent'>
-                    YOUR ACTIVITY APPEARS HERE
-                </div>
+      <div className='activityContent'>
+   <table>
+            <thead>
+              <tr>
+<th>Block Number</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Amount</th>
+                <th>More Information</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transactionHistory.map((transaction, index) => (
+                <tr key={index}>
+<td>{transaction.blockNumber}</td>                  
+<td>{transaction.from}</td>
+                  <td>{transaction.to}</td>
+                  <td>{Web3.utils.fromWei(transaction.value, 'ether')} CELO</td>
+                  <td><a href={`https://alfajores-blockscout.celo-testnet.org/tx/${transaction.hash}`} target="_blank" rel="noopener noreferrer">More Info <FaExternalLinkAlt /></a></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>                    
+     </div>
             </div>
             <div className='utilityButtons'>
                 <div className='buttonHolder'>
                     <div className='paymentsButton'>
-                        <Link to = '/send'><p style = {{'color': '#fff', 'textDecoration': 'none' }}>Send</p></Link>
+                        <Link to = '/send'><a style = {{'color': '#fff', 'textDecoration': 'none' }}>Send</a></Link>
                     </div>
                     <div className='paymentsButton'>
-                        Request
+                       <Link to = '/qr'><a style = {{'color': '#fff', 'textDecoration': 'none' }}>Request</a></Link>
                     </div>
+                    <Link
+                      to='/qr'
+                    >
+                    <div className='scanner'>
+                        <TbQrcode />
+                    </div>
+                    </Link>
                 </div>
             </div>
             
@@ -431,18 +493,6 @@ const settings = {
 
   }
 }
-
-const [mainAccount, setMainAccount] = useState("");
-
-  useEffect(() => {
-    const handleGetAccount = async () => {
-      const account = await provider?.readAddress();
-      setMainAccount(account);
-    }
-    if (provider) {
-      handleGetAccount();
-    }
-  }, [provider, mainAccount]);
 
     const [username, setUser] = useState("");
 
@@ -687,7 +737,7 @@ const balance = getBalance();
          <Route path="/deposit-withdraw" element={<Layout><ComingSoon /></Layout>} />
          <Route path="/qr" element={<Layout><QrCodePage /></Layout>} />
 <Route path="/savings" element={<Layout><Saving /></Layout>} />
-	         <Route path="/send" element={<Send />} />
+                 <Route path="/send" element={<Send />} />
            <Route path="/sendQR/:address" element={<SendQR />} />
 
 
@@ -1055,4 +1105,3 @@ window.location.href="/login";
 };
 
 export default Main;
-
