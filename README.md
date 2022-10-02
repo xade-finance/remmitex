@@ -9,6 +9,5 @@ Send Payments To Your Loved Ones All Around The Globe Instantly With Close To Ze
 - Arav Budhiraja (@arav06)
 - Andrew Alisa (@andrewalisa)
 - Tanishq Sharma (@SharmaTanishq)
-- Anshuman Tekriwal (@Ansh3101)
 
 ***
