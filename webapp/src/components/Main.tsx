@@ -432,7 +432,7 @@ var xhr2 = new XMLHttpRequest();
 }
 }
 
-  xhr2.open('GET', "https://celo.api.xade.finance")
+  xhr2.open('GET', "https://price.api.xade.finance/celo")
   xhr2.send() 
 //const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString();
 //const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
@@ -471,7 +471,7 @@ return (
 <td>{transaction.blockNumber}</td>                  
 <td>{transaction.from}</td>
                   <td>{transaction.to}</td>
-                  <td>{Web3.utils.fromWei(transaction.value, 'ether')} CELO</td>
+                  <td>{(parseFloat(price)*(parseFloat(transaction.value)/Math.pow(10,18))).toFixed(2)} USD</td>
                   <td><a href={`https://alfajores-blockscout.celo-testnet.org/tx/${transaction.hash}`} target="_blank" rel="noopener noreferrer">More Info <FaExternalLinkAlt /></a></td>
                 </tr>
               ))}
