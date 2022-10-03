@@ -281,19 +281,6 @@ const Main=() => {
   const { provider, login, logout, getUserInfo, getAccounts, readAddress,userData, getBalance,isLoading,signAndSendTransaction } = useWeb3Auth();
 const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
 
-
-
-
-
- 
-
-
-
- 
- 
- 
-
-
 const[username, setUsername] = useState("");
 
   useEffect(() => {
@@ -420,8 +407,8 @@ const settings = {
     }
   }, [provider, amount]);
 const amountStr = amount.toString();
-const [price,setPrice] = useState(0);
-var donezo = false;
+//const [price,setPrice] = useState(0);
+//var donezo = false;
  /* useEffect(() => {
     const handleGetCelo = async () => {
       var xhr2 = new XMLHttpRequest();
@@ -437,20 +424,21 @@ setPrice(xhr2.responseText);
   }, [price]);
 
 */
-
+const [price,setPrice] = useState("")
 var xhr2 = new XMLHttpRequest();
   xhr2.onreadystatechange=function(){
  if(xhr2.readyState==XMLHttpRequest.DONE){
-if(xhr2.status == 200){
-  setPrice(xhr2.responseText);
-}
+ setPrice(xhr2.responseText)
 }
 }
 
   xhr2.open('GET', "https://celo.api.xade.finance")
   xhr2.send() 
-const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString().substring(0, 4);;
+//const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString();
 //const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
+const usdBal = (parseFloat(price)*(parseFloat(amountStr)/Math.pow(10,18))).toFixed(2);
+//alert(price);
+
 return (
       
         <div className='container'>
