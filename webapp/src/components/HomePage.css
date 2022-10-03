@@ -58,7 +58,7 @@ body{
 }
 .utilityButtons{
     display: flex;
-    width: 32%;
+    width: 40%;
     height: 80px;
     justify-content: center;
     /* border-width: 301px; */
@@ -66,7 +66,7 @@ body{
     align-items: center;
 }
 .buttonHolder{
-    width: 50%;
+    width: 100%;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -76,20 +76,25 @@ body{
 
 .paymentsButton{
     
-    width: 120px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80%;
+    height: 100%;
     border-radius: 20px;
-    background:#1c1d1e;
+    background:#000;
     box-shadow: 
       inset 5px 5px 7px rgb(0, 0, 0),
-      6px 5px 16px rgb(0,0,0),
+      6px 5px 16px rgb(28, 29, 30),
       -6px -5px 16px rgb(67,14,239);
       font-size: 1.1rem;
       color: #fff;
+      text-decoration:none;
       font-weight: 500;
+}
+
+a{
+        text-decoration:none;
 }
 
 .scanner{
@@ -177,11 +182,7 @@ body{
         height: 80%;
         border-radius: 20px;
         background:#1c1d1e;
-        box-shadow: 
-          inset 5px 5px 7px rgba(0, 0, 0, 0.1),
-          6px 5px 16px rgba(0, 0, 0, 0.3),
-          -6px -5px 16px rgba(53, 53, 53, 0.7);
-          font-size: 1.1rem;
+                 font-size: 1.1rem;
           color: #fff;
           font-weight: 500;
     }
@@ -194,5 +195,3 @@ body{
         color: rgba(255, 255, 255, 0.7);
     }
 }
-
-
