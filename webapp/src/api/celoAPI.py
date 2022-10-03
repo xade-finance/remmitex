@@ -1,18 +1,18 @@
 from requests import get as rget
-from json import loads as jloads
+#from json import loads as jloads
 from flask import Flask
-
+from bs4 import BeautifulSoup as bs
 app = Flask(__name__)
 
-API_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=API_KEY_HERE"
+URL = "https://coinmarketcap.com/currencies/celo/"
 
 @app.route('/')
 def index():
-      response = rget(API_URL)
-      jsonData = jloads(response.text)
-
-      currentPrice = f'{jsonData["data"][0]["quote"]["USD"]["price"]}'
-
+      response = rget(URL)
+      content = response.content
+      soup = bs(content,'lxml')
+      divPrice = soup.find_all('div',class_ = "priceValue")
+      currentPrice = divPrice[0].find('span').text.replace("$","")
       return currentPrice
 
 if __name__ == '__main__':
