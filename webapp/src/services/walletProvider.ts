@@ -4,6 +4,7 @@ import solanaProvider from "./solanaProvider";
 
 export interface IWalletProvider {
   getAccounts: () => Promise<any>;
+  readAddress: () => Promise<any>;
   getBalance: () => Promise<any>;
   signAndSendTransaction: (toAddress: string, amount: string) => any;
 }

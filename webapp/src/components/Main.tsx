@@ -1,44 +1,44 @@
-// import { WALLET_ADAPTERS } from "@web3auth/base";
-// import { useWeb3Auth } from "../services/web3auth";
-// //import Loader from "./Loader";
-// import styles from "../styles/Home.module.css";
-// import Loader from "./Loader";
-// import styles2 from './Payments.module.css'
-// import CarouselCard from './CarouselCard/CarouselCard'
-// import { Layout } from './Layout'
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
-// import Popup from 'reactjs-popup';
-// import 'reactjs-popup/dist/index.css';
-// import { FormEvent, useEffect, useState } from "react";
-// import { WALLET_ADAPTERS } from "@web3auth/base";
-// import { useWeb3Auth } from "../services/web3auth";
+import Web3 from "web3";
+import { FaExternalLinkAlt } from 'react-icons/fa'
+import { getNormalTransactionsByAddress } from "../services/celoScan";
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
+import React from 'react'
 import styles from "../styles/Home.module.css";
 import Loader from "./Loader";
 import styles2 from './Payments.module.css'
-import CarouselCard from './CarouselCard/CarouselCard'
-import HomePage from './HomePage/HomePage'
-import QrCodePage from './HomePage/QrCodePage'
-import { Layout } from './Layout'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { FormEvent, useEffect, useState } from "react";
 import Investments from './INVESTMENTS'
 import ComingSoon from './ComingSoon'
-import React from 'react'
 import styles3 from './send.module.css'
 import { WALLET_ADAPTERS } from "@web3auth/base";
 import { useWeb3Auth } from "../services/web3auth";
+
 import Saving from './../Savings';
 import tickStyles from './tickStyles.module.css';
 import tickStyles2 from './tickStyles2.module.css';
 // import RegisterBox from './register'
-import Web3 from 'web3';
+
+import tickStyles from './tickStyles.module.css'
+import RegisterBox from './register'
+import "./QrPage.css";
+import { ImCross } from "react-icons/im";
+import { FiShare } from "react-icons/fi";
+import { Link, useParams } from 'react-router-dom'
+// import { Avatar } from 'web3uikit'
+import QRCode from "react-qr-code";
+import "./qrscan.css";
+import { Html5QrcodeScanner } from "html5-qrcode";
+import CarouselCard from './CarouselCard/CarouselCard'
+import Popup from 'reactjs-popup'
+import { Layout } from './Layout'
+import './HomePage.css'
+import { TbQrcode } from "react-icons/tb";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 var cc;
 var num;
@@ -89,6 +89,8 @@ const Information = (props:any) => {
       </>
     )
 }
+
+
 
 
 const Send = () => {
@@ -442,40 +444,234 @@ function storenum(c, n) {
   s.send(data);
 }
 
-const Main = () => {
-  const { provider, login, logout, getUserInfo, getAccounts, getBalance, isLoading, signAndSendTransaction } = useWeb3Auth();
-  const handleLoginWithEmail = (e: FormEvent<HTMLFormElement>) => {
-    //     var error = document.getElementById("error");
-    // cc = document.getElementById("cc").value;
-    // num = document.getElementById("num").value;
-    // var re = /\S+@\S+\.\S+/;
 
-    // if(cc == 0)
-    // {
-    //               error.textContent = "Please select a valid country code";
-    //           error.style.color = "red";
-    //           return;
+const Main=() => {
+  const { provider, login, logout, getUserInfo, getAccounts, readAddress,userData, getBalance,isLoading,signAndSendTransaction } = useWeb3Auth();
+const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
 
-    // }
-    // else if (num.length != 10){
-    //      error.textContent = "Please enter a valid phone number";
-    //           error.style.color = "red";
-    //           return;
+const[username, setUsername] = useState("");
 
-    // }
+  useEffect(() => {
+    const handleGetUser = async () => {
+      const user = await userData();
+      setUsername(user);
+    }
+    if (provider) {
+      handleGetUser();
+    }
+  }, [provider, username]);
 
-    // // else {
-    // //   error.textContent = "";
-    // //   error.style.color="#020202";
-    // //   e.preventDefault();
-    e.preventDefault();
-    const email = (e.target as any)[0].value
+const [mainAccount, setMainAccount] = useState("");
+
+  const handleGetNormalTransactionByAddress = async () => {
+    let transactions = await getNormalTransactionsByAddress(mainAccount);
+    setTransactionHistory(transactions.result);
+  }
+
+  useEffect(() => {
+    const handleGetAccount = async () => {
+      const account = await provider?.readAddress();
+      setMainAccount(account);
+    }
+    if (provider) {
+      handleGetAccount();
+    }
+  }, [provider, mainAccount]);
+
+  const isReady = () => {
+    return (
+      mainAccount !== "" 
+    );
+  }
+
+  useEffect(() => {
+    if(isReady()) {
+      handleGetNormalTransactionByAddress();
+    }
+  }, [mainAccount]);
+
+  
+const handleLoginWithEmail=(e: FormEvent<HTMLFormElement>) => {
+  //     var error = document.getElementById("error");
+  // cc = document.getElementById("cc").value;
+  // num = document.getElementById("num").value;
+  // var re = /\S+@\S+\.\S+/;
+
+  // if(cc == 0)
+  // {
+  //               error.textContent = "Please select a valid country code";
+  //           error.style.color = "red";
+  //           return;
+      
+  // }
+  // else if (num.length != 10){
+  //      error.textContent = "Please enter a valid phone number";
+  //           error.style.color = "red";
+  //           return;
+        
+  // }
+
+  // // else {
+  // //   error.textContent = "";
+  // //   error.style.color="#020202";
+  // //   e.preventDefault();
+  e.preventDefault();
+    const email=(e.target as any)[0].value
     login(WALLET_ADAPTERS.OPENLOGIN, "email_passwordless", email);
 
   
     // }
 
   }
+  const HomePage = (props: Props) => {
+type Props = {}
+
+const settings = {
+    dots: true,
+    infinite: true,
+    
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    arrows:false,
+    responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            initialSlide: 1
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+  };
+    let symbol = 'CELO';
+    let value = '0.00';
+   
+  const [amount, setAmt] = useState(0);
+
+  useEffect(() => {
+    const handleGetBalance = async () => {
+      const bal = await provider?.getBalance();
+      setAmt(bal);
+    }
+    if (provider) {
+      handleGetBalance();
+    }
+  }, [provider, amount]);
+const amountStr = amount.toString();
+//const [price,setPrice] = useState(0);
+//var donezo = false;
+ /* useEffect(() => {
+    const handleGetCelo = async () => {
+      var xhr2 = new XMLHttpRequest();
+  xhr2.onreadystatechange=function(){
+ if(xhr2.readyState==XMLHttpRequest.DONE){
+if(xhr2.status == 200){
+setPrice(xhr2.responseText);
+}
+}
+}
+    }
+   
+  }, [price]);
+
+*/
+const [price,setPrice] = useState("")
+var xhr2 = new XMLHttpRequest();
+  xhr2.onreadystatechange=function(){
+ if(xhr2.readyState==XMLHttpRequest.DONE){
+ setPrice(xhr2.responseText)
+}
+}
+
+  xhr2.open('GET', "https://price.api.xade.finance/celo")
+  xhr2.send() 
+//const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString();
+//const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
+const usdBal = (parseFloat(price)*(parseFloat(amountStr)/Math.pow(10,18))).toFixed(2);
+//alert(price);
+
+return (
+      
+        <div className='container'>
+            <div className='carouselHolder'>
+                <Slider {...settings}>
+                      <CarouselCard/>
+                      <CarouselCard/>
+                      <CarouselCard/>
+                </Slider>
+            </div>
+            <div className='myActivity'>
+                <div className='totalBalance'>
+                    <p className='label'>Checking Account</p>
+                    <p className='value'>USD  {usdBal}</p>
+                </div>
+      <div className='activityContent'>
+   <table>
+            <thead>
+              <tr>
+<th>Block Number</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Amount</th>
+                <th>More Information</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transactionHistory.map((transaction, index) => (
+                <tr key={index}>
+<td>{transaction.blockNumber}</td>                  
+<td>{transaction.from}</td>
+                  <td>{transaction.to}</td>
+                  <td>{(parseFloat(price)*(parseFloat(transaction.value)/Math.pow(10,18))).toFixed(2)} USD</td>
+                  <td><a href={`https://alfajores-blockscout.celo-testnet.org/tx/${transaction.hash}`} target="_blank" rel="noopener noreferrer">More Info <FaExternalLinkAlt /></a></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>                    
+     </div>
+            </div>
+            <div className='utilityButtons'>
+                <div className='buttonHolder'>
+                    <div className='paymentsButton'>
+                        <Link to = '/send'><a style = {{'color': '#fff', 'textDecoration': 'none' }}>Send</a></Link>
+                    </div>
+                    <div className='paymentsButton'>
+                       <Link to = '/qr'><a style = {{'color': '#fff', 'textDecoration': 'none' }}>Request</a></Link>
+                    </div>
+                    <Link
+                      to='/qr'
+                    >
+                    <div className='scanner'>
+                        <TbQrcode />
+                    </div>
+                    </Link>
+                </div>
+            </div>
+            
+        </div>
+    
+  )
+}
+
 
   const handleLoginWithEmail2 = (e: FormEvent<HTMLFormElement>) => {
     var error = document.getElementById("error");
@@ -512,6 +708,219 @@ const Main = () => {
     }
   }
 
+    /*const [username, setUser] = useState("");
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+    if (xhr.status == 200)
+{
+        setUser(xhr.responseText);
+    
+}
+else{
+    setUser("User");
+}
+}
+
+    }
+xhr.open('GET', `https://user.api.xade.finance?address=${mainAccount}`, true);
+xhr.send(null);
+*/
+    // const [phoneNum, setPhone] = useState("");
+
+//     var xhr = new XMLHttpRequest();
+//     xhr.onreadystatechange = function() {
+//         if (xhr.readyState == XMLHttpRequest.DONE) {
+//     if (xhr.status == 200)
+// {
+//         setPhone(xhr.responseText);
+    
+// }
+// else{
+//     setPhone("Phone Number");
+// }
+// }
+
+//     }
+// xhr.open('GET', `https://mobile.api.xade.finance?address=0x6f994FcccBd601D164E3743714F5D0D315Eda41b`, true);
+// xhr.send(null);
+
+const SendQR = () => {
+  const params = useParams();
+  let [current, setCurrent] = React.useState(0); // Phone number accept
+
+  let [amount, setAmount] = React.useState(0);
+  let [error, setError] = React.useState({'message': '', 'style': {'color':'rgba(251, 251, 251, 0.6)'}, 'error': false})
+  const handleSendAmountToAddress = async (e:any) => {
+    e.preventDefault();
+    const addr = params.address;
+
+  if(amount <= 0) 
+  {
+    setError({...error, 'message': 'Please enter a valid amount', 'style': {'color': 'red'}, 'error': true})
+    return 
+  }
+  alert(`Address: ${addr} | Amt: ${amount}`);
+  setCurrent(1);
+await signAndSendTransaction(addr, amount.toString()); 
+}
+ return(
+  
+<div>
+{(current == 0)?
+<>
+  <br />
+  <br />
+  <br />
+  <br />
+<h1 className = {styles3.element}>Enter amount</h1>
+<p id="error" style = {error.style}className={styles.error}>{error.message}</p>
+
+<form onSubmit = {(e) => {
+// Some web3auth function
+handleSendAmountToAddress(e);
+}}>
+<section className={styles.phoneNumber}>
+       <div className={styles.flexContainerCountry}>
+          <section className={styles.callingCodeTitle}>
+              Amount <a className={styles.red}>*</a>
+          </section>    
+
+          <section>
+              <input id='num' onChange = {(e) => setAmount(parseInt(e.target.value))} value = {amount} className={styles.inputForm} type='number' autoFocus/>
+          </section>
+      </div>
+  </section>
+    <br />
+    <br />
+    <br />
+
+             <div className = {styles3.submitSection}>
+  <button type = "submit" className = {styles3.submitButton2}>Confirm transaction</button>
+
+</div>
+</form>
+</>
+:
+<>
+<div className={tickStyles.wrapper}> <svg className={tickStyles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className ={tickStyles.checkmark__circle} cx="26" cy="26" r="25" fill="none"/> <path className={tickStyles.checkmark__check} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+            </div>  
+
+            <div className = {tickStyles.and}>Transaction successful! </div>
+</>
+}
+</div>
+  );
+};
+
+const QRCodeValue = `${username}@${mainAccount}`;
+
+const QRScanner = () => {
+  const [scannedCodes, setScannedCodes] = useState([]);
+var error = "";
+  function activateLasers() {
+    var decodedText = "asdf";
+    var decodedResult = "asdfasdfasdf";
+    console.log(scannedCodes);
+
+    setScannedCodes(scannedCodes.concat([{ decodedText, decodedResult }]));
+  }
+
+  useEffect(() => {
+    function onScanSuccess(decodedText, decodedResult) {
+window.stop();     
+ // handle the scanned code as you like, for example:
+      console.log(`Code matched = ${decodedText}`, decodedResult);
+   // setScannedCodes(scannedCodes.concat([{ decodedText, decodedResult }]));
+const walletAddr = decodedText.split("@")[1]
+window.location.href="/sendQR/"+walletAddr;
+}
+
+    function onScanFailure(error) {
+      // handle scan failure, usually better to ignore and keep scanning.
+      // for example:
+      console.warn(`Code scan error = ${error}`);
+    }
+
+    let html5QrcodeScanner = new Html5QrcodeScanner(
+      "reader",
+      { fps: 10, qrbox: { width: 250, height: 250 } },
+      /* verbose= */ false
+    );
+    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+  });
+//alert(scannedCodes);
+  return (
+    <div>
+    <br />
+     <br />
+      <br />
+          <br />
+     <br />
+      <br />
+          <br />
+     <br />
+      <br />
+      <div id="reader" width="600px"></div>
+   <a>{error}</a>
+    </div>
+  );
+};
+
+
+const QrCodePage = (props: Props) => {
+
+    const [isActive, setActive] = useState(false);
+
+    const showReader = () => {
+        if (isActive)
+            return (
+                <div className={'mainContent' + 'active'}>
+                    <div className={"contentWrapper"}>
+                        <QRScanner />
+                    </div>
+                </div>
+            )
+
+    }
+    return (
+        <div className='containerQrPage'>
+            <div className='topBar'>
+                <Link to='/'>
+                    <div className='goBack'><ImCross /></div>
+                </Link>
+                <div className='buttonHolderQrPage'>
+                    <div className={'qrButtonLeft ' + (isActive ? 'active' : 'inActive')} onClick={() => setActive(!isActive)} >My Code</div>
+                    <div className={'qrButtonRight ' + (isActive ? 'inActive' : 'active')} onClick={() => setActive(!isActive)} >Scan</div>
+                </div>
+
+                <div className='share'><FiShare /></div>
+
+            </div>
+            <div className={'mainContent ' + (isActive ? 'myInfoInActive' : 'myInfoActive')}>
+                <div className='contentWrapper'>
+                    <div className='infoHolder'>
+
+                                  <div><h1>{username}</h1></div>
+                        <div><h4>{mainAccount}</h4></div>
+                        <div><h4>🟢 Celo Alfajores Testnet</h4></div>
+                    </div>
+                    <div className='QrHolder'>
+                        <div className='QrWrapper'>
+                            <QRCode value={QRCodeValue} />
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            {showReader()}
+
+        </div>
+    )
+}
 
   const handleSendAmountToAddress = async () => {
 
@@ -526,9 +935,19 @@ const Main = () => {
   const loggedInView = (
 
 
+<<<<<<< HEAD
     getUserInfo(secret),
     <>
       <div className="App">
+=======
+         <Route path="/investments" element={<Layout><Investments /></Layout>} />
+        <Route path="/payments" element={<></>} />
+         <Route path="/deposit-withdraw" element={<Layout><ComingSoon /></Layout>} />
+         <Route path="/qr" element={<Layout><QrCodePage /></Layout>} />
+<Route path="/savings" element={<Layout><Saving /></Layout>} />
+                 <Route path="/send" element={<Send />} />
+           <Route path="/sendQR/:address" element={<SendQR />} />
+>>>>>>> f2535ff332ede2649211f53b433ebbe6033cdb30
 
         <BrowserRouter>
 
@@ -568,7 +987,63 @@ const Main = () => {
       error.textContent = "Please enter a valid phone number";
       error.style.color = "red";
 
+<<<<<<< HEAD
     }
+=======
+
+//     <>
+//     <script>
+//     alert("hello");
+//     </script> 
+//       <head>
+//       <title>Xade | Dashboard</title>
+//       </head>
+// {/*      <body onLoad={getUserInfo}>
+// */}{/*      {{getUserInfo()}}
+// */}      <div className={styles.logindone}>
+// {/*<script> 
+// window.onload=function() {
+//   {getUserInfo()}
+// }*/}
+// {/*</script>*/}
+//       <h1 className={styles.dash}>Dashboard</h1>
+//       <div className={styles.logindone2}>
+//       <div className={styles.console} id="console">
+//         <p className={styles.code}></p>
+//       </div>
+//       <script src="details.js"></script>
+//       <button id="mybtn" onClick={getUserInfo} className={styles.loggedIn}>
+//         <b>Get User Info</b>
+//       </button>
+//       <div>
+//       </div>
+
+//       {/*<br/>
+//       <br/>
+//       <button onClick={getAccounts} className={styles.loggedIn}>
+//         <b>Get Accounts</b>
+//       </button>
+//       <br/>
+//       <br/>
+//       <button onClick={getBalance} className={styles.loggedIn}>
+//         <b>Get Balance</b>
+//       </button>*/}
+//       <br/>
+//       <br/>
+//       <button onClick={logout} className={styles.loggedIn}>
+//         <b>Log Out</b>
+
+//       </button>
+//       </div>
+
+//       </div>
+//           </>
+//   );
+
+
+function loginSocial(social:string){
+        login(WALLET_ADAPTERS.OPENLOGIN,social);
+>>>>>>> f2535ff332ede2649211f53b433ebbe6033cdb30
 
     else {
       error.textContent = "";
@@ -876,11 +1351,19 @@ const Main = () => {
               </div>
 
 
+<<<<<<< HEAD
             </>}
           />
           <Route path="/register" element={<Box />} />
           <Route path="/login" element={<Box2 />} />
 
+=======
+        </>}
+     /> 
+ <Route path= "/register" element={<Box/>}/> 
+ <Route path="/login" element={<Box2 />}/> 
+<Route path="/qrscan" element={<QRScanner />}/> 
+>>>>>>> f2535ff332ede2649211f53b433ebbe6033cdb30
 
 
         </Routes>

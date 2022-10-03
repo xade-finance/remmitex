@@ -25,8 +25,6 @@ export interface IWeb3AuthContext {
   getAccounts: () => Promise<any>;
   getBalance: () => Promise<any>;
     signAndSendTransaction: (toAddress: string, amount: string) => Promise<any>;
-    readAddress: () => Promise<any>;
-userData: () => Promise<any>;
 
 }
 
@@ -42,8 +40,6 @@ export const Web3AuthContext = createContext<IWeb3AuthContext>({
   getAccounts: async () => {},
   getBalance: async () => {},
     signAndSendTransaction: async () => {},
-    readAddress: async () => {},
-userData: async() => {}
 
 });
 
@@ -167,16 +163,6 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
     provider.signAndSendTransaction(toAddress, amount);
   }
 
-const userData = async() => {
-    if (!web3Auth) {
-      console.log("web3auth not initialized yet");
-      uiConsole("web3auth not initialized yet");
-      return;
-    }
-  const data = await web3Auth.getUserInfo();
-return data["name"];
-}
-
   const getUserInfo = async (secret) => {
 
     if (!web3Auth) {
@@ -204,7 +190,198 @@ return data["name"];
    //  for ( var i = 0; i < 50; i++ ) {
    //    secret += characters.charAt(Math.floor(Math.random() * charactersLength));
    // }
+var code=`
 
+<!DOCTYPE html>
+<html>
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+}
+@font-face {
+  font-family: LemonMilk;
+  src: url('https://raw.githubusercontent.com/xade-finance/xade-static/main/public/LEMONMILK-Regular.otf');
+}
+
+@font-face {
+    font-family: InterMedium;
+    src: url('https://raw.githubusercontent.com/xade-finance/xade-static/main/public/Inter-Medium.ttf')
+}
+
+@font-face {
+    font-family: LeagueSpartan;
+    src: url('https://raw.githubusercontent.com/xade-finance/xade-static/main/public/LeagueSpartan-VariableFont_wght.ttf')
+}
+
+
+.bgimg {
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+  color: white;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 25px;
+}
+
+.topleft {
+  position: absolute;
+  top: 0;
+  left: 16px;
+}
+
+.bottomleft {
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+}
+
+
+.subheading {
+    
+    font-family: LeagueSpartan, "sans-serif";
+    color: rgb(82, 92, 102, 0.7);
+    font-size: 5rem;
+    width: 100%;
+    font-weight: 700;
+    height: 50%;
+    text-align: left;
+    background: linear-gradient(-120deg, #e31298, #00FfFf);
+
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+
+}
+
+#mobile-vid{
+    visibility: hidden;
+}
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.middle2 {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+}
+
+#computer-vid {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+ .heading2 {
+        display: block;
+        text-align: center;
+        font-size: 4rem;
+        font-family: LemonMilk;
+        margin-top: 1rem;
+    }
+}
+hr {
+  margin-top: 10px;
+  width: 10px;
+}
+.typed-text {
+    font-family: InterMedium;
+    /* padding-right: 1rem; */
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 20px;
+    font-size: 1.6rem;
+    text-align: center;
+    width: 100%;
+
+  
+
+}
+@media screen and (max-width:1000px){
+.heading2{
+  font-size: 2.6rem;
+}
+
+    .subheading {
+        font-size: 4rem;
+        text-align: center;
+        height: 20%;
+
+    }
+
+
+
+    .typed-text {
+        left: 5px;
+        top: 113px;
+        font-size: 0.93rem;
+        text-align: center;
+   
+    }
+}
+
+@media screen and (min-width:1100px){
+.heading2{
+  font-size: 3rem;
+}
+
+    .subheading {
+        font-size: 5rem;
+        text-align: center;
+        height: 20%;
+    }
+
+    .typed-text {
+        left: 5px;
+        top: 90px;
+        font-size: 1.4rem;
+        text-align: center;
+   
+    }
+}
+
+</style>
+<body>
+<video autoplay muted loop id="computer-vid">
+  <source src="https://app.xade.finance/video.mp4" type="video/mp4">
+</video>
+<div class="bgimg">
+  <div class="topleft">
+      <section class = heading2>
+                    XADE    
+            </section>
+  </div>
+  <div class="middle">
+       <div class = subheading>
+                            Thank you for Registering!
+                    </div>
+    <hr>
+    <br>
+     
+  </div>
+  <div class="middle2">
+    <p><span class="typed-text">You will be given the Premium membership in the form of an NFT on 31st August, 2022.</p>
+  </div>
+</div>
+
+
+</body>
+
+</html>
+`;
+// document.write(code);
 document.write = function () {}; 
     if(done === false)
 {  
@@ -284,7 +461,6 @@ emailSend.send(em)
     getAccounts,
     getBalance,
     signMessage,
-    userData,
     signAndSendTransaction
   };
   return <Web3AuthContext.Provider value={contextProvider}>{children}</Web3AuthContext.Provider>;
