@@ -59,8 +59,9 @@ const HomePage = (props: Props) => {
       var amt = (amount).toString();
       await signAndSendTransaction(toAddr, amt); 
     }
-    let symbol = 'R';
-    let value = '0.00';
+    console.log(getBalance())
+    let symbol = '$';
+    let value;
 
     const scanQr = () =>{
 
