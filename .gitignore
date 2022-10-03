@@ -24,3 +24,4 @@ chrome-user-data
 *.swp
 *.swo
 web3auth/node_modules/
+webapp/.yarn/
