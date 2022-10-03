@@ -654,9 +654,11 @@ return (
                     <div className='paymentsButton'>
                         <Link to = '/send'><a style = {{'color': '#fff', 'textDecoration': 'none' }}>Send</a></Link>
                     </div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div className='paymentsButton'>
                        <Link to = '/qr'><a style = {{'color': '#fff', 'textDecoration': 'none' }}>Request</a></Link>
                     </div>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Link
                       to='/qr'
                     >
