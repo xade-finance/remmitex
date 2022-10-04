@@ -44,11 +44,7 @@ const readAddress = async() => {
       const web3 = new Web3(provider as any);
       const accounts = await web3.eth.getAccounts();
       const balance = await web3.eth.getBalance(accounts[0]);
-<<<<<<< HEAD
-      // console.log(balance);
-=======
       return balance
->>>>>>> f2535ff332ede2649211f53b433ebbe6033cdb30
     } catch (error) {
       console.error("Error", error);
       uiConsole("error", error);
@@ -91,18 +87,17 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
         maxFeePerGas: "6000000000000", // Max fee per gas
       });
       uiConsole("txRes", txRes);
-      if (txRes.status == true) {
+      if (txRes.status == '0x1' || txRes.status == 1) {
         console.log(`${txRes.status} Transaction Success`);
-        return txRes;
+        return true;
       } else {
         console.log(`${txRes.status} Transaction Failed`);
-          return txRes;
+        return false;
       }
     } catch (error) {
       console.log("Could not process transaction!")
       console.log("error", error);
-        return false;
-
+      return false;
     }
   };
 

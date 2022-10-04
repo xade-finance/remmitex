@@ -6,7 +6,7 @@ export interface IWalletProvider {
   getAccounts: () => Promise<any>;
   readAddress: () => Promise<any>;
   getBalance: () => Promise<any>;
-  signAndSendTransaction: (toAddress: string, amount: string) => any;
+  signAndSendTransaction: (toAddress: string, amount: string) => Promise<any>;
 }
 export const getWalletProvider = (chain: string, provider: SafeEventEmitterProvider, uiConsole: any): IWalletProvider => {
   if (chain === "solana") {

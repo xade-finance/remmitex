@@ -17,9 +17,9 @@ class S(BaseHTTPRequestHandler):
 		content_length = int(self.headers['Content-Length']) 
 		post_data = self.rfile.read(content_length) 
 		data = post_data.decode('utf-8')
-		registered = open("/home/xade/web3auth/src/api/emails.log",'r')
-		sent = open("/home/xade/web3auth/src/api/emailsSent.log",'a')
-		sentRead = open("/home/xade/web3auth/src/api/emailsSent.log",'r')
+		registered = open("/home/xade/kinda-final-app/src/api/emails.log",'r')
+		sent = open("/home/xade/kinda-final-app/src/api/emailsSent.log",'a')
+		sentRead = open("/home/xade/kinda-final-app/src/api/emailsSent.log",'r')
 		receiver = data.replace("email=","")
         #a = i+'\n'
 		if receiver in registered.read().split("\n") and receiver not in sentRead.read().split("\n"):
@@ -50,7 +50,7 @@ class S(BaseHTTPRequestHandler):
 			mail = smtplib.SMTP_SSL('smtpout.secureserver.net',465)
 			mail.ehlo()
 			dev = "development@xade.finance"
-			passwd = "Commune_dev1"
+			passwd = "Password"
 			mail.login(dev,passwd)
 			mail.sendmail(dev,receiver,msg.as_string())
 			mail.quit()

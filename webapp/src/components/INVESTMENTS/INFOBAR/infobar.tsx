@@ -7,6 +7,26 @@ export default function Component() {
     let json = {data:[{"id":1, "quote": {"USD": {price:"21490.00"}}}]};
     let response = null;
     let obj = "";
+        
+
+    //const baseURL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=a7df6582-7a00-4861-a5dc-392c2ce54b79&start=1&limit=1'
+    //  React.useEffect(() => {
+    //     axios.get(baseURL).then((response:any) => {
+    //     alert(response.data);
+    //     }).catch((error:any) => {console.log(error)});
+    // }, []);
+    //var xhttp = new XMLHttpRequest();
+
+     //xhttp.onreadystatechange = function() {
+    //if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready:
+     //   obj = JSON.parse(xhttp.responseText);
+       // alert(JSON.stringify(obj["quote"]["USD"]["price"]));
+      //  console.log(JSON.stringify(obj["quote"]["USD"]["price"]));  
+       //      }
+//};
+//xhttp.open("GET", "/api", true);
+//xhttp.send();
 const [price,setPrice] = useState("")
 var xhr2 = new XMLHttpRequest();
   xhr2.onreadystatechange=function(){

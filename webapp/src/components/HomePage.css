@@ -94,8 +94,14 @@ body{
 }
 
 a{
-        text-decoration:none;
+	text-decoration:none;
 }
+
+.pfp{
+	border-radius: 50%;
+width:140px;
+}
+
 
 .scanner{
     display: flex;
@@ -195,3 +201,5 @@ a{
         color: rgba(255, 255, 255, 0.7);
     }
 }
+
+

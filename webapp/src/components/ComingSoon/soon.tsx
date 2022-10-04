@@ -32,7 +32,7 @@ export default function Component()
           themeColor: "000", // App theme color
           redirectURL: "https://app.xade.finance",
           exchangeScreenTitle:
-            "Xade Uses Transak As It's Fiat Ramp For Payments", // Exchange screen title
+            "Xade Uses Transak As Its Fiat Ramp For Payments, Investing and Savings", // Exchange screen title
         });
         transak.init();
         // To get all the events

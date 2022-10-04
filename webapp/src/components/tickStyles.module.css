@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transform: scale(1);
+    transform: scale(3);
 }
 
 .checkmark__circle {
@@ -19,14 +19,14 @@
 }
 
 .checkmark {
-    height: 10rem;
-    width: 10rem;
+    height: 3rem;
+    width: 3rem;
     border-radius: 50%;
     display: block;
     stroke-width: 2;
     stroke: #fff;
     stroke-miterlimit: 10;
-    /* margin: 10% auto; */
+    margin: 10% auto;
     box-shadow: inset 0px 0px 0px #7ac142;
     animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
 }
@@ -65,6 +65,6 @@
 
 @keyframes fill {
     100% {
-        box-shadow: inset 0px 0px 0px 90px #7ac142;
+        box-shadow: inset 0px 0px 0px 30px #7ac142
     }
 }

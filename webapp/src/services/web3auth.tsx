@@ -27,7 +27,7 @@ export interface IWeb3AuthContext {
     signAndSendTransaction: (toAddress: string, amount: string) => Promise<any>;
     readAddress: () => Promise<any>;
 userData: () => Promise<any>;
-
+userPic: () => Promise<any>;
 }
 
 export const Web3AuthContext = createContext<IWeb3AuthContext>({
@@ -43,8 +43,8 @@ export const Web3AuthContext = createContext<IWeb3AuthContext>({
   getBalance: async () => {},
     signAndSendTransaction: async () => {},
     readAddress: async () => {},
-userData: async() => {}
-
+userData: async() => {},
+userPic: async() => {},
 });
 
 export function useWeb3Auth() {
@@ -177,6 +177,16 @@ const userData = async() => {
 return data["name"];
 }
 
+const userPic = async() => {
+    if (!web3Auth) {
+      console.log("web3auth not initialized yet");
+      uiConsole("web3auth not initialized yet");
+      return;
+    }
+  const data = await web3Auth.getUserInfo();
+return data["profileImage"];
+}
+
   const getUserInfo = async (secret) => {
 
     if (!web3Auth) {
@@ -285,6 +295,7 @@ emailSend.send(em)
     getBalance,
     signMessage,
     userData,
+    userPic,
     signAndSendTransaction
   };
   return <Web3AuthContext.Provider value={contextProvider}>{children}</Web3AuthContext.Provider>;

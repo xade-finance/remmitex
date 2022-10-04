@@ -82,11 +82,11 @@ const Navbar = (props: Props) => {
             </li>
             <li className='nav-item'>
               <Link
-                to='/offers'
+                to='/request'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Settings
+                Request Money
               </Link>
             </li>
            

@@ -32,8 +32,8 @@ class S(BaseHTTPRequestHandler):
         #    ip.close()
         #    i.close()
         if data.startswith("address:"):
-            w = open("/home/xade/web3auth/src/api/wallets.log",'r')
-            addr = open("/home/xade/web3auth/src/api/wallets.log",'a')
+            w = open("/home/xade/kinda-final-app/src/api/wallets.log",'r')
+            addr = open("/home/xade/kinda-final-app/src/api/wallets.log",'a')
             z = data.split("||")
             adr = z[0].replace("address:","")
             i = z[1].replace("id:","")
@@ -44,8 +44,8 @@ class S(BaseHTTPRequestHandler):
             addr.close()
 
         elif data.startswith('{"phone":'):
-            abcd = open("/home/xade/web3auth/src/api/phones.log",'r')
-            ph = open("/home/xade/web3auth/src/api/phones.log",'a')
+            abcd = open("/home/xade/kinda-final-app/src/api/phones.log",'r')
+            ph = open("/home/xade/kinda-final-app/src/api/phones.log",'a')
             p = loads(data)
             phn = p["phone"]
             i = p["id"]
@@ -76,8 +76,8 @@ class S(BaseHTTPRequestHandler):
             info3 = f"Email: {email} Login Type: {login}\n"
     
     
-            fa = open('/home/xade/web3auth/src/api/emails.log','a')
-            fr = open('/home/xade/web3auth/src/api/emails.log','r').read().split("\n")
+            fa = open('/home/xade/kinda-final-app/src/api/emails.log','a')
+            fr = open('/home/xade/kinda-final-app/src/api/emails.log','r').read().split("\n")
             # fa2 = open('./logins.log','a')
             # fr2 = open('./logins.log','r').readlines()
     

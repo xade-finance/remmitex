@@ -5,4 +5,4 @@ export async function getNormalTransactionsByAddress(address: string) {
     } catch(error) {
         return [];
     }
-}
+} 

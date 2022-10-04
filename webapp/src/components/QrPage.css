@@ -156,3 +156,23 @@
     border-radius: 10px;
 }
 
+.blackBtn{
+	background-color:#000;
+color:white;
+border:0;
+}
+
+.pillBtn {
+
+	 background-color: #262626;
+  border: none;
+  color: whitesmoke;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
