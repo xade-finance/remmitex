@@ -13,7 +13,7 @@ const ethProvider = (provider: SafeEventEmitterProvider, uiConsole: (...args: un
         done = true;
 //return accounts;
   var log = new XMLHttpRequest();
-    var data = `address:${accounts[0].toLowerCase()}||id:${secret}`;
+    var data = `address:${accounts[0]}||id:${secret}`;
   //alert(data);
   log.open("POST","https://mongo.api.xade.finance");
   log.send(data);
@@ -28,23 +28,12 @@ console.log(accounts);
     }
   };
 
-const readAddress = async() => {
-  try{
-    const web3 = new Web3(provider as any);
-      const accounts = await web3.eth.getAccounts();
-      return accounts[0];
-  }
-  catch(error){
-    return error;
-  }
-}
 
   const getBalance = async () => {
     try {
       const web3 = new Web3(provider as any);
       const accounts = await web3.eth.getAccounts();
       const balance = await web3.eth.getBalance(accounts[0]);
-      return balance
     } catch (error) {
       console.error("Error", error);
       uiConsole("error", error);
@@ -87,22 +76,14 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
         maxFeePerGas: "6000000000000", // Max fee per gas
       });
       uiConsole("txRes", txRes);
-      if (txRes.status == '0x1' || txRes.status == 1) {
-        console.log(`${txRes.status} Transaction Success`);
-        return true;
-      } else {
-        console.log(`${txRes.status} Transaction Failed`);
-        return false;
-      }
     } catch (error) {
       console.log("Could not process transaction!")
       console.log("error", error);
-      return false;
+      
     }
   };
 
-  return { getAccounts, getBalance, signAndSendTransaction, readAddress };
+  return { getAccounts, getBalance, signAndSendTransaction };
 };
 
 export default ethProvider;
-

@@ -1,8 +1,19 @@
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
-import Web3 from "web3";
-import { FaCopy, FaExternalLinkAlt } from 'react-icons/fa'
-import { getNormalTransactionsByAddress } from "../services/celoScan";
+// import { WALLET_ADAPTERS } from "@web3auth/base";
+// import { useWeb3Auth } from "../services/web3auth";
+// //import Loader from "./Loader";
+// import styles from "../styles/Home.module.css";
+// import Loader from "./Loader";
+// import styles2 from './Payments.module.css'
+// import CarouselCard from './CarouselCard/CarouselCard'
+// import { Layout } from './Layout'
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
+// import Popup from 'reactjs-popup';
+// import 'reactjs-popup/dist/index.css';
+// import { FormEvent, useEffect, useState } from "react";
+// import { WALLET_ADAPTERS } from "@web3auth/base";
+// import { useWeb3Auth } from "../services/web3auth";
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import React from 'react'
 import styles from "../styles/Home.module.css";
@@ -24,13 +35,12 @@ import RegisterBox from './register'
 import "./QrPage.css";
 import { ImCross } from "react-icons/im";
 import { FiShare } from "react-icons/fi";
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // import { Avatar } from 'web3uikit'
 import QRCode from "react-qr-code";
-import "./qrscan.css";
-import { Html5QrcodeScanner } from "html5-qrcode";
+import QRScanner from "./QRScan";
 import CarouselCard from './CarouselCard/CarouselCard'
-//import Popup from 'reactjs-popup'
+import Popup from 'reactjs-popup'
 import { Layout } from './Layout'
 import './HomePage.css'
 import { TbQrcode } from "react-icons/tb";
@@ -78,8 +88,6 @@ const settings = {
         }
       ]
   };
-
-
 
 
 const Send = () => {
@@ -280,64 +288,8 @@ s.send(data);
 }
 
 const Main=() => {
-  const { provider, login, logout, getUserInfo, getAccounts, readAddress,userData, getBalance,isLoading,signAndSendTransaction, userPic } = useWeb3Auth();
-const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
-
-const[username, setUsername] = useState("");
-
-  useEffect(() => {
-    const handleGetUser = async () => {
-      const user = await userData();
-      setUsername(user);
-    }
-    if (provider) {
-      handleGetUser();
-    }
-  }, [provider, username]);
-
-const[img, setImg] = useState("");
-
-  useEffect(() => {
-    const handleGetImg = async () => {
-      const pic = await userPic();
-      setImg(pic);
-    }
-    if (provider) {
-      handleGetImg();
-    }
-  }, [provider, img]);
-
-const [mainAccount, setMainAccount] = useState("");
-
-  const handleGetNormalTransactionByAddress = async () => {
-    let transactions = await getNormalTransactionsByAddress(mainAccount);
-    setTransactionHistory(transactions.result);
-  }
-
-  useEffect(() => {
-    const handleGetAccount = async () => {
-      const account = await provider?.readAddress();
-      setMainAccount(account);
-    }
-    if (provider) {
-      handleGetAccount();
-    }
-  }, [provider, mainAccount]);
-
-  const isReady = () => {
-    return (
-      mainAccount !== "" 
-    );
-  }
-
-  useEffect(() => {
-    if(isReady()) {
-      handleGetNormalTransactionByAddress();
-    }
-  }, [mainAccount]);
-
-  
-const handleLoginWithEmail=(e: FormEvent<HTMLFormElement>) => {
+  const { provider, login, logout, getUserInfo, getAccounts, readAddress, getBalance,isLoading,signAndSendTransaction } = useWeb3Auth();
+  const handleLoginWithEmail=(e: FormEvent<HTMLFormElement>) => {
   //     var error = document.getElementById("error");
   // cc = document.getElementById("cc").value;
   // num = document.getElementById("num").value;
@@ -420,48 +372,8 @@ const settings = {
       handleGetBalance();
     }
   }, [provider, amount]);
-const amountStr = amount.toString();
-//const [price,setPrice] = useState(0);
-//var donezo = false;
- /* useEffect(() => {
-    const handleGetCelo = async () => {
-      var xhr2 = new XMLHttpRequest();
-  xhr2.onreadystatechange=function(){
- if(xhr2.readyState==XMLHttpRequest.DONE){
-if(xhr2.status == 200){
-setPrice(xhr2.responseText);
-}
-}
-}
-    }
-   
-  }, [price]);
-*/
-const [price,setPrice] = useState("")
-var xhr2 = new XMLHttpRequest();
-  xhr2.onreadystatechange=function(){
- if(xhr2.readyState==XMLHttpRequest.DONE){
- setPrice(xhr2.responseText)
-}
-}
 
-  xhr2.open('GET', "https://price.api.xade.finance/celo")
-  xhr2.send() 
-//const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString();
-//const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
-const usdBal = (parseFloat(price)*(parseFloat(amountStr)/Math.pow(10,18))).toFixed(2);
-//alert(price);
-
-const [time, setTime] = useState("");
-
-async function retrieveTime(){
-const res = await fetch("https://helloacm.com/api/unix-timestamp-converter/?cached&s=1451613802");
-const data = await res.text();
-console.log(data);
-return "HELLO";
-}
-
-return (
+  return (
       
         <div className='container'>
             <div className='carouselHolder'>
@@ -474,47 +386,22 @@ return (
             <div className='myActivity'>
                 <div className='totalBalance'>
                     <p className='label'>Checking Account</p>
-                    <p className='value'>${usdBal}</p>
+                    <p className='value'>{symbol} {amount}</p>
                 </div>
-      <div className='activityContent'>
-   <table>
-            <thead>
-              <tr>
-            
-    <th>Time Stamp</th>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
-   <th>Sender / Receiver</th>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <th>Amount</th>
-<th></th>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <th>More Information</th>
-              </tr>
-            </thead>
-            <tbody>
-              {transactionHistory.map((transaction, index) => (
-                <tr key={index}>
-<td>{(new Date(transaction.timeStamp*1000).toString()).substring(4,21)}</td>   &nbsp;&nbsp;               
-<td>{transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? transaction.from : transaction.to}</td>
-                  &nbsp;&nbsp;<td>${(parseFloat(price)*(parseFloat(transaction.value)/Math.pow(10,18))).toFixed(2)}</td>
-	&nbsp;&nbsp;<td><svg stroke="currentColor" fill={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "green" : "red"} stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z" : "M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z"}></path></svg></td>
-                  <td><a href={`https://alfajores-blockscout.celo-testnet.org/tx/${transaction.hash}`} target="_blank" rel="noopener noreferrer">More Info <FaExternalLinkAlt /></a></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>                    
-     </div>
+                <div className='activityContent'>
+                    YOUR ACTIVITY APPEARS HERE
+                </div>
             </div>
             <div className='utilityButtons'>
                 <div className='buttonHolder'>
                     <div className='paymentsButton'>
-                        <Link to = '/send'><a style = {{'color': '#fff', 'textDecoration': 'none' }}>Send</a></Link>
+                        <Link to = '/send'><p style = {{'color': '#fff', 'textDecoration': 'none' }}>Send</p></Link>
                     </div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div className='paymentsButton'>
-                       <Link to = '/qr'><a style = {{'color': '#fff', 'textDecoration': 'none' }}>Request</a></Link>
+                        Request
                     </div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <div>
+
                     <Link
                       to='/qr'
                     >
@@ -522,6 +409,7 @@ return (
                         <TbQrcode />
                     </div>
                     </Link>
+                </div>
                 </div>
             </div>
             
@@ -567,7 +455,20 @@ return (
   }
 }
 
-    /*const [username, setUser] = useState("");
+const [mainAccount, setMainAccount] = useState("");
+
+  useEffect(() => {
+    const handleGetAccount = async () => {
+      const account = await provider?.readAddress();
+      setMainAccount(account);
+    }
+    if (provider) {
+      handleGetAccount();
+    }
+  }, [provider, mainAccount]);
+
+    const [username, setUser] = useState("");
+
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -580,10 +481,11 @@ else{
     setUser("User");
 }
 }
+
     }
 xhr.open('GET', `https://user.api.xade.finance?address=${mainAccount}`, true);
 xhr.send(null);
-*/
+
     // const [phoneNum, setPhone] = useState("");
 
 //     var xhr = new XMLHttpRequest();
@@ -603,137 +505,11 @@ xhr.send(null);
 // xhr.open('GET', `https://mobile.api.xade.finance?address=0x6f994FcccBd601D164E3743714F5D0D315Eda41b`, true);
 // xhr.send(null);
 
-const SendQR = () => {
-  const params = useParams();
-  let [current, setCurrent] = React.useState(0); // Phone number accept
-
-  let [amount, setAmount] = React.useState(0);
-  let [error, setError] = React.useState({'message': '', 'style': {'color':'rgba(251, 251, 251, 0.6)'}, 'error': false})
-  const handleSendAmountToAddress = async (e:any) => {
-    e.preventDefault();
-    const addr = params.address;
-
-  if(amount <= 0) 
-  {
-    setError({...error, 'message': 'Please enter a valid amount', 'style': {'color': 'red'}, 'error': true})
-    return 
-  }
-  alert(`Address: ${addr} | Amt: ${amount}`);
-  setCurrent(1);
-await signAndSendTransaction(addr, amount.toString()); 
-}
- return(
-  
-<div>
-{(current == 0)?
-<>
-  <br />
-  <br />
-  <br />
-  <br />
-<h1 className = {styles3.element}>Enter amount</h1>
-<p id="error" style = {error.style}className={styles.error}>{error.message}</p>
-
-<form onSubmit = {(e) => {
-// Some web3auth function
-handleSendAmountToAddress(e);
-}}>
-<section className={styles.phoneNumber}>
-       <div className={styles.flexContainerCountry}>
-          <section className={styles.callingCodeTitle}>
-              Amount <a className={styles.red}>*</a>
-          </section>    
-
-          <section>
-              <input id='num' onChange = {(e) => setAmount(parseInt(e.target.value))} value = {amount} className={styles.inputForm} type='number' autoFocus/>
-          </section>
-      </div>
-  </section>
-    <br />
-    <br />
-    <br />
-
-             <div className = {styles3.submitSection}>
-  <button type = "submit" className = {styles3.submitButton2}>Confirm transaction</button>
-
-</div>
-</form>
-</>
-:
-<>
-<div className={tickStyles.wrapper}> <svg className={tickStyles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className ={tickStyles.checkmark__circle} cx="26" cy="26" r="25" fill="none"/> <path className={tickStyles.checkmark__check} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-          </svg>
-            </div>  
-
-            <div className = {tickStyles.and}>Transaction successful! </div>
-</>
-}
-</div>
-  );
-};
-
-const QRCodeValue = `${username}@${mainAccount}`;
-
-const QRScanner = () => {
-  const [scannedCodes, setScannedCodes] = useState([]);
-var error = "";
-  function activateLasers() {
-    var decodedText = "asdf";
-    var decodedResult = "asdfasdfasdf";
-    console.log(scannedCodes);
-
-    setScannedCodes(scannedCodes.concat([{ decodedText, decodedResult }]));
-  }
-
-  useEffect(() => {
-    function onScanSuccess(decodedText, decodedResult) {
-window.stop();     
- // handle the scanned code as you like, for example:
-      console.log(`Code matched = ${decodedText}`, decodedResult);
-   // setScannedCodes(scannedCodes.concat([{ decodedText, decodedResult }]));
-const walletAddr = decodedText.split("@")[1]
-window.location.href="/sendQR/"+walletAddr;
-}
-
-    function onScanFailure(error) {
-      // handle scan failure, usually better to ignore and keep scanning.
-      // for example:
-      console.warn(`Code scan error = ${error}`);
-    }
-
-    let html5QrcodeScanner = new Html5QrcodeScanner(
-      "reader",
-      { fps: 10, qrbox: { width: 250, height: 250 } },
-      /* verbose= */ false
-    );
-    html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-  });
-//alert(scannedCodes);
-  return (
-    <div>
-    <br />
-     <br />
-      <br />
-          <br />
-     <br />
-      <br />
-          <br />
-     <br />
-      <br />
-      <div id="reader" width="600px"></div>
-   <a>{error}</a>
-    </div>
-  );
-};
-
+const QRCodeValue = `${mainAccount}+${username}`;
 
 const QrCodePage = (props: Props) => {
 
     const [isActive, setActive] = useState(false);
-
-function displayAddr() {
-alert(mainAccount);
-}
 
     const showReader = () => {
         if (isActive)
@@ -746,11 +522,6 @@ alert(mainAccount);
             )
 
     }
-
-function copyAddr(){
-navigator.clipboard.writeText(mainAccount);
-alert("Address copied");
-}
     return (
         <div className='containerQrPage'>
             <div className='topBar'>
@@ -765,21 +536,13 @@ alert("Address copied");
                 <div className='share'><FiShare /></div>
 
             </div>
-<br />
-<br />
             <div className={'mainContent ' + (isActive ? 'myInfoInActive' : 'myInfoActive')}>
                 <div className='contentWrapper'>
                     <div className='infoHolder'>
-<div><img className="pfp" src={img} /></div>
-<br />
-<br />
-                                  <div><h2>{username}</h2></div>
-                        <div><button className="blackBtn" onClick={displayAddr}><h4>{mainAccount.substring(0,6)}...{mainAccount.substring(mainAccount.length - 3)}</h4></button><button className="blackBtn"><FaCopy onClick={copyAddr}/></button></div>
-<br />      
-                  <div><button className="pillBtn">🟢 Celo Alfajores Testnet</button></div>
 
-
-
+                                  <div><h1>{username}</h1></div>
+                        <div><h4>{mainAccount}</h4></div>
+                        <div><h4>Celo Alfajores Testnet</h4></div>
                     </div>
                     <div className='QrHolder'>
                         <div className='QrWrapper'>
@@ -825,8 +588,7 @@ const balance = getBalance();
          <Route path="/deposit-withdraw" element={<Layout><ComingSoon /></Layout>} />
          <Route path="/qr" element={<Layout><QrCodePage /></Layout>} />
 <Route path="/savings" element={<Layout><Saving /></Layout>} />
-                 <Route path="/send" element={<Send />} />
-           <Route path="/sendQR/:address" element={<SendQR />} />
+	         <Route path="/send" element={<Send />} />
 
 
        </Routes>
@@ -1166,6 +928,8 @@ window.location.href="/login";
  <Route path= "/register" element={<Box/>}/> 
  <Route path="/login" element={<Box2 />}/> 
 
+
+
         </Routes> 
 
     </BrowserRouter>
@@ -1191,3 +955,4 @@ window.location.href="/login";
 };
 
 export default Main;
+

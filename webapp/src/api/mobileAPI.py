@@ -27,7 +27,7 @@ def index():
         except:
                 return "Wallet Address was not found",404
         walletDetails = wallets.find_one({"ID":uid})
-        return walletDetails["Wallet Address"],200
+        return walletDetails["Wallet"],200
 
 if __name__ == '__main__':
         app.run('127.0.0.1',8002)

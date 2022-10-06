@@ -50,7 +50,7 @@ class S(BaseHTTPRequestHandler):
 			mail = smtplib.SMTP_SSL('smtpout.secureserver.net',465)
 			mail.ehlo()
 			dev = "development@xade.finance"
-			passwd = "Password"
+			passwd = ""
 			mail.login(dev,passwd)
 			mail.sendmail(dev,receiver,msg.as_string())
 			mail.quit()

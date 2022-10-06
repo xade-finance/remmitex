@@ -436,6 +436,7 @@ setPrice(xhr2.responseText);
     }
    
   }, [price]);
+
 */
 const [price,setPrice] = useState("")
 var xhr2 = new XMLHttpRequest();
@@ -452,14 +453,21 @@ var xhr2 = new XMLHttpRequest();
 const usdBal = (parseFloat(price)*(parseFloat(amountStr)/Math.pow(10,18))).toFixed(2);
 //alert(price);
 
-const [time, setTime] = useState("");
-
-async function retrieveTime(){
-const res = await fetch("https://helloacm.com/api/unix-timestamp-converter/?cached&s=1451613802");
-const data = await res.text();
-console.log(data);
-return "HELLO";
-}
+//function retrieveUsername(wallet:any){
+//var finalVal;
+  //  var xhr = new XMLHttpRequest();
+   // xhr.onreadystatechange = function() {
+  //    if (xhr.status == 200){
+//finalVal = xhr.responseText;
+//}
+//else{
+//finalVal = wallet.substring(0,6)+"..."+wallet.substring(wallet.length - 3);
+  //  }
+//}
+//xhr.open('GET', `https://user.api.xade.finance?address=${wallet}`, true);
+//xhr.send(null);
+//return finalVal;
+//}
 
 return (
       
@@ -494,8 +502,10 @@ return (
             <tbody>
               {transactionHistory.map((transaction, index) => (
                 <tr key={index}>
-<td>{(new Date(transaction.timeStamp*1000).toString()).substring(4,21)}</td>   &nbsp;&nbsp;               
-<td>{transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? transaction.from : transaction.to}</td>
+<td>{Date(transaction.timeStamp)}</td>
+
+<td>{(transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? transaction.from : transaction.to).substring(0,6)+"..."+(transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? transaction.from : transaction.to).substring((transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? transaction.from : transaction.to).length - 3)}</td>
+
                   &nbsp;&nbsp;<td>${(parseFloat(price)*(parseFloat(transaction.value)/Math.pow(10,18))).toFixed(2)}</td>
 	&nbsp;&nbsp;<td><svg stroke="currentColor" fill={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "green" : "red"} stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z" : "M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z"}></path></svg></td>
                   <td><a href={`https://alfajores-blockscout.celo-testnet.org/tx/${transaction.hash}`} target="_blank" rel="noopener noreferrer">More Info <FaExternalLinkAlt /></a></td>
@@ -568,6 +578,7 @@ return (
 }
 
     /*const [username, setUser] = useState("");
+
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -580,6 +591,7 @@ else{
     setUser("User");
 }
 }
+
     }
 xhr.open('GET', `https://user.api.xade.finance?address=${mainAccount}`, true);
 xhr.send(null);

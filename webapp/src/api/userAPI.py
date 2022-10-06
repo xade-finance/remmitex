@@ -14,10 +14,10 @@ def index():
         database = client["xade"]
         wallets = database["wallets"]
         try:
-                walletDetails = wallets.find_one({"Wallet Address":str(wallet)})
+                walletDetails = wallets.find_one({"Wallet":str(wallet)})
         except:
                 return "wallet address was not found",404
-        walletDetails = wallets.find_one({"Wallet Address":str(wallet)})
+        walletDetails = wallets.find_one({"Wallet":str(wallet)})
         if walletDetails == None:
             return "wallet address was not found",404
         uid = walletDetails["ID"]
