@@ -452,14 +452,59 @@ var xhr2 = new XMLHttpRequest();
 const usdBal = (parseFloat(price)*(parseFloat(amountStr)/Math.pow(10,18))).toFixed(2);
 //alert(price);
 
-const [time, setTime] = useState("");
+function returnUser(walletAddr:any){
+var finalVal = "";
+var xhr = new XMLHttpRequest();
 
-async function retrieveTime(){
-const res = await fetch("https://helloacm.com/api/unix-timestamp-converter/?cached&s=1451613802");
-const data = await res.text();
-console.log(data);
-return "HELLO";
+xhr.onreadystatechange = function(){
+
+if (xhr.status == 200){
+finalVal = xhr.responseText;
 }
+else{
+finalVal = walletAddr;
+}
+}
+
+xhr.open("GET",`https://user.api.xade.finance?address=${walletAddr}`);
+xhr.send(null);
+
+return finalVal;
+
+}
+
+useEffect(() => {
+for(var i = 0; i < transactionHistory.length; i++)
+{
+
+var currentTransac = transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase()? transactionHistory[i].from : transactionHistory[i].to;
+//var currentTransac = "0xa13414fa08c8ae49a9cceabdae4ff8d2d82ec139";
+var xhr = new XMLHttpRequest();
+var finalVal;
+xhr.onreadystatechange = function(){
+
+if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+finalVal = xhr.responseText;
+}
+else if(xhr.status != 200){
+finalVal = currentTransac.substring(0,6)+"..."+currentTransac.substring(currentTransac.length - 3);
+console.log(xhr.status);
+}
+}
+
+xhr.open("GET",`https://user.api.xade.finance?address=${currentTransac}`);
+xhr.send(null);
+console.log(finalVal);
+if (transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase())
+{
+transactionHistory[i].from = finalVal;
+}
+else{
+transactionHistory[i].to = finalVal;
+}
+}
+});
+
 
 return (
       
@@ -475,7 +520,9 @@ return (
                 <div className='totalBalance'>
                     <p className='label'>Checking Account</p>
                     <p className='value'>${usdBal}</p>
-                </div>
+ 
+
+               </div>
       <div className='activityContent'>
    <table>
             <thead>
@@ -495,9 +542,9 @@ return (
               {transactionHistory.map((transaction, index) => (
                 <tr key={index}>
 <td>{(new Date(transaction.timeStamp*1000).toString()).substring(4,21)}</td>   &nbsp;&nbsp;               
-<td>{transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? transaction.from : transaction.to}</td>
+<td>{transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()? transaction.from : transaction.to}</td>
                   &nbsp;&nbsp;<td>${(parseFloat(price)*(parseFloat(transaction.value)/Math.pow(10,18))).toFixed(2)}</td>
-	&nbsp;&nbsp;<td><svg stroke="currentColor" fill={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "green" : "red"} stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z" : "M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z"}></path></svg></td>
+        &nbsp;&nbsp;<td><svg stroke="red" fill={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "green" : "red"} stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z" : "M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z"}></path></svg></td>
                   <td><a href={`https://alfajores-blockscout.celo-testnet.org/tx/${transaction.hash}`} target="_blank" rel="noopener noreferrer">More Info <FaExternalLinkAlt /></a></td>
                 </tr>
               ))}
