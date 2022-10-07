@@ -493,7 +493,7 @@ const Main = () => {
 
                     &nbsp;&nbsp;
                     <div className="amount-time-stlying">
-                    {(parseFloat(price) * (parseFloat(transaction.value) / Math.pow(10, 18))).toFixed(2)}
+                    ${(parseFloat(price) * (parseFloat(transaction.value) / Math.pow(10, 18))).toFixed(2)}
                       
                     </div >
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
