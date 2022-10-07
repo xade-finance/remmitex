@@ -52,8 +52,9 @@ body {
 }
 
 .activityContent {
-    display: grid;
+    display: inline-block;
     justify-content: center;
+    
     align-items: center;
     width: 100%;
     min-height: 368px;
@@ -63,12 +64,31 @@ body {
 
 .transactionHistory-pills {
     width: 24rem;
-    background-color: #262626;
+    background-color: #0c0c0c;
     border-radius: 6rem;
-    display: grid;
+    margin-top: 2rem;
+    display: flex;
     justify-content: center;
     font-size: 21px;
 
+}
+.rightHalf-pill {
+    float: right;
+    /* border-left: 2px solid #000; */
+    margin-top: 0.5rem;
+    margin-right: -2px;
+   border-top-left-radius: 0 !important;
+   border-bottom-left-radius: 0 !important;
+}
+/* .rightHalf-pill:hover{
+    background:red;
+} */
+.leftHalf-pill{
+    float: right;
+    /* border-left: 2px solid #000; */
+    margin-right: -2px;
+   border-top-left-radius: 0 !important;
+   border-bottom-left-radius: 0 !important;
 }
 
 .transaction-history-line1,
