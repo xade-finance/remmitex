@@ -29,7 +29,10 @@ import { Link, useParams } from 'react-router-dom'
 import QRCode from "react-qr-code";
 import "./qrscan.css";
 import { Html5QrcodeScanner } from "html5-qrcode";
-import CarouselCard from './CarouselCard/CarouselCard'
+import CarouselCard1 from './CarouselCard/CarouselCard1';
+import CarouselCard3 from './CarouselCard/CarouselCard3';
+import CarouselCard4 from './CarouselCard/CarouselCard4'
+import CarouselCard2 from './CarouselCard/CarouselCard2';
 //import Popup from 'reactjs-popup'
 import { Layout } from './Layout'
 import './HomePage.css'
@@ -40,413 +43,413 @@ import "slick-carousel/slick/slick-theme.css";
 var cc;
 var num; 
 
- type Props = {}
+type Props = {}
 
 const settings = {
-    dots: true,
-    infinite: true,
-    
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    arrows:false,
-    responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            initialSlide: 1
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-  };
+dots: true,
+infinite: true,
+
+speed: 500,
+slidesToShow: 2,
+slidesToScroll: 1,
+initialSlide: 0,
+arrows:false,
+responsive: [
+{
+breakpoint: 1024,
+settings: {
+slidesToShow: 1,
+slidesToScroll: 1,
+infinite: true,
+dots: true
+}
+},
+{
+breakpoint: 768,
+settings: {
+slidesToShow: 1,
+slidesToScroll: 1,
+initialSlide: 1
+}
+},
+{
+breakpoint: 480,
+settings: {
+slidesToShow: 1,
+slidesToScroll: 1
+}
+}
+]
+};
 
 
 
 
 const Send = () => {
-  
-    let [current, setCurrent] = React.useState(0); // Phone number accept
-    let [address, setAddress] = React.useState('');
-    let [cc, setCC] = React.useState(0);
-    let [num, setNum] = React.useState(0);
-    let [amount, setAmount] = React.useState(0);
-    let [error, setError] = React.useState({'message': '', 'style': {'color':'rgba(251, 251, 251, 0.6)'}, 'error': false})
-    const { signAndSendTransaction } = useWeb3Auth();
+
+let [current, setCurrent] = React.useState(0); // Phone number accept
+let [address, setAddress] = React.useState('');
+let [cc, setCC] = React.useState(0);
+let [num, setNum] = React.useState(0);
+let [amount, setAmount] = React.useState(0);
+let [error, setError] = React.useState({'message': '', 'style': {'color':'rgba(251, 251, 251, 0.6)'}, 'error': false})
+const { signAndSendTransaction } = useWeb3Auth();
 
 
-    const handleSendAmountToAddress = async (e:any) => {
-      e.preventDefault();
-    if(amount <= 0) 
-    {
-      setError({...error, 'message': 'Please enter a valid amount', 'style': {'color': 'red'}, 'error': true})
-      return 
-    }
-    alert(`Address: ${address} | Amt: ${amount}`);
-    setCurrent(2);
-  await signAndSendTransaction(address, amount.toString()); 
-  }
-
-
-    function retrieveAddr(e:any)  
-    {
-      e.preventDefault();
-        if(cc == 0)
-        {
-          setError({...error, 'message': 'Please select a valid country code', 'style': {'color': 'red'}, 'error': true}) 
-        } 
-        else if(num.toString().length != 10)
-        {
-          setError({...error, 'message': 'Please select a valid phone number', 'style': {'color': 'red'}, 'error': true}) 
-        }
-        else 
-        {
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-    if (xhr.status == 404 || xhr.status == 500)
-    {
-            setError({...error, 'message': 'Please select a valid phone number', 'style': {'color': 'red'}, 'error': true}) 
-    }
-    else
-    {
-        setAddress(xhr.responseText);
-        setCurrent(1);
-        setError({'error': false, 'message': '', style: {'color': 'rgba(251, 251, 251, 0.6)'}})
-    }
+const handleSendAmountToAddress = async (e:any) => {
+e.preventDefault();
+if(amount <= 0) 
+{
+setError({...error, 'message': 'Please enter a valid amount', 'style': {'color': 'red'}, 'error': true})
+return 
+}
+alert(`Address: ${address} | Amt: ${amount}`);
+setCurrent(2);
+await signAndSendTransaction(address, amount.toString()); 
 }
 
-    }
+
+function retrieveAddr(e:any)  
+{
+e.preventDefault();
+if(cc == 0)
+{
+setError({...error, 'message': 'Please select a valid country code', 'style': {'color': 'red'}, 'error': true}) 
+} 
+else if(num.toString().length != 10)
+{
+setError({...error, 'message': 'Please select a valid phone number', 'style': {'color': 'red'}, 'error': true}) 
+}
+else 
+{
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+if (xhr.readyState == XMLHttpRequest.DONE) {
+if (xhr.status == 404 || xhr.status == 500)
+{
+setError({...error, 'message': 'Please select a valid phone number', 'style': {'color': 'red'}, 'error': true}) 
+}
+else
+{
+setAddress(xhr.responseText);
+setCurrent(1);
+setError({'error': false, 'message': '', style: {'color': 'rgba(251, 251, 251, 0.6)'}})
+}
+}
+
+}
 xhr.open('GET', `https://mobile.api.xade.finance?phone=${String(cc)+String(num)}`, true);
 xhr.send(null);
-        }
+}
 
-    }
+}
 
-    return (
-      <div style = {{"margin": '5px'}}>
-      {(current == 0)?
-      <>
-                  <br />
-                          <br />
-                          <br />
-                                      <br />
-                          <br />
-                          <br />
-      <h1 className = {styles3.element}>Enter mobile number</h1>
-                        <p id="error" style = {error.style}className={styles.error}>{error.message}</p>
+return (
+<div style = {{"margin": '5px'}}>
+{(current == 0)?
+<>
+<br />
+  <br />
+  <br />
+	      <br />
+  <br />
+  <br />
+<h1 className = {styles3.element}>Enter mobile number</h1>
+<p id="error" style = {error.style}className={styles.error}>{error.message}</p>
 
 
-    <div className={styles.number_input}  id="phonenums">
-                <form onSubmit = {(e) => retrieveAddr(e)} className={styles.number_form}>
-                    <div className={styles.flexContainer}>
-                        <section className={styles.countryCode}>
-                                    <div className={styles.flexContainerCountry}>
-                                <section className={styles.callingCodeTitle}>
-                                    Country Code <a className={styles.red}>*</a> 
-                                </section>    
+<div className={styles.number_input}  id="phonenums">
+<form onSubmit = {(e) => retrieveAddr(e)} className={styles.number_form}>
+<div className={styles.flexContainer}>
+<section className={styles.countryCode}>
+	    <div className={styles.flexContainerCountry}>
+	<section className={styles.callingCodeTitle}>
+	    Country Code <a className={styles.red}>*</a> 
+	</section>    
 
-                                <section>
-                                    <select id='cc' className={styles.selectForm} onChange = {(e) => {
-                                      setCC(parseInt(e.target.value))
-                                      console.log(cc)
-                                       }
-                                      } >
-                                <option value="0">Select your country code</option>
-                                <option value="1">United States of America/Canada</option>
-                                <option value="44">United Kingdom</option>
-                                <option value="91">India</option>
-                                <option value="61">Australia</option>                                    
-                                <option value="971">United Arab Emirates</option>
-                                <option value="852">Hong Kong</option>
-                                <option value="49">Germany</option>
-                                <option value="33">France</option>
-                                <option value="81">Japan</option>
-                                <option value="234">Nigeria</option>
-                                    </select> 
-                                </section>
-                            </div>
-                        </section>      
-                        <section className={styles.phoneNumber}>
-                             <div className={styles.flexContainerCountry}>
-                                <section className={styles.callingCodeTitle}>
-                                    Mobile Number <a className={styles.red}>*</a>
-                                </section>    
+	<section>
+	    <select id='cc' className={styles.selectForm} onChange = {(e) => {
+	      setCC(parseInt(e.target.value))
+	      console.log(cc)
+	       }
+	      } >
+	<option value="0">Select your country code</option>
+	<option value="1">United States of America/Canada</option>
+	<option value="44">United Kingdom</option>
+	<option value="91">India</option>
+	<option value="61">Australia</option>                                    
+	<option value="971">United Arab Emirates</option>
+	<option value="852">Hong Kong</option>
+	<option value="49">Germany</option>
+	<option value="33">France</option>
+	<option value="81">Japan</option>
+	<option value="234">Nigeria</option>
+	    </select> 
+	</section>
+    </div>
+</section>      
+<section className={styles.phoneNumber}>
+     <div className={styles.flexContainerCountry}>
+	<section className={styles.callingCodeTitle}>
+	    Mobile Number <a className={styles.red}>*</a>
+	</section>    
 
-                                <section>
-                                    <input id='num' onChange = {(e) => setNum(parseInt(e.target.value))} value = {num} className={styles.inputForm} type='number' autoFocus/>
-                                </section>
-                            </div>
-                        </section>
-                          {/*  <section className={styles.submitSection}>
-                        <button className={styles.submitButton} onClick={test} id="cont">Continue</button>
-                    </section>*/}
-              
-               </div>
-                      <br />
-                          <br />
-                          <br />
-                                   <div className = {styles3.submitSection}>
-                        <button type = "submit" className = {styles3.submitButton}>Proceed</button>
-                                  </div>
-               
-               </form></div>
-               </>
-               
-               : (current == 1)? 
-    
-               <>
-                           <br />
-                          <br />
-                          <br />
-                                      <br />
-                          <br />
-                          <br />
-                <h1 className = {styles3.element}>Enter amount</h1>
-                <p id="error" style = {error.style}className={styles.error}>{error.message}</p>
+	<section>
+	    <input id='num' onChange = {(e) => setNum(parseInt(e.target.value))} value = {num} className={styles.inputForm} type='number' autoFocus/>
+	</section>
+    </div>
+</section>
+  {/*  <section className={styles.submitSection}>
+<button className={styles.submitButton} onClick={test} id="cont">Continue</button>
+</section>*/}
 
-                <form onSubmit = {(e) => {
-                      // Some web3auth function
-                      handleSendAmountToAddress(e);
-                }}>
-                     <section className={styles.phoneNumber}>
-                             <div className={styles.flexContainerCountry}>
-                                <section className={styles.callingCodeTitle}>
-                                    Amount <a className={styles.red}>*</a>
-                                </section>    
+</div>
+<br />
+  <br />
+  <br />
+	   <div className = {styles3.submitSection}>
+<button type = "submit" className = {styles3.submitButton}>Proceed</button>
+	  </div>
 
-                                <section>
-                                    <input id='num' onChange = {(e) => setAmount(parseInt(e.target.value))} value = {amount} className={styles.inputForm} type='number' autoFocus/>
-                                </section>
-                            </div>
-                        </section>
-                          <br />
-                          <br />
-                          <br />
-   
-                                   <div className = {styles3.submitSection}>
-                        <button type = "submit" className = {styles3.submitButton2}>Confirm transaction</button>
-              
-                    </div>
-                </form>
-
-                <button></button>
-               </>
-               
-              :
-              <>
-              <div className={tickStyles.wrapper}> <svg className={tickStyles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className ={tickStyles.checkmark__circle} cx="26" cy="26" r="25" fill="none"/> <path className={tickStyles.checkmark__check} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-          </svg>
-            </div>  
-
-            <div className = {tickStyles.and}>Transaction successful! </div>
+</form></div>
 </>
-              }
 
-      </div>
-    );
-  }
-    var secret= '';
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < 50; i++ ) {
-      secret += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
+: (current == 1)? 
+
+<>
+   <br />
+  <br />
+  <br />
+	      <br />
+  <br />
+  <br />
+<h1 className = {styles3.element}>Enter amount</h1>
+<p id="error" style = {error.style}className={styles.error}>{error.message}</p>
+
+<form onSubmit = {(e) => {
+// Some web3auth function
+handleSendAmountToAddress(e);
+}}>
+<section className={styles.phoneNumber}>
+     <div className={styles.flexContainerCountry}>
+	<section className={styles.callingCodeTitle}>
+	    Amount <a className={styles.red}>*</a>
+	</section>    
+
+	<section>
+	    <input id='num' onChange = {(e) => setAmount(parseInt(e.target.value))} value = {amount} className={styles.inputForm} type='number' autoFocus/>
+	</section>
+    </div>
+</section>
+  <br />
+  <br />
+  <br />
+
+	   <div className = {styles3.submitSection}>
+<button type = "submit" className = {styles3.submitButton2}>Confirm transaction</button>
+
+</div>
+</form>
+
+<button></button>
+</>
+
+:
+<>
+<div className={tickStyles.wrapper}> <svg className={tickStyles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className ={tickStyles.checkmark__circle} cx="26" cy="26" r="25" fill="none"/> <path className={tickStyles.checkmark__check} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+</svg>
+</div>  
+
+<div className = {tickStyles.and}>Transaction successful! </div>
+</>
+}
+
+</div>
+);
+}
+var secret= '';
+var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+var charactersLength = characters.length;
+for ( var i = 0; i < 50; i++ ) {
+secret += characters.charAt(Math.floor(Math.random() * charactersLength));
+}
 
 function storenum(c,n){
-  var phone = c+""+n;
-  var data = `{"phone":"${phone}","id":"${secret}"}`;
-    var s = new XMLHttpRequest();
+var phone = c+""+n;
+var data = `{"phone":"${phone}","id":"${secret}"}`;
+var s = new XMLHttpRequest();
 s.open("POST","https://mongo.api.xade.finance");
 s.send(data);
 }
 
 const Main=() => {
-  const { provider, login, logout, getUserInfo, getAccounts, readAddress,userData, getBalance,isLoading,signAndSendTransaction, userPic } = useWeb3Auth();
+const { provider, login, logout, getUserInfo, getAccounts, readAddress,userData, getBalance,isLoading,signAndSendTransaction, userPic } = useWeb3Auth();
 const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
 
 const[username, setUsername] = useState("");
 
-  useEffect(() => {
-    const handleGetUser = async () => {
-      const user = await userData();
-      setUsername(user);
-    }
-    if (provider) {
-      handleGetUser();
-    }
-  }, [provider, username]);
+useEffect(() => {
+const handleGetUser = async () => {
+const user = await userData();
+setUsername(user);
+}
+if (provider) {
+handleGetUser();
+}
+}, [provider, username]);
 
 const[img, setImg] = useState("");
 
-  useEffect(() => {
-    const handleGetImg = async () => {
-      const pic = await userPic();
-      setImg(pic);
-    }
-    if (provider) {
-      handleGetImg();
-    }
-  }, [provider, img]);
+useEffect(() => {
+const handleGetImg = async () => {
+const pic = await userPic();
+setImg(pic);
+}
+if (provider) {
+handleGetImg();
+}
+}, [provider, img]);
 
 const [mainAccount, setMainAccount] = useState("");
 
-  const handleGetNormalTransactionByAddress = async () => {
-    let transactions = await getNormalTransactionsByAddress(mainAccount);
-    setTransactionHistory(transactions.result);
-  }
+const handleGetNormalTransactionByAddress = async () => {
+let transactions = await getNormalTransactionsByAddress(mainAccount);
+setTransactionHistory(transactions.result);
+}
 
-  useEffect(() => {
-    const handleGetAccount = async () => {
-      const account = await provider?.readAddress();
-      setMainAccount(account);
-    }
-    if (provider) {
-      handleGetAccount();
-    }
-  }, [provider, mainAccount]);
+useEffect(() => {
+const handleGetAccount = async () => {
+const account = await provider?.readAddress();
+setMainAccount(account);
+}
+if (provider) {
+handleGetAccount();
+}
+}, [provider, mainAccount]);
 
-  const isReady = () => {
-    return (
-      mainAccount !== "" 
-    );
-  }
+const isReady = () => {
+return (
+mainAccount !== "" 
+);
+}
 
-  useEffect(() => {
-    if(isReady()) {
-      handleGetNormalTransactionByAddress();
-    }
-  }, [mainAccount]);
+useEffect(() => {
+if(isReady()) {
+handleGetNormalTransactionByAddress();
+}
+}, [mainAccount]);
 
-  
+
 const handleLoginWithEmail=(e: FormEvent<HTMLFormElement>) => {
-  //     var error = document.getElementById("error");
-  // cc = document.getElementById("cc").value;
-  // num = document.getElementById("num").value;
-  // var re = /\S+@\S+\.\S+/;
+//     var error = document.getElementById("error");
+// cc = document.getElementById("cc").value;
+// num = document.getElementById("num").value;
+// var re = /\S+@\S+\.\S+/;
 
-  // if(cc == 0)
-  // {
-  //               error.textContent = "Please select a valid country code";
-  //           error.style.color = "red";
-  //           return;
-      
-  // }
-  // else if (num.length != 10){
-  //      error.textContent = "Please enter a valid phone number";
-  //           error.style.color = "red";
-  //           return;
-        
-  // }
+// if(cc == 0)
+// {
+//               error.textContent = "Please select a valid country code";
+//           error.style.color = "red";
+//           return;
 
-  // // else {
-  // //   error.textContent = "";
-  // //   error.style.color="#020202";
-  // //   e.preventDefault();
-  e.preventDefault();
-    const email=(e.target as any)[0].value
-    login(WALLET_ADAPTERS.OPENLOGIN, "email_passwordless", email);
-        // }
+// }
+// else if (num.length != 10){
+//      error.textContent = "Please enter a valid phone number";
+//           error.style.color = "red";
+//           return;
 
-  }
-  const HomePage = (props: Props) => {
+// }
+
+// // else {
+// //   error.textContent = "";
+// //   error.style.color="#020202";
+// //   e.preventDefault();
+e.preventDefault();
+const email=(e.target as any)[0].value
+login(WALLET_ADAPTERS.OPENLOGIN, "email_passwordless", email);
+// }
+
+}
+const HomePage = (props: Props) => {
 type Props = {}
 
 const settings = {
-    dots: true,
-    infinite: true,
-    
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    initialSlide: 0,
-    arrows:false,
-    responsive: [
-        {
-          breakpoint: 1024,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            infinite: true,
-            dots: true
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            initialSlide: 1
-          }
-        },
-        {
-          breakpoint: 480,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1
-          }
-        }
-      ]
-  };
-    let symbol = 'CELO';
-    let value = '0.00';
-   
-  const [amount, setAmt] = useState(0);
+dots: true,
+infinite: true,
 
-  useEffect(() => {
-    const handleGetBalance = async () => {
-      const bal = await provider?.getBalance();
-      setAmt(bal);
-    }
-    if (provider) {
-      handleGetBalance();
-    }
-  }, [provider, amount]);
+speed: 500,
+slidesToShow: 2,
+slidesToScroll: 1,
+initialSlide: 0,
+arrows:false,
+responsive: [
+{
+breakpoint: 1024,
+settings: {
+slidesToShow: 1,
+slidesToScroll: 1,
+infinite: true,
+dots: true
+}
+},
+{
+breakpoint: 768,
+settings: {
+slidesToShow: 1,
+slidesToScroll: 1,
+initialSlide: 1
+}
+},
+{
+breakpoint: 480,
+settings: {
+slidesToShow: 1,
+slidesToScroll: 1
+}
+}
+]
+};
+let symbol = 'CELO';
+let value = '0.00';
+
+const [amount, setAmt] = useState(0);
+
+useEffect(() => {
+const handleGetBalance = async () => {
+const bal = await provider?.getBalance();
+setAmt(bal);
+}
+if (provider) {
+handleGetBalance();
+}
+}, [provider, amount]);
 const amountStr = amount.toString();
 //const [price,setPrice] = useState(0);
 //var donezo = false;
- /* useEffect(() => {
-    const handleGetCelo = async () => {
-      var xhr2 = new XMLHttpRequest();
-  xhr2.onreadystatechange=function(){
- if(xhr2.readyState==XMLHttpRequest.DONE){
+/* useEffect(() => {
+const handleGetCelo = async () => {
+var xhr2 = new XMLHttpRequest();
+xhr2.onreadystatechange=function(){
+if(xhr2.readyState==XMLHttpRequest.DONE){
 if(xhr2.status == 200){
 setPrice(xhr2.responseText);
 }
 }
 }
-    }
-   
-  }, [price]);
+}
+
+}, [price]);
 */
 const [price,setPrice] = useState("")
 var xhr2 = new XMLHttpRequest();
-  xhr2.onreadystatechange=function(){
- if(xhr2.readyState==XMLHttpRequest.DONE){
- setPrice(xhr2.responseText)
+xhr2.onreadystatechange=function(){
+if(xhr2.readyState==XMLHttpRequest.DONE){
+setPrice(xhr2.responseText)
 }
 }
 
-  xhr2.open('GET', "https://price.api.xade.finance/celo")
-  xhr2.send() 
+xhr2.open('GET', "https://price.api.xade.finance/celo")
+xhr2.send() 
 //const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString();
 //const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
 const usdBal = (parseFloat(price)*(parseFloat(amountStr)/Math.pow(10,18))).toFixed(2);
@@ -460,6 +463,13 @@ xhr.onreadystatechange = function(){
 
 if (xhr.status == 200){
 finalVal = xhr.responseText;
+<<<<<<< HEAD
+}
+else{
+finalVal = walletAddr;
+}
+=======
+>>>>>>> 2634b8d1efc1351b734dfafc436d9b6f52f52ded
 }
 else{
 finalVal = walletAddr;
@@ -506,16 +516,81 @@ transactionHistory[i].to = finalVal;
 });
 
 
+xhr.open("GET",`https://user.api.xade.finance?address=${walletAddr}`);
+xhr.send(null);
+
+return finalVal;
+
+}
+
+useEffect(() => {
+for(var i = 0; i < transactionHistory.length; i++)
+{
+
+var currentTransac = transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase()? transactionHistory[i].from : transactionHistory[i].to;
+//var currentTransac = "0xa13414fa08c8ae49a9cceabdae4ff8d2d82ec139";
+var xhr = new XMLHttpRequest();
+var finalVal;
+xhr.onreadystatechange = function(){
+
+if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+finalVal = xhr.responseText;
+}
+else if(xhr.status != 200){
+finalVal = currentTransac.substring(0,6)+"..."+currentTransac.substring(currentTransac.length - 3);
+console.log(xhr.status);
+}
+}
+
+xhr.open("GET",`https://user.api.xade.finance?address=${currentTransac}`);
+xhr.send(null);
+console.log(finalVal);
+if (transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase())
+{
+transactionHistory[i].from = finalVal;
+}
+else{
+transactionHistory[i].to = finalVal;
+}
+}
+});
+
+
 return (
-      
-        <div className='container'>
-            <div className='carouselHolder'>
-                <Slider {...settings}>
-                      <CarouselCard/>
-                      <CarouselCard/>
-                      <CarouselCard/>
+
+<div className='container'>
+<br />
+<br />
+<br />
+<div className='carouselHolder'>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<Slider {...settings}>
+<CarouselCard1/>
+                      <CarouselCard2/>
+
+               
+
+ <CarouselCard3/>
+
+ <CarouselCard4/>
                 </Slider>
-            </div>
+      
+      </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
             <div className='myActivity'>
                 <div className='totalBalance'>
                     <p className='label'>Checking Account</p>
@@ -544,7 +619,11 @@ return (
 <td>{(new Date(transaction.timeStamp*1000).toString()).substring(4,21)}</td>   &nbsp;&nbsp;               
 <td>{transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()? transaction.from : transaction.to}</td>
                   &nbsp;&nbsp;<td>${(parseFloat(price)*(parseFloat(transaction.value)/Math.pow(10,18))).toFixed(2)}</td>
+<<<<<<< HEAD
+	&nbsp;&nbsp;<td><svg stroke="red" fill={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "green" : "red"} stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z" : "M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z"}></path></svg></td>
+=======
         &nbsp;&nbsp;<td><svg stroke="red" fill={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "green" : "red"} stroke-width="0" viewBox="0 0 16 16" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase()  ? "M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z" : "M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z"}></path></svg></td>
+>>>>>>> 2634b8d1efc1351b734dfafc436d9b6f52f52ded
                   <td><a href={`https://alfajores-blockscout.celo-testnet.org/tx/${transaction.hash}`} target="_blank" rel="noopener noreferrer">More Info <FaExternalLinkAlt /></a></td>
                 </tr>
               ))}
