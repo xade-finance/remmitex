@@ -48,7 +48,8 @@ type Props = {}
 const settings = {
 dots: true,
 infinite: true,
-
+  autoplay: true,
+      autoplaySpeed: 2000,
 speed: 500,
 slidesToShow: 2,
 slidesToScroll: 1,
@@ -151,7 +152,7 @@ return (
 <br />
   <br />
   <br />
-	      <br />
+              <br />
   <br />
   <br />
 <h1 className = {styles3.element}>Enter mobile number</h1>
@@ -162,41 +163,41 @@ return (
 <form onSubmit = {(e) => retrieveAddr(e)} className={styles.number_form}>
 <div className={styles.flexContainer}>
 <section className={styles.countryCode}>
-	    <div className={styles.flexContainerCountry}>
-	<section className={styles.callingCodeTitle}>
-	    Country Code <a className={styles.red}>*</a> 
-	</section>    
+            <div className={styles.flexContainerCountry}>
+        <section className={styles.callingCodeTitle}>
+            Country Code <a className={styles.red}>*</a> 
+        </section>    
 
-	<section>
-	    <select id='cc' className={styles.selectForm} onChange = {(e) => {
-	      setCC(parseInt(e.target.value))
-	      console.log(cc)
-	       }
-	      } >
-	<option value="0">Select your country code</option>
-	<option value="1">United States of America/Canada</option>
-	<option value="44">United Kingdom</option>
-	<option value="91">India</option>
-	<option value="61">Australia</option>                                    
-	<option value="971">United Arab Emirates</option>
-	<option value="852">Hong Kong</option>
-	<option value="49">Germany</option>
-	<option value="33">France</option>
-	<option value="81">Japan</option>
-	<option value="234">Nigeria</option>
-	    </select> 
-	</section>
+        <section>
+            <select id='cc' className={styles.selectForm} onChange = {(e) => {
+              setCC(parseInt(e.target.value))
+              console.log(cc)
+               }
+              } >
+        <option value="0">Select your country code</option>
+        <option value="1">United States of America/Canada</option>
+        <option value="44">United Kingdom</option>
+        <option value="91">India</option>
+        <option value="61">Australia</option>                                    
+        <option value="971">United Arab Emirates</option>
+        <option value="852">Hong Kong</option>
+        <option value="49">Germany</option>
+        <option value="33">France</option>
+        <option value="81">Japan</option>
+        <option value="234">Nigeria</option>
+            </select> 
+        </section>
     </div>
 </section>      
 <section className={styles.phoneNumber}>
      <div className={styles.flexContainerCountry}>
-	<section className={styles.callingCodeTitle}>
-	    Mobile Number <a className={styles.red}>*</a>
-	</section>    
+        <section className={styles.callingCodeTitle}>
+            Mobile Number <a className={styles.red}>*</a>
+        </section>    
 
-	<section>
-	    <input id='num' onChange = {(e) => setNum(parseInt(e.target.value))} value = {num} className={styles.inputForm} type='number' autoFocus/>
-	</section>
+        <section>
+            <input id='num' onChange = {(e) => setNum(parseInt(e.target.value))} value = {num} className={styles.inputForm} type='number' autoFocus/>
+        </section>
     </div>
 </section>
   {/*  <section className={styles.submitSection}>
@@ -207,9 +208,9 @@ return (
 <br />
   <br />
   <br />
-	   <div className = {styles3.submitSection}>
+           <div className = {styles3.submitSection}>
 <button type = "submit" className = {styles3.submitButton}>Proceed</button>
-	  </div>
+          </div>
 
 </form></div>
 </>
@@ -220,7 +221,7 @@ return (
    <br />
   <br />
   <br />
-	      <br />
+              <br />
   <br />
   <br />
 <h1 className = {styles3.element}>Enter amount</h1>
@@ -232,20 +233,20 @@ handleSendAmountToAddress(e);
 }}>
 <section className={styles.phoneNumber}>
      <div className={styles.flexContainerCountry}>
-	<section className={styles.callingCodeTitle}>
-	    Amount <a className={styles.red}>*</a>
-	</section>    
+        <section className={styles.callingCodeTitle}>
+            Amount <a className={styles.red}>*</a>
+        </section>    
 
-	<section>
-	    <input id='num' onChange = {(e) => setAmount(parseInt(e.target.value))} value = {amount} className={styles.inputForm} type='number' autoFocus/>
-	</section>
+        <section>
+            <input id='num' onChange = {(e) => setAmount(parseInt(e.target.value))} value = {amount} className={styles.inputForm} type='number' autoFocus/>
+        </section>
     </div>
 </section>
   <br />
   <br />
   <br />
 
-	   <div className = {styles3.submitSection}>
+           <div className = {styles3.submitSection}>
 <button type = "submit" className = {styles3.submitButton2}>Confirm transaction</button>
 
 </div>
@@ -383,7 +384,8 @@ type Props = {}
 const settings = {
 dots: true,
 infinite: true,
-
+  autoplay: true,
+      autoplaySpeed: 2000,
 speed: 500,
 slidesToShow: 2,
 slidesToScroll: 1,
@@ -531,6 +533,7 @@ return (
 <br />
 <Slider {...settings}>
 <CarouselCard1/>
+
                       <CarouselCard2/>
 
                
@@ -544,15 +547,8 @@ return (
 <br />
 <br />
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
            
-    <div className='myActivity'>
+ <div className='myActivity'>
           <div className='totalBalance'>
             <p className='label'>Checking Account</p>
             <p className='value'>${usdBal}</p>
