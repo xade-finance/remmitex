@@ -34,8 +34,8 @@ const Navbar = (props: Props) => {
            
           </Link>
           <div onClick={handleClick} className='menu-icon'>
-            <i className={'fas fa-bars'} >
-</i>
+             <i className={'fas fa-bars desktopstuff'} >
+                </i>
           </div>
           
           <ul className={click ? 'nav-menu navActive' : 'nav-menu'}>

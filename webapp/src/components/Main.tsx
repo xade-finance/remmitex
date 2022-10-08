@@ -39,6 +39,7 @@ import './HomePage.css'
 import { TbQrcode } from "react-icons/tb";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Send from './Send.tsx'
 
 var cc;
 var num; 
@@ -86,188 +87,6 @@ slidesToScroll: 1
 
 
 
-const Send = () => {
-
-let [current, setCurrent] = React.useState(0); // Phone number accept
-let [address, setAddress] = React.useState('');
-let [cc, setCC] = React.useState(0);
-let [num, setNum] = React.useState(0);
-let [amount, setAmount] = React.useState(0);
-let [error, setError] = React.useState({'message': '', 'style': {'color':'rgba(251, 251, 251, 0.6)'}, 'error': false})
-const { signAndSendTransaction } = useWeb3Auth();
-
-
-const handleSendAmountToAddress = async (e:any) => {
-e.preventDefault();
-if(amount <= 0) 
-{
-setError({...error, 'message': 'Please enter a valid amount', 'style': {'color': 'red'}, 'error': true})
-return 
-}
-alert(`Address: ${address} | Amt: ${amount}`);
-setCurrent(2);
-await signAndSendTransaction(address, amount.toString()); 
-}
-
-
-function retrieveAddr(e:any)  
-{
-e.preventDefault();
-if(cc == 0)
-{
-setError({...error, 'message': 'Please select a valid country code', 'style': {'color': 'red'}, 'error': true}) 
-} 
-else if(num.toString().length != 10)
-{
-setError({...error, 'message': 'Please select a valid phone number', 'style': {'color': 'red'}, 'error': true}) 
-}
-else 
-{
-var xhr = new XMLHttpRequest();
-xhr.onreadystatechange = function() {
-if (xhr.readyState == XMLHttpRequest.DONE) {
-if (xhr.status == 404 || xhr.status == 500)
-{
-setError({...error, 'message': 'Please select a valid phone number', 'style': {'color': 'red'}, 'error': true}) 
-}
-else
-{
-setAddress(xhr.responseText);
-setCurrent(1);
-setError({'error': false, 'message': '', style: {'color': 'rgba(251, 251, 251, 0.6)'}})
-}
-}
-
-}
-xhr.open('GET', `https://mobile.api.xade.finance?phone=${String(cc)+String(num)}`, true);
-xhr.send(null);
-}
-
-}
-
-return (
-<div style = {{"margin": '5px'}}>
-{(current == 0)?
-<>
-<br />
-  <br />
-  <br />
-              <br />
-  <br />
-  <br />
-<h1 className = {styles3.element}>Enter mobile number</h1>
-<p id="error" style = {error.style}className={styles.error}>{error.message}</p>
-
-
-<div className={styles.number_input}  id="phonenums">
-<form onSubmit = {(e) => retrieveAddr(e)} className={styles.number_form}>
-<div className={styles.flexContainer}>
-<section className={styles.countryCode}>
-            <div className={styles.flexContainerCountry}>
-        <section className={styles.callingCodeTitle}>
-            Country Code <a className={styles.red}>*</a> 
-        </section>    
-
-        <section>
-            <select id='cc' className={styles.selectForm} onChange = {(e) => {
-              setCC(parseInt(e.target.value))
-              console.log(cc)
-               }
-              } >
-        <option value="0">Select your country code</option>
-        <option value="1">United States of America/Canada</option>
-        <option value="44">United Kingdom</option>
-        <option value="91">India</option>
-        <option value="61">Australia</option>                                    
-        <option value="971">United Arab Emirates</option>
-        <option value="852">Hong Kong</option>
-        <option value="49">Germany</option>
-        <option value="33">France</option>
-        <option value="81">Japan</option>
-        <option value="234">Nigeria</option>
-            </select> 
-        </section>
-    </div>
-</section>      
-<section className={styles.phoneNumber}>
-     <div className={styles.flexContainerCountry}>
-        <section className={styles.callingCodeTitle}>
-            Mobile Number <a className={styles.red}>*</a>
-        </section>    
-
-        <section>
-            <input id='num' onChange = {(e) => setNum(parseInt(e.target.value))} value = {num} className={styles.inputForm} type='number' autoFocus/>
-        </section>
-    </div>
-</section>
-  {/*  <section className={styles.submitSection}>
-<button className={styles.submitButton} onClick={test} id="cont">Continue</button>
-</section>*/}
-
-</div>
-<br />
-  <br />
-  <br />
-           <div className = {styles3.submitSection}>
-<button type = "submit" className = {styles3.submitButton}>Proceed</button>
-          </div>
-
-</form></div>
-</>
-
-: (current == 1)? 
-
-<>
-   <br />
-  <br />
-  <br />
-              <br />
-  <br />
-  <br />
-<h1 className = {styles3.element}>Enter amount</h1>
-<p id="error" style = {error.style}className={styles.error}>{error.message}</p>
-
-<form onSubmit = {(e) => {
-// Some web3auth function
-handleSendAmountToAddress(e);
-}}>
-<section className={styles.phoneNumber}>
-     <div className={styles.flexContainerCountry}>
-        <section className={styles.callingCodeTitle}>
-            Amount <a className={styles.red}>*</a>
-        </section>    
-
-        <section>
-            <input id='num' onChange = {(e) => setAmount(parseInt(e.target.value))} value = {amount} className={styles.inputForm} type='number' autoFocus/>
-        </section>
-    </div>
-</section>
-  <br />
-  <br />
-  <br />
-
-           <div className = {styles3.submitSection}>
-<button type = "submit" className = {styles3.submitButton2}>Confirm transaction</button>
-
-</div>
-</form>
-
-<button></button>
-</>
-
-:
-<>
-<div className={tickStyles.wrapper}> <svg className={tickStyles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className ={tickStyles.checkmark__circle} cx="26" cy="26" r="25" fill="none"/> <path className={tickStyles.checkmark__check} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-</svg>
-</div>  
-
-<div className = {tickStyles.and}>Transaction successful! </div>
-</>
-}
-
-</div>
-);
-}
 var secret= '';
 var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 var charactersLength = characters.length;
@@ -918,7 +737,7 @@ const balance = getBalance();
          <Route path="/investments" element={<Layout><Investments /></Layout>} />
         <Route path="/payments" element={<></>} />
          <Route path="/deposit-withdraw" element={<Layout><ComingSoon /></Layout>} />
-         <Route path="/qr" element={<Layout><QrCodePage /></Layout>} />
+         <Route path="/qr" element={<QrCodePage />} />
 <Route path="/savings" element={<Layout><Saving /></Layout>} />
                  <Route path="/send" element={<Send />} />
            <Route path="/sendQR/:address" element={<SendQR />} />
