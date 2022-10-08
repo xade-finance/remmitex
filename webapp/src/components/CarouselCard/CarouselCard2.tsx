@@ -5,13 +5,14 @@ type Props = {}
 const CarouselCard2 = (props: Props) => {
   return (
 
-         <div className="box">
-<img src="https://www.xade.finance/media/coins.png" />   
+         <div className="box">   
 <br />
 <br />
-<a className="labelText">Trade 5000+ markets including global stocks, crypto, ETFs and commodities with 10x leverage</a>
+<a className="labelText">
+<br />Trade 5000+ markets including global stocks, crypto, and commodities with 10x leverage</a>
 <br />
 <br />
+<img className="carouselImg" src="https://www.xade.finance/media/coins.png" />
 <br />
 <br />
 
