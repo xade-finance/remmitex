@@ -40,6 +40,7 @@ import { TbQrcode } from "react-icons/tb";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Send from './Send.tsx'
+import OnramperWidget from "@onramper/widget";
 
 var cc;
 var num; 
@@ -84,7 +85,35 @@ slidesToScroll: 1
 ]
 };
 
-
+const ComingSoon = () => {                          
+                                                    
+return (                                            
+<div className="container">                         
+<div                                                
+      style={{                                      
+        width: "460px",                             
+        height: "660px",                            
+      }}                                            
+    >                                               
+      <OnramperWidget                               
+        API_KEY="pk_test_NHmfMmwVq30RR0ati4EyzNAxxhS
+lb0XBg82iJ623cT80"                                  
+        color="#000000"                             
+        fontFamily="Arial"                          
+        defaultCrypto="USDC"                        
+        defaultFiat="USD"                           
+        filters={{                                  
+          onlyCryptos: ["USDC"],                    
+onlyPaymentMethods: ["creditCard", "bankTransfer", "applePay", "googlePay", "paynow", "fps", "alipay-hk"
+, "prompt-pay", "instapay", "upi", "gojek-id", "viettel-pay", "duit-now", "ideal", "bancontact", "giropay", "sofort", "sepaBankTransfer"]                  
+}}                                                  
+        darkMode={true}                             
+        redirectURL="https://app.xade.finance/"     
+      />                                            
+    </div>                                          
+</div>                                              
+  );                                                
+}
 
 
 var secret= '';
@@ -724,7 +753,7 @@ const balance = getBalance();
 
      getUserInfo(secret),
          <>
-              <div className="App">
+              <div className="App" >
   
       <BrowserRouter>
        

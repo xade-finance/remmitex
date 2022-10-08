@@ -30,7 +30,6 @@ body{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 32%;
     padding: 25px;
     background: #000;
 }
@@ -60,12 +59,14 @@ body{
 .activityContent{
      display: inline-block;
     justify-content: center;
-margin-right:100px;
+/* margin-right:100px; */
     align-items: center;
-    width: 100%;
+    width: 40vw;
     min-height: 368px;
     height: 100%;
-    color: #fff;   
+    color: #fff; 
+    max-height: 40vh;
+    overflow-y: auto;  
 }
 .utilityButtons{
     display: flex;
@@ -102,7 +103,11 @@ margin-right:100px;
 }
 
 .transactionHistory-pills {
-    width: 24rem;
+    transform: translate(-50%, -50%);
+    left: 46%;
+    top: 50%;
+    position: relative;
+    max-width: 24rem;
     background-color: #0c0c0c;
     border-radius: 6rem;
     margin-top: 2rem;
@@ -210,6 +215,7 @@ width:140px;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
         width: 100%;
         min-height: 368px;
         height: 100%;
