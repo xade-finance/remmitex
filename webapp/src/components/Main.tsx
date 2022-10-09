@@ -14,7 +14,7 @@ import "slick-carousel/slick/slick-theme.css";
 import 'reactjs-popup/dist/index.css';
 import { FormEvent, useEffect, useState } from "react";
 import Investments from './INVESTMENTS'
-import ComingSoon from './ComingSoon'
+//import ComingSoon from './ComingSoon'
 import styles3 from './send.module.css'
 import { WALLET_ADAPTERS } from "@web3auth/base";
 import { useWeb3Auth } from "../services/web3auth";
@@ -96,8 +96,7 @@ return (
       }}                                            
     >                                               
       <OnramperWidget                               
-        API_KEY="pk_test_NHmfMmwVq30RR0ati4EyzNAxxhS
-lb0XBg82iJ623cT80"                                  
+        API_KEY="pk_test_NHmfMmwVq30RR0ati4EyzNAxxhSlb0XBg82iJ623cT80"                                  
         color="#000000"                             
         fontFamily="Arial"                          
         defaultCrypto="USDC"                        
@@ -219,6 +218,124 @@ login(WALLET_ADAPTERS.OPENLOGIN, "email_passwordless", email);
 // }
 
 }
+
+const TxHistory = () => {
+
+useEffect(() => {
+for(var i = 0; i < transactionHistory.length; i++)
+{
+
+var currentTransac = transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase()? transactionHistory[i].from : transactionHistory[i].to;
+//var currentTransac = "0xa13414fa08c8ae49a9cceabdae4ff8d2d82ec139";
+var xhr = new XMLHttpRequest();
+var finalVal;
+xhr.onreadystatechange = function(){
+
+if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+finalVal = xhr.responseText;
+}
+else if(xhr.status != 200){
+finalVal = currentTransac.substring(0,6)+"..."+currentTransac.substring(currentTransac.length - 3);
+console.log(xhr.status);
+}
+}
+
+xhr.open("GET",`https://user.api.xade.finance?address=${currentTransac}`);
+xhr.send(null);
+console.log(finalVal);
+if (transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase())
+{
+transactionHistory[i].from = finalVal;
+}
+else{
+transactionHistory[i].to = finalVal;
+}
+}
+});
+
+
+    const addressShortner = (transaction: any) => {
+      const address = transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? transaction.from : transaction.to;
+      const addressShortened = address.substring(0, 6) + "..." + address.substring(address.length - 3);
+      return addressShortened;
+    }
+
+const [price,setPrice] = useState("")
+var xhr2 = new XMLHttpRequest();
+xhr2.onreadystatechange=function(){
+if(xhr2.readyState==XMLHttpRequest.DONE){
+setPrice(xhr2.responseText)
+}
+}
+
+xhr2.open('GET', "https://price.api.xade.finance/celo")
+xhr2.send()
+return (
+<div>
+<br />
+            <div className='topBar'>
+                <Link to='/'>
+                    <div className='goBack'><ImCross /></div>
+                </Link>
+                <div className='buttonHolderQrPage'>
+                   <div className='qrButtonLeftinActive' style = {{'color': '#fff', 'textDecoration': 'none' }}><h2>Transaction</h2></div>
+                    <div className='qrButtonRightActive'style = {{'color': '#fff', 'textDecoration': 'none' }} ><h2>&nbsp;History</h2></div>
+                </div>
+
+                <div className='share'><FiShare /></div>
+
+            </div>
+<div className='activityContent'>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+            {transactionHistory.map((transaction, index) => (
+              <div key={index} className='transactionHistory-pills'>
+                <div className='rightHalf-pill'>
+                <div className='transactionIndicator-arrows'>
+                      <svg stroke="currentColor" fill={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? "green" : "red"} stroke-width="0" viewBox="0 
+0 16 16" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg"><path d={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? "M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z" : "M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z"}></path></svg>
+                </div>
+                </div>
+                <div className='leftHalf-pill'>
+                  <div className='transaction-history-line1'>
+
+                    &nbsp;&nbsp;
+                    <div className="address-styling">
+                      {addressShortner(transaction)}
+                    </div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href={`https://alfajores-blockscout.celo-testnet.org/tx/${transaction.hash}`} target="_blank" rel="noopener noreferrer"> <FaExternalLinkAlt /></a>
+                    </div>
+                  </div>
+                  <div className='transaction-history-line2'>
+
+
+
+                    &nbsp;&nbsp;
+                    <div className="amount-time-stlying">
+                    {(parseFloat(transaction.value) / Math.pow(10,18)).toFixed(2)}
+
+                    </div >
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div className="amount-time-stlying">
+                      {(new Date(transaction.timeStamp * 1000).toString()).substring(4, 21)}
+                    </div>
+                    &nbsp;&nbsp;
+
+                  </div>
+                </div>
+              </div>
+            ))}
+   </div>
+</div>
+);
+
+}
+
 const HomePage = (props: Props) => {
 
     const addressShortner = (transaction: any) => {
@@ -301,15 +418,17 @@ const [price,setPrice] = useState("")
 var xhr2 = new XMLHttpRequest();
 xhr2.onreadystatechange=function(){
 if(xhr2.readyState==XMLHttpRequest.DONE){
-setPrice(xhr2.responseText)
+const usdJson = JSON.parse(xhr2.responseText);
+const balCUSD = usdJson["result"];
+setPrice(balCUSD);
 }
 }
 
-xhr2.open('GET', "https://price.api.xade.finance/celo")
+xhr2.open('GET', `https://alfajores-blockscout.celo-testnet.org/api?module=account&action=tokenbalance&contractaddress=0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1&address=${mainAccount}`);
 xhr2.send() 
 //const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString();
 //const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
-const usdBal = (parseFloat(price)*(parseFloat(amountStr)/Math.pow(10,18))).toFixed(2);
+const usdBal = (parseFloat(price)/Math.pow(10,18)).toFixed(2);
 //alert(price);
 
 function returnUser(walletAddr:any){
@@ -369,16 +488,7 @@ transactionHistory[i].to = finalVal;
 return (
 
 <div className='container'>
-<br />
-<br />
-<br />
 <div className='carouselHolder'>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 <Slider {...settings}>
 <CarouselCard1/>
 
@@ -395,16 +505,33 @@ return (
 <br />
 <br />
 <br />
+<br />
+<br />
            
- <div className='myActivity'>
+<br />
+<br />
+ <div  className='myActivity'>
           <div className='totalBalance'>
-            <p className='label'>Checking Account</p>
+<br />
+<br />
+<br />     
+<br />
+<br />
+       <p className='label'>Checking Account</p>
             <p className='value'>${usdBal}</p>
           </div>
 <br />
 <br />
 <br />
-<div className='activityContent'>
+<br />
+<br />
+<button className="txBtn"><a href="/history" style = {{'color': '#fff', 'textDecoration': 'none' }}>View Transaction History</a></button>
+<br />
+<br />
+</div>
+<br />
+<br />
+{/*<div className='activityContent'>
             {transactionHistory.map((transaction, index) => (
               <div key={index} className='transactionHistory-pills'>
                 <div className='rightHalf-pill'>
@@ -429,7 +556,7 @@ return (
 
                     &nbsp;&nbsp;
                     <div className="amount-time-stlying">
-                    ${(parseFloat(price) * (parseFloat(transaction.value) / Math.pow(10, 18))).toFixed(2)}
+                    {transaction.value}
                       
                     </div >
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -444,9 +571,7 @@ return (
             ))}
    </div> 
   </div>
-      <br />
-<br />
-<br />
+   */}
 <br />  
           <div className='utilityButtons'>
                 <div className='buttonHolder'>
@@ -467,8 +592,14 @@ return (
                     </Link>
                 </div>
             </div>
-            
-        </div>
+     <br /> 
+ {/*<br />
+ <br />
+ <br />
+ <br />
+ <br /> 
+ <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />     
+    */}    </div>
     
   )
 }
@@ -770,7 +901,7 @@ const balance = getBalance();
 <Route path="/savings" element={<Layout><Saving /></Layout>} />
                  <Route path="/send" element={<Send />} />
            <Route path="/sendQR/:address" element={<SendQR />} />
-
+<Route path="/history" element={<TxHistory />} />
 
        </Routes>
        

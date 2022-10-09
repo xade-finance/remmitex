@@ -8,8 +8,7 @@
     justify-content: center;
     align-items: center;
     
-    
-
+ 
 }
 
 
@@ -22,7 +21,8 @@ body{
         max-width: 775px;
         /* align-items: center; */
         /* justify-content: center; */
-        max-height: 350px;
+ margin-top:200px;
+ 	max-height: 350px;
         overflow: visible;
 }
 
@@ -53,13 +53,16 @@ body{
 
 
 .carouselHolder {
+	position:absolute;
+        top:0;
+	margin-bottom:0;
         justify-content: space-between;
 }
 
-.activityContent{
+/*.activityContent{
      display: inline-block;
     justify-content: center;
-/* margin-right:100px; */
+ margin-right:100px; 
     align-items: center;
     width: 40vw;
     min-height: 368px;
@@ -67,7 +70,19 @@ body{
     color: #fff; 
     max-height: 40vh;
     overflow-y: auto;  
-}
+}*/
+
+.activityContent{
+	display: inline-block;
+    justify-content: center;
+margin-right:100px;
+    align-items: center;
+    width: 100%;
+    min-height: 368px;
+    height: 100%;
+    color: #fff;
+    }
+
 .utilityButtons{
     display: flex;
     width: 40%;
@@ -184,7 +199,7 @@ width:140px;
     }
     .carouselHolder{
         max-width: 380px;
-        max-height: 350px;
+     	max-height: 350px;
     }
     
     .myActivity{
