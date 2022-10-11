@@ -1,3 +1,4 @@
+import CUSD from "./CUSD.json";
 import { SafeEventEmitterProvider } from "@web3auth/base";
 import Web3 from "web3";
 import { IWalletProvider } from "./walletProvider";

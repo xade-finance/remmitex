@@ -1,4 +1,5 @@
 import Popup from 'reactjs-popup';
+import OnramperWidget from "@onramper/widget";
 import 'reactjs-popup/dist/index.css';
 import Web3 from "web3";
 import { FaCopy, FaExternalLinkAlt } from 'react-icons/fa'
@@ -85,7 +86,7 @@ slidesToScroll: 1
 ]
 };
 
-const ComingSoon = () => {                          
+const DepositWithdraw = () => {                          
                                                     
 return (                                            
 <div className="container">                         
@@ -96,7 +97,7 @@ return (
       }}                                            
     >                                               
       <OnramperWidget                               
-        API_KEY="pk_test_NHmfMmwVq30RR0ati4EyzNAxxhSlb0XBg82iJ623cT80"                                  
+        API_KEY=""                                  
         color="#000000"                             
         fontFamily="Arial"                          
         defaultCrypto="USDC"                        
@@ -899,7 +900,7 @@ const balance = getBalance();
 
          <Route path="/investments" element={<Layout><Investments /></Layout>} />
         <Route path="/payments" element={<></>} />
-         {/* <Route path="/deposit-withdraw" element={<Layout><ComingSoon /></Layout>} /> */}
+         <Route path="/deposit-withdraw" element={<Layout><DepositWithdraw /></Layout>} />
          <Route path="/qr" element={<QrCodePage />} />
 <Route path="/savings" element={<Layout><Saving /></Layout>} />
                  <Route path="/send" element={<Send />} />
