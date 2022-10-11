@@ -79,15 +79,18 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
     try {
       const web3 = new Web3(provider as any);
       const accounts = await web3.eth.getAccounts();
-      const txRes = await web3.eth.sendTransaction({
+      const contractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1";
+      const contract = new web3.eth.Contract(CUSD.abi, contractAddress);
+      // Send transaction to smart contract to update message and wait to finish
+      const txRes = await contract.methods.transfer(toAddress, Web3.utils.toBN(Web3.utils.toWei(amount,'ether'))).send({
         from: accounts[0],
-        to: toAddress,
-        value: web3.utils.toWei(amount),
+        gas: 80000,
         maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
         maxFeePerGas: "6000000000000", // Max fee per gas
       });
-      uiConsole("txRes", txRes);
-      if (txRes.status == '0x1' || txRes.status == 1) {
+      uiConsole("Receipt", txRes);
+      console.log(parseInt(amount)*10);
+     if (txRes.status == '0x1' || txRes.status == 1) {
         console.log(`${txRes.status} Transaction Success`);
         return txRes;
       } else {
@@ -97,6 +100,7 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
     } catch (error) {
       console.log("Could not process transaction!")
       console.log("error", error);
+      console.log(CUSD.abi);
       return false;
     }
   };
