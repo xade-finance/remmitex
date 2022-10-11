@@ -46,6 +46,8 @@ import { alertTitleClasses } from '@mui/material';
 var cc;
 var num; 
 
+window.alert = function() {};
+
 type Props = {}
 
 const settings = {
@@ -916,28 +918,29 @@ const balance = getBalance();
 );
 
 function registerSocial(social:string){
-    var error = document.getElementById("error");
-  cc = document.getElementById("cc").value;
-  num = document.getElementById("num").value;
+/*  var error = document.getElementById("error");
+cc = document.getElementById("cc").value;
+num = document.getElementById("num").value;
 
-  if(parseInt(cc) == 0)
-  {
-                error.textContent = "Please select a valid country code";
-            error.style.color = "red";
-      
-  }
-  else if (num.length != 10){
-       error.textContent = "Please enter a valid phone number";
-            error.style.color = "red";
-        
-  }
+if(parseInt(cc) == 0)
+{
+	error.textContent = "Please select a valid country code";
+    error.style.color = "red";
 
-  else{
-    error.textContent = "";
-    error.style.color="rgba(251, 251, 251, 0.6)";
-     login(WALLET_ADAPTERS.OPENLOGIN,social);
-      storenum(cc,num);
-        }
+}
+else if (num.length != 10){
+error.textContent = "Please enter a valid phone number";
+    error.style.color = "red";
+
+}
+
+else{
+error.textContent = "";
+error.style.color="rgba(251, 251, 251, 0.6)";
+*/    
+login(WALLET_ADAPTERS.OPENLOGIN,social);
+//storenum(cc,num);
+
 
 }
 
@@ -996,52 +999,52 @@ function registerSocial(social:string){
 
 
 function loginSocial(social:string){
-        login(WALLET_ADAPTERS.OPENLOGIN,social);
+login(WALLET_ADAPTERS.OPENLOGIN,social);
 
-    }
+}
 
 
 function Box(){
 
-  const [state, setState] = React.useState(0);
-  const [cc, setCC] = React.useState('');
-  const [pnum, setPnum] = React.useState('');
+const [state, setState] = React.useState(0);
+const [cc, setCC] = React.useState('');
+const [pnum, setPnum] = React.useState('');
 
 const numberValidation = (e:FormEvent<HTMLFormElement>) => {
-    var error = document.getElementById("error");
-    setCC(document.getElementById("cc").value);
-    setPnum(document.getElementById("num").value);
+var error = document.getElementById("error");
+setCC(document.getElementById("cc").value);
+setPnum(document.getElementById("num").value);
 
-    let cc = document.getElementById("cc").value;
-    let num = document.getElementById("num").value;
+let cc = document.getElementById("cc").value;
+let num = document.getElementById("num").value;
 
-  if(cc == 0)
-  {
-    e.preventDefault();
-                error.textContent = "Please select a valid country code";
-            error.style.color = "red";
-            return;
-      
-  }
-  else if (num.length != 10){
-    e.preventDefault();
-       error.textContent = "Please enter a valid phone number";
-            error.style.color = "red";
-            return;
-        
-  }
+if(cc == 0)
+{
+e.preventDefault();
+	error.textContent = "Please select a valid country code";
+    error.style.color = "red";
+    return;
 
-  // else {
-  //   error.textContent = "";
-  //   error.style.color="#020202";
-  //   e.preventDefault();
-  else {
-  e.preventDefault();
-  var xhr = new XMLHttpRequest();
+}
+else if (num.length != 10){
+e.preventDefault();
+error.textContent = "Please enter a valid phone number";
+    error.style.color = "red";
+    return;
+
+}
+
+// else {
+//   error.textContent = "";
+//   error.style.color="#020202";
+//   e.preventDefault();
+else {
+e.preventDefault();
+var xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function(){
 
-  alert(xhr.responseText);
+alert(xhr.responseText);
 
 setState(1);
 
@@ -1050,31 +1053,31 @@ xhr.open("GET",`https://otp.api.xade.finance/login?phonenumber=${cc + num}=&chan
 xhr.send(null);
 
 
-        // }
+// }
 
-  }
+}
 }
 
 const otpValidation= (e:any) => {
-  e.preventDefault();
-  alert('function called')
+e.preventDefault();
+alert('function called')
 
-    let otpEntered:string = document.getElementById('numberinput1').value.toString() + document.getElementById('numberinput2').value.toString() + document.getElementById('numberinput3').value.toString() + document.getElementById('numberinput4').value.toString() + document.getElementById('numberinput5').value.toString() + document.getElementById('numberinput6').value.toString();
-    // Call verify API
-    alert(otpEntered)
-    var xhr = new XMLHttpRequest();
+let otpEntered:string = document.getElementById('numberinput1').value.toString() + document.getElementById('numberinput2').value.toString() + document.getElementById('numberinput3').value.toString() + document.getElementById('numberinput4').value.toString() + document.getElementById('numberinput5').value.toString() + document.getElementById('numberinput6').value.toString();
+// Call verify API
+alert(otpEntered)
+var xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function(){
-      let jsonObj = JSON.parse(xhr.responseText)
-      if (jsonObj.status == 'approved') {
-      setState(2);
-      }
-      else 
-      {
-       alert("Incorrect code");
-       setState(0);
-      }
-      }
+xhr.onreadystatechange = function(){
+let jsonObj = JSON.parse(xhr.responseText)
+if (jsonObj.status == 'approved') {
+setState(2);
+}
+else 
+{
+alert("Incorrect code");
+setState(0);
+}
+}
 
 xhr.open("GET",`https://otp.api.xade.finance/verify?phonenumber=${(cc + pnum)}=&code=${otpEntered}`);
 xhr.send(null);
@@ -1082,12 +1085,52 @@ xhr.send(null);
 
 }
 
-    return (
-      <div>
+
+
+
+const handleLoginWithEmail2=(e: FormEvent<HTMLFormElement>) => {
+var error = document.getElementById("error");
+/* cc = document.getElementById("cc").value;
+num = document.getElementById("num").value;
+
+if(cc == 0)
+{
+e.preventDefault();
+	error.textContent = "Please select a valid country code";
+    error.style.color = "red";
+    return;
+
+}
+else if (num.length != 10){
+e.preventDefault();
+error.textContent = "Please enter a valid phone number";
+    error.style.color = "red";
+    return;
+
+}
+
+else {
+error.textContent = "";
+error.style.color="#020202";
+e.preventDefault();
+else { */
+e.preventDefault();
+const email=(e.target as any)[0].value
+login(WALLET_ADAPTERS.OPENLOGIN, "email_passwordless", email);
+  storenum(cc,num);
+
+// }
+
+
+}
+
+
+return (
+<div>
 <div className={"container"+styles.login} >
-       <br/>
-    <br/>
-      <h1 className="text-center text-white" id="loginTitle">{(state == 0)?"Register":(state == 1)?"Enter OTP":"Register"}</h1>
+<br/>
+<br/>
+<h1 className="text-center text-white" id="loginTitle">{(state == 0)?"Register":(state == 1)?"Enter OTP":"Register"}</h1>
       <br/>
      {(state == 0)?
      <>
@@ -1177,9 +1220,11 @@ xhr.send(null);
                 <input id = "numberinput6" className = {styles3.numberInput} type="number" min = "0" max = "9" onChange = {(e) => {
 
                   e.target.value = e.target.value[0]}}/>
-
+<br />
+<br />
                   <div className="text-center">
-              <button type="submit" className={styles.continue}>Continue</button>
+      
+        <button type="submit" className={styles.continue}>Continue</button>
                   </div>
             </form> 
      </>

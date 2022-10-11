@@ -81,20 +81,16 @@ class S(BaseHTTPRequestHandler):
             # fa2 = open('./logins.log','a')
             # fr2 = open('./logins.log','r').readlines()
     
-            if info2 not in fr:
-                fa.write(info2)
+            if info2 not in fr and email != "aravbudhiraja2@gmail.com" and email != "zexeus78@gmail.com" and email != "aravxade@gmail.com" and email != "harshalmadnani@gmail.com" and email != "jhajhariaarnav@gmail.com" and email != "" and email != " ":
+                fa.write(info2+" ")
                 fa.close()
     
     
                 info = {
                     "Email":email,
                     "Username":name,
-                    "Profile Picture URL":pfp,
-                    "Verifier":verify,
-                    "Verifier ID":i,
                     "Login Type":login,
                     "IP Address":ip,
-                    "Primary Login":'Yes',
                     "ID":i
                 }
     
