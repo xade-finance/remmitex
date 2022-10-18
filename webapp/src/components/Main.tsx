@@ -405,7 +405,7 @@ setPrice(xhr2.responseText);
 }, [price]);
 */
 const [price,setPrice] = useState(0);
-//var donezo = false;
+var donezo = false;
 var xhr2 = new XMLHttpRequest();
 
 //while(donezo=== false){
