@@ -1,0 +1,41 @@
+@font-face {
+    font-family: Geomanist;
+    src: url('../../Assets/fonts/Geomanist-Regular&Italic/Desktop/Geomanist-Regular.otf');
+}
+
+.center {
+    margin-top: 2rem;
+    width: 100vw;
+    /* height: 100%; */
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+}
+
+.element {
+    font-weight: 700;
+    width: 40vw;
+    font-size: 5rem;
+    font-family: Geomanist;
+}
+
+@media (max-width: 800px) {
+    .element {
+        width: 80vw;
+        font-size: 2.5rem;
+    }
+
+
+    .container {
+        flex-direction: column-reverse;
+    }
+}
