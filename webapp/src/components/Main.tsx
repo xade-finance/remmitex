@@ -895,7 +895,8 @@ const balance = getBalance();
                   <Route path="/register" element={<Layout><HomePage/></Layout>} />
          <Route path="/" element={<Layout><HomePage/></Layout>} />
 
-         <Route path="/investments" element={<Layout><Investments /></Layout>} />
+         <Route path = '/investments/asset/:addr' element = {{<Layout><Investments /></Layout>} />
+
         <Route path="/payments" element={<></>} />
          <Route path="/deposit-withdraw" element={<Layout><DepositWithdraw /></Layout>} />
          <Route path="/qr" element={<QrCodePage />} />
