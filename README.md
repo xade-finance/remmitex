@@ -12,4 +12,16 @@ Send payments globally with close to zero fees instantly in multiple stablecoins
 - Harsh Shaw (@harshshaw)
 - Arnav Jhajharia (@Arnav-Jhajharia)
 
+## Tech Stack
+
+- NodeJS
+- ReactJS
+- TypeScript
+- Web3Auth
+- MongoDB
+- Python 
+- Apache2
+
+<b>The WPMANT Stack</b>
+
 ***
