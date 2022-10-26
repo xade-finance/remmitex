@@ -22,6 +22,6 @@ Send payments globally with close to zero fees instantly in multiple stablecoins
 - Python 
 - Apache2
 
-<b>The WPMRANT Stack</b>
+<b>The MWPRANT Stack</b>
 
 ***
