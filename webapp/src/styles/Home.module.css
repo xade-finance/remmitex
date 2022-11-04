@@ -15,6 +15,12 @@
     src: url('https://raw.githubusercontent.com/xade-finance/xade-static/main/public/basiercircle-regular.otf')
 }
 
+.skipNumber{
+  background:black;
+  color:white;
+  border: none;
+}
+
 body{
   background-color: #020202;
 }
@@ -435,6 +441,20 @@ box-shadow: 0px 0px 18px 1px rgba(191, 191, 191, 1);
     width: 100%;
   }
 }*/
+
+.continue2 {
+  font-style: sans;
+  margin: 0.8rem;
+  padding: 0.7rem;
+  text-align: center;
+  background-color: #3385ff;
+  text-decoration: none;
+  border-radius: 10px;
+transition: transform .2s;
+  width: 100%;
+  border: 0;
+  color: #f2f2f2;
+}
 
 .continue {
   font-style: sans;

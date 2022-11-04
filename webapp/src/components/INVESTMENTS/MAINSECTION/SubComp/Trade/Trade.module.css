@@ -230,6 +230,7 @@
     outline: none;
 }
 
+
 @media screen and (max-width:600px){
     .long, .short {
         width: 30vw;
@@ -255,10 +256,6 @@
     }
 
 
-}
-
-.modalHeading {
-    font-size: 2rem;
 }
 
 @media screen and (min-width: 600px) {

@@ -1,63 +1,25 @@
 import React from "react";
 import styles from './Trade.module.css'
-import './leverage.css'
-import Popup from 'reactjs-popup';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
-import { useParams } from 'react-router-dom'
-import Modal from '@mui/material/Modal';
-import Slider from '@mui/material/Slider';
-import Contracts from '../../../constants'
-import { useNavigate } from 'react-router-dom'
-
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: '#000',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4,
-};
-
 
 export default function Trade() {
-    let navigate = useNavigate();
-    const params:any = useParams();
-    let addr = parseInt(params.addr)
-    if(!(addr >= 1 && addr <= 5)) 
-      addr = 1;
-    const contract = Contracts[addr-1]
     let [marketLS, setMarketLS] = React.useState('L');
-    let [leverage, setLeverage] = React.useState(5);
+    let [leverage, setLeverage] = React.useState(1);
     let [buyState, setBuyState] = React.useState(true);
     let [amount, setAmount] = React.useState([0, 0, 0]);
-    let [exchange, setExchange] = React.useState('23423');    
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    var xhr2 = new XMLHttpRequest();
-    xhr2.onreadystatechange=function(){
-    if(xhr2.readyState==XMLHttpRequest.DONE){
-    setExchange(xhr2.responseText)
+    let [exchange, setExchange] = React.useState('23423');
+    var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+       // Typical action to be performed when the document is ready:
+       // console.log(xhttp.responseText);
     }
-    }
+};
+xhttp.open("GET", "/api", true);
+xhttp.send();
 
-    function valuetext(value: number) {
-        setLeverage(value);
-        return `${value}°C`;
-    }
-
-    xhr2.open('GET', "https://price.api.xade.finance/btc")
-    xhr2.send()
 
     return (
         <>
-        <div>
             <div className = {styles.market_ls}>
                 <button className = {styles.long + " " + ((marketLS === 'L')? styles.longSelected: '')} onClick = {() => {setMarketLS('L')}}>
                     Long
@@ -84,7 +46,7 @@ export default function Trade() {
                                 }}
                                 className = {styles.USD_BUTTON}>
                                     <img src={process.env.PUBLIC_URL + '/images/ticker/usd-svgrepo-com.svg'} />
-                                    <p style = {{'fontSize': '1.3rem', 'color': 'snow'}}>USD</p>
+                                    <p style = {{'fontSize': '1.3rem', 'color': 'snow'}}>&nbsp;&nbsp;USD</p>
                                 </button>
                             </div>  
                     <input type = 'number' className = {styles.thisIsFunn} step = "any" value = {amount[0]} onChange = {(e) => {if(buyState == true) setAmount([parseFloat(e.target.value), parseFloat(e.target.value) / parseFloat(exchange), parseFloat(e.target.value) * 0.003])}}></input>
@@ -98,56 +60,20 @@ export default function Trade() {
                     </div> */}
 
                         <div className = {styles.conversion_element + " " + styles.conversion_btc}>
-                           
-  <div className = {styles.conversion_usd_element}>
-{/* <Button onClick={handleOpen}>Open modal</Button> */}
-<Modal
-  open={open}
-  onClose={handleClose}
-  aria-labelledby="modal-modal-title"
-  aria-describedby="modal-modal-description"
->
-  <Box sx={style}>
-    <p className = {styles.modalHeading}>Select an asset</p>
-    <hr style = {{'color': '#fff'}}></hr>
-    <div className = {styles.contracts}>
-    {
-        Contracts.map((selected, index) => {
-        return (
-        <div className = {styles.conversion_usd_element} style = {{width: '35%'}}> 
-              <button onClick={() => {
-                    navigate(`/investments/asset/${index + 1}`)
-                    handleClose();
-              }} 
-        style = {{
-                    'display': 'flex',
-                    'alignItems': 'center',
-                    'padding': '15%',
-                    'paddingRight': '0  ',
-                    'justifyContent': 'space-between'
-                }}
-                className = {styles.BTC_BUTTON}>
-                <img src={process.env.PUBLIC_URL + '/images/ticker/' + selected.ticker} />
-            <p style = {{'fontSize': '1.3rem', 'color': 'snow'}}>{selected.symbol}</p>
-            </button>  
-        </div>
-        )
-    })}
-    </div>
-  </Box>
-</Modal>                            
-    <button onClick={handleOpen} 
-        style = {{
-                    'display': 'flex',
-                    'alignItems': 'center',
-                    'padding': '15%',
-                    'paddingRight': '0  ',
-                    'justifyContent': 'space-between'
-                }}
-                className = {styles.BTC_BUTTON}>
-                <img src={process.env.PUBLIC_URL + '/images/ticker/' + contract.ticker} />
-            <p style = {{'fontSize': '1.3rem', 'color': 'snow'}}>{contract.symbol}</p>
-            </button>
+                            <div className = {styles.conversion_usd_element}>
+                                <button    
+                                style = {{
+                                    'display': 'flex',
+                                    'alignItems': 'center',
+                                    'padding': '15%',
+                                    'paddingRight': '0  ',
+                                    'justifyContent': 'space-between'
+                                }}
+                                className = {styles.BTC_BUTTON}>
+                                    <img src={process.env.PUBLIC_URL + '/images/ticker/bitcoin.png'} />
+                                    <p style = {{'fontSize': '1.3rem', 'color': 'snow'}}>BTC</p>
+                                </button>
+
                             </div>
 
                             <input className = {styles.thisIsFunn} step = "any" type = "number"  value = {amount[1]} onChange = {(e) => {if(buyState == false) setAmount([parseFloat(e.target.value) * parseFloat(exchange) , parseFloat(e.target.value), parseFloat(e.target.value) * parseFloat(exchange) * 0.003])} }></input>
@@ -155,25 +81,12 @@ export default function Trade() {
                     
                 </div>                
             </div>
-            </div>
 
             <div className = {styles.center}>
                 <div className = {styles.leverage}>
-      <label htmlFor = "lvg" className = {styles.leverage_title}>Leverage </label>
-                                        <Slider
-        aria-label="Temperature"
-        defaultValue={1}
-        getAriaValueText={valuetext}
-        valueLabelDisplay="auto"
-        step={1}
-        marks
-        min={1}
-        max={10}
-        sx = {{
-            color: '#E0FFFF',
-        }}
-      /> 
-                    <p className = {styles.display_lvg}>{leverage}x</p>
+                    <label htmlFor = "lvg" className = {styles.leverage_title}>Leverage </label>
+                    <input min = '1' max = '10' type = 'range' value = {leverage} onChange ={(event) => setLeverage(parseInt(event.target.value))}/>
+                    <p className = {styles.display_lvg}>{leverage}</p>
                 </div>
             </div>
             <div className = {styles.center}>

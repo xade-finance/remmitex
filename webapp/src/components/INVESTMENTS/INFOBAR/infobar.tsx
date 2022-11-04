@@ -1,20 +1,10 @@
 import { React, useState } from 'react';
 import styles from './index.module.css';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import Contracts from './../constants'
-
 
  var currentPrice;
 export default function Component() {
-    const params:any = useParams();
-    let addr = parseInt(params.addr)
-    if(!(addr >= 1 && addr <= 5)) 
-      addr = 1;
-    const contract = Contracts[addr-1]
-    // let contra
-
-    // let json = {data:[{"id":1, "quote": {"USD": {price:"21490.00"}}}]};
+    let json = {data:[{"id":1, "quote": {"USD": {price:"21490.00"}}}]};
     let response = null;
     let obj = "";
         
@@ -54,8 +44,8 @@ var xhr2 = new XMLHttpRequest();
         <div className={styles.horicenter}>
             <div className = {styles.infobar}>
                     <div className = {styles.details}>
-                        <img alt = 'btc' className = {styles.logo} src = {process.env.PUBLIC_URL + `/images/ticker/${contract.ticker}`}  />
-                        <p className = {styles.name}>{contract.symbol}</p>
+                        <img alt = 'btc' className = {styles.logo} src = {process.env.PUBLIC_URL + "/images/ticker/bitcoin.png  "}  />
+                        <p className = {styles.name}>BTC</p>
                     </div>  
 
                     <div className = {styles.price}>

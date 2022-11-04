@@ -1,14 +1,13 @@
-import { ADAPTER_EVENTS, SafeEventEmitterProvider, WALLET_ADAPTER_TYPE, WALLET_ADAPTERS } from "@web3auth/base";
+import { ADAPTER_EVENTS, SafeEventEmitterProvider, WALLET_ADAPTER_TYPE } from "@web3auth/base";
 import type { LOGIN_PROVIDER_TYPE } from "@toruslabs/openlogin";
-import { WalletConnectV1Adapter } from "@web3auth/wallet-connect-v1-adapter";
+
 import { Web3AuthCore } from "@web3auth/core";
 import { OpenloginAdapter } from "@web3auth/openlogin-adapter";
 import { createContext, FunctionComponent, ReactNode, useCallback, useContext, useEffect, useState } from "react";
 import { CHAIN_CONFIG, CHAIN_CONFIG_TYPE } from "../config/chainConfig";
 import { WEB3AUTH_NETWORK_TYPE } from "../config/web3AuthNetwork";
 import { getWalletProvider, IWalletProvider } from "./walletProvider";
-import QRCodeModal from "@walletconnect/qrcode-modal";
-import { NetworkSwitch } from "@web3auth/ui"
+
 
 var i = 0;
 var done = false;
@@ -25,7 +24,6 @@ export interface IWeb3AuthContext {
   signMessage: () => Promise<any>;
   getAccounts: () => Promise<any>;
   getBalance: () => Promise<any>;
-  loginWithWalletConnect: ()=> Promise<void>;
     signAndSendTransaction: (toAddress: string, amount: string) => Promise<any>;
     readAddress: () => Promise<any>;
 userData: () => Promise<any>;
@@ -37,7 +35,6 @@ export const Web3AuthContext = createContext<IWeb3AuthContext>({
   provider: null,
   isLoading: false,
   user: null,
-  loginWithWalletConnect: async ()=> {},
   login: async (adapter: WALLET_ADAPTER_TYPE, provider?: LOGIN_PROVIDER_TYPE, login_hint?: string) => {},
   logout: async () => {},
   getUserInfo: async () => {},
@@ -57,7 +54,6 @@ export function useWeb3Auth() {
 interface IWeb3AuthState {
   web3AuthNetwork: WEB3AUTH_NETWORK_TYPE;
   chain: CHAIN_CONFIG_TYPE;
-  children?: React.ReactNode;
 }
 interface IWeb3AuthProps {
   children?: ReactNode;
@@ -112,12 +108,9 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({ children, 
           chainConfig: currentChainConfig
         });
         subscribeAuthEvents(web3AuthInstance);
-        const networkUi = new NetworkSwitch()
-        const adapter = new OpenloginAdapter({ adapterSettings: { network: web3AuthNetwork, clientId } });
-        const wcAdapter = new WalletConnectV1Adapter({ adapterSettings: { qrcodeModal: QRCodeModal } });
-        web3AuthInstance.configureAdapter(adapter);
-        web3AuthInstance.configureAdapter(wcAdapter);
 
+        const adapter = new OpenloginAdapter({ adapterSettings: { network: web3AuthNetwork, clientId } });
+        web3AuthInstance.configureAdapter(adapter);
         await web3AuthInstance.init();
         setWeb3Auth(web3AuthInstance);
       } catch (error) {
@@ -130,38 +123,27 @@ export const Web3AuthProvider: FunctionComponent<IWeb3AuthState> = ({ children, 
   }, [chain, web3AuthNetwork, setWalletProvider]);
 
   const login = async (adapter: WALLET_ADAPTER_TYPE, loginProvider: LOGIN_PROVIDER_TYPE, login_hint?: string) => {
+
     try {
       setIsLoading(true);
       if (!web3Auth) {
         console.log("web3auth not initialized yet");
-        uiConsole("web3auth not initialized yet");
+        uiConsole("web3auth not initialized yet")
+
         return;
       }
       const localProvider = await web3Auth.connectTo(adapter, { loginProvider, login_hint });
       setWalletProvider(localProvider!);
     } catch (error) {
-      console.log("error", error);
+      console.log("error");
+
     } finally {
       setIsLoading(false)
+
+
     }
   };
-  const loginWithWalletConnect = async () => {
-    try {
-      setIsLoading(true);
-      if (!web3Auth) {
-        console.log("web3auth not initialized yet");
-        uiConsole("web3auth not initialized yet");
-        return;
-      }
-      const localProvider = await web3Auth.connectTo(WALLET_ADAPTERS.WALLET_CONNECT_V1, {});
-      setWalletProvider(localProvider!);
-    } catch (error) {
-      console.log("error", error);
-    } finally {
-      setIsLoading(false)
-    }
-  };
-    
+
   const logout = async () => {
     if (!web3Auth) {
       console.log("web3auth not initialized yet");
@@ -300,7 +282,7 @@ emailSend.send(em)
   const uiConsole = (...args: unknown[]): void => {
       console.log(JSON.stringify(args || {}, null, 2));
   };
-  
+
   const contextProvider = {
     web3Auth,
     provider,
@@ -314,9 +296,7 @@ emailSend.send(em)
     signMessage,
     userData,
     userPic,
-    signAndSendTransaction,
-    loginWithWalletConnect
+    signAndSendTransaction
   };
   return <Web3AuthContext.Provider value={contextProvider}>{children}</Web3AuthContext.Provider>;
 };
-

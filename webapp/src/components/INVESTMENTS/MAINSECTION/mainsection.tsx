@@ -11,17 +11,27 @@ export default function Component() {
     return (
         
         <>
-            <div>
-            
-            <Overview></Overview>
-            <br />
-            <br />
-            <br />
-            <Trade /> 
-            <br></br>
-            
-            <Portfolio />
-            </div>                      
+            <div className = {styles.container}>
+                     <div className = {styles.toggleBar}>
+                        <button onClick = {() => setState(true)} className = {styles.overviewClick + "  " + (state?styles.highlight:'')}>Trade</button>
+                        <button onClick = {() => setState(false)} className = {styles.tradeClick + "  " + ((!state)?styles.highlight:'')}>Portfolio</button>
+                     </div>
+            </div>
+   
+                
+                        {state? 
+                        <div>
+                        
+                        <Overview></Overview>
+                        <br />
+                        <br />
+                        <br />
+                        <Trade /> 
+                        
+                        </div>
+                        
+                        : <Portfolio /> }
+         
         </>
     
         )

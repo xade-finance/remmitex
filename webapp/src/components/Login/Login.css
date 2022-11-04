@@ -1,0 +1,227 @@
+@import url("https://fonts.googleapis.com/css2?family=Vela+Sans:wght@500;600;700&display=swap");
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+.mask-group-icon,
+.xade-icon {
+  position: absolute;
+  top: 53px;
+  left: 62px;
+  width: 108px;
+  height: 33px;
+}
+.mask-group-icon {
+  height: 100%;
+  width: 52.25%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 47.75%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  opacity: 0.5;
+}
+.secured-by-div {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  line-height: 122.5%;
+  font-weight: 600;
+  display: inline-block;
+  opacity: 0.5;
+}
+.group-div {
+  position: absolute;
+  height: 3.07%;
+  width: 9.27%;
+  top: 80.58%;
+  right: 12.71%;
+  bottom: 16.35%;
+  left: 78.02%;
+  display: none;
+}
+.one-app-to-manage-all-finance,
+.sign-in-and-explore-all-the-fe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+}
+.sign-in-and-explore-all-the-fe {
+  top: 67px;
+  font-size: 22px;
+  font-weight: 500;
+}
+.group-div4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 525px;
+  height: 97px;
+}
+.or-continue-with,
+.your-email-div {
+  position: absolute;
+  left: 0;
+  display: inline-block;
+}
+.or-continue-with {
+  top: 254px;
+  width: 149px;
+  height: 19px;
+}
+.your-email-div {
+  top: 0;
+  font-weight: 500;
+  color: #3a3a3a;
+}
+.rectangle-div {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  background-color: #d9d9d9;
+  width: 525px;
+  height: 2px;
+}
+.group-div3,
+.group-div5,
+.group-icon {
+  position: absolute;
+  top: 306px;
+  left: 0;
+  width: 318.56px;
+  height: 47px;
+}
+.group-div3,
+.group-div5 {
+  top: 199px;
+  width: 525px;
+  height: 353px;
+  font-size: 18px;
+}
+.group-div3 {
+  top: 0;
+  height: 552px;
+  text-align: left;
+  font-size: 36px;
+}
+.sign-in-b {
+  position: relative;
+  line-height: 122.5%;
+  display: inline-block;
+}
+.get-started-button,
+.get-started-button1 {
+  position: absolute;
+  top: 305px;
+  border-radius: 100px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  padding: 28px 43px;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.get-started-button {
+  left: 0;
+  background-color: #fff;
+  color: #000;
+}
+.get-started-button1 {
+  left: 153px;
+  border: 1px solid #fff;
+}
+.group-div2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 525px;
+  height: 552px;
+}
+.secured-by {
+  position: absolute;
+  top: 6px;
+  left: 0;
+  display: inline-block;
+}
+.logo-for-dark-navbar-1-1 {
+  position: absolute;
+  top: 0;
+  left: 90px;
+  width: 99px;
+  height: 33px;
+  overflow: hidden;
+}
+.group-div7 {
+  position: absolute;
+  top: 3px;
+  left: 206px;
+  width: 189px;
+  height: 33px;
+  display: none;
+  opacity: 0.3;
+}
+.dont-have-an-account-sign-up,
+.secured-by-div1 {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  display: inline-block;
+  width: 254px;
+  height: 19px;
+}
+.secured-by-div1 {
+  font-weight: 500;
+  width: 88px;
+}
+.logo-for-dark-navbar-2-1 {
+  position: absolute;
+  top: 0;
+  left: 89px;
+  width: 97px;
+  height: 32px;
+  overflow: hidden;
+}
+.group-div9 {
+  position: absolute;
+  top: 0;
+  left: 339px;
+  width: 186px;
+  height: 32px;
+}
+.group-div1,
+.group-div6,
+.group-div8 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 525px;
+  height: 32px;
+}
+.group-div1,
+.group-div6 {
+  top: 611px;
+  text-align: left;
+}
+.group-div1 {
+  top: 178px;
+  left: 1098px;
+  height: 643px;
+  text-align: center;
+  color: #fff;
+}
+.frame-div {
+  position: relative;
+  background-color: #000;
+  width: 100%;
+  height: 999px;
+  overflow: hidden;
+  text-align: left;
+  font-size: 16px;
+  color: #797979;
+  font-family: "Vela Sans";
+}
+
