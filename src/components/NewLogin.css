@@ -1,3 +1,9 @@
+@font-face{ font-family: "NeueMontreal"; src: url("https:///app.xade.finance/fonts/NeueMontreal.otf"); }
+
+.create-account-span,.sign-in-b1{
+	font-family:"NeueMontreal";
+}
+
 .main-body {
  position:fixed;
        	margin: 0;
@@ -21,8 +27,8 @@
 .secured-by-div {
  color:white;
        	position: absolute;
-  top: 5px;
-  left: 0;
+  /*top: 5px;
+  left: 0;*/
   font-weight: 500;
   display: inline-block;
   width: 88px;
@@ -38,8 +44,9 @@
 }
 .web3aunth-div {
   position: absolute;
-  top: 548px;
+  /*top: 548px;
   left: 109px;
+  */
   width: 186px;
   height: 32px;
   opacity: 0.4;
@@ -148,9 +155,9 @@ color:white;
 }
 .sign-in-form {
   position: absolute;
-  top: 151px;
-  left: 866px;
-  width: 343px;
+  top: 150px;
+  left: 930px;
+  width: 500px;
   height: 364px;
 }
 .were-all-explorers {
@@ -232,17 +239,18 @@ text-align: center;
   top: 208px;
   left: 250px;
   }
-  .web3aunth-div{
+ /* .web3aunth-div{
     visibility: hidden;
-  }
+  }*/
 }
 @media screen and (max-width: 500px) {
   .sign-in-form {
      position: absolute;
   top: 208px;
+
   left: 25px;
   }
-    .web3aunth-div{
+    /*.web3aunth-div{
     visibility: hidden;
-  }
+  }*/
 }

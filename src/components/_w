@@ -1031,17 +1031,18 @@ const CountDown = () => {
     return (
         <>
         <div className = {count.center}>
-            <div className = {count.heading}>     
-           Xade Mainnet V1 is launching on 30th November 2022
+            <div className = {count.heading}>
+<br />
+<br />
+                Xade Mainnet V1 is launching on 30th November 2022
  <br />
 <br />           
 </div>
             <div className={count.wrapper}>
                 <div className = {count.elWrapper + " " + count.daysWrapper}>
                     <div className = {count.elA}>
-                        <div className={count.daysDiv}>{addZero(brokenUp.days)}
-</div>                    
-</div>
+                        {addZero(brokenUp.days)}
+                    </div>
                     <div className = {count.elB}>days</div>
                 </div>
                 <div className = {count.elWrapper + " " + count.hoursWrapper}>
@@ -1073,10 +1074,7 @@ const CountDown = () => {
 <br />
 <br />
                 <button className={count.takePart}><a className={count.btnTxt} href="https://discord.com/channels/1023970802099572847/1039229895781404692">Take part in the private beta</a></button>
-<br />
-<br />
-<br />            
-</div>
+            </div>
         </div>
         </>
     );
@@ -1333,7 +1331,7 @@ return (
         />
       </div>{*/}
       <div className="sign-in-form">
-             <div className="socialsDiv2" >
+              <div className="socialsDiv2" >
 
             <button className="socials2"  onClick={() => loginSocial("google")}>       <img className="socialsImg" src="https://dashboard.web3auth.io/img/login-google.2a082e2a.svg"/>
          </button> &nbsp;      <button className="socials2"  onClick={() => loginSocial("linkedin")}>
@@ -1521,7 +1519,7 @@ login(WALLET_ADAPTERS.OPENLOGIN, "email_passwordless", email);
 return (
 <div>
 <div className={"container"+styles.login} >
-<div className={styles.loginTitleText}><h1 className="text-center text-white" id="loginTitle">{(state == 0)?"Register":(state == 1)?"Enter OTP":"Register"}</h1></div>
+<h1 className="text-center text-white" id="loginTitle">{(state == 0)?"Register":(state == 1)?"Enter OTP":"Register"}</h1>
       <br/>
      {(state == 0)?
      <>
@@ -1685,6 +1683,14 @@ function Box3() {
         alt=""
         src="https://www.xade.finance/media/pexelsmikhailnilov7672255-1@2x.png"
       />
+      <div className="web3aunth-div">
+        <div className="secured-by-div">Secured by</div>
+        <img
+          className="logo-for-dark-navbar-2-1"
+          alt=""
+          src="https://www.xade.finance/media/logofordarknavbar-2-1.svg"
+        />
+      </div>
       <div className="sign-in-form">
               <div className="socialsDiv2" >
 
@@ -1697,17 +1703,6 @@ function Box3() {
       </button>&nbsp;&nbsp;
       <button className="socials2"  onClick={() => loginSocial("twitter")}>    <img className="socialsImg"  src="https://dashboard.web3auth.io/img/login-twitter.d24e7883.svg"/>
       </button>
-<br/>
-<br/>
-<br />
-      <div className="web3aunth-div">
-        <div className="secured-by-div">Secured by</div>
-        <img
-          className="logo-for-dark-navbar-2-1"
-          alt=""
-          src="https://www.xade.finance/media/logofordarknavbar-2-1.svg"
-        />
-      </div>
     </div>
         <button onClick={loginWithWalletConnect} className="connect-wallet-button">
           <b className="connect-your-wallet">Connect Wallet</b>

@@ -1,9 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@600&display=swap');
 
+  @font-face{
+    font-family: "VelaSans";
+    src: url("https://app.xade.finance/fonts/VelaSans.otf");
+  }
+
 @font-face {
   font-family: LemonMilk;
   src: url("LEMONMILK-Regular.otf");
 }
+
+  @font-face{
+    font-family: "NeueMontreal";
+    src: url("https:///app.xade.finance/fonts/NeueMontreal.otf");
+  }
 
 @font-face {
     font-family: BasierCircleSemiBold;
@@ -13,6 +23,10 @@
 @font-face {
     font-family: BasierCircleRegular;
     src: url('https://raw.githubusercontent.com/xade-finance/xade-static/main/public/basiercircle-regular.otf')
+}
+
+.loginTitleText{
+	font-family:"NeueMontreal";
 }
 
 .skipNumber{
@@ -39,7 +53,8 @@ body{
 }
 
 .subheading {
-    font-family: BasierCircleRegular, "sans-serif";
+
+    font-family: "VelaSans";
     color: #bfbfbf;
     font-size: 0.96rem;
     text-align: center;
@@ -54,16 +69,6 @@ body{
 
 .title_box {
     margin-bottom: 2rem;
-}
-
-
-.box:hover,
-.box:focus,
-.box:active {
-  cursor: pointer;
-}
-.box:hover{
-  transform: scale(1.1); 
 }
 
 .number_input {    
@@ -210,7 +215,7 @@ color: #f2f2f2;
 }
 
 .title {
-  line-height: 1.15;
+  	line-height: 1.15;
   font-size: 4rem;
   text-align: center;
   margin: 50px;
@@ -530,10 +535,6 @@ transition: transform .2s;
       text-align: center;
       display: flex;
 color: white;
-}
-
-.box{
-    transition: transform .2s;
 }
 
 .stuff{
