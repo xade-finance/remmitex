@@ -455,37 +455,37 @@ return finalVal;
 
 }
 
-useEffect(() => {
-for(var i = 0; i < transactionHistory.length; i++)
-{
+// useEffect(() => {
+// for(var i = 0; i < transactionHistory.length; i++)
+// {
 
-var currentTransac = transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase()? transactionHistory[i].from : transactionHistory[i].to;
-//var currentTransac = "0xa13414fa08c8ae49a9cceabdae4ff8d2d82ec139";
-//var xhr = new XMLHttpRequest();
-var finalVal;
-//xhr.onreadystatechange = function(){
+// var currentTransac = transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase()? transactionHistory[i].from : transactionHistory[i].to;
+// //var currentTransac = "0xa13414fa08c8ae49a9cceabdae4ff8d2d82ec139";
+// //var xhr = new XMLHttpRequest();
+// var finalVal;
+// //xhr.onreadystatechange = function(){
 
-//if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
-//finalVal = xhr.responseText;
-//}
-//else if(xhr.status != 200){
-finalVal = currentTransac.substring(0,6)+"..."+currentTransac.substring(currentTransac.length - 3);
-//console.log(xhr.status);
-//}
-//}
+// //if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+// //finalVal = xhr.responseText;
+// //}
+// //else if(xhr.status != 200){
+// finalVal = currentTransac.substring(0,6)+"..."+currentTransac.substring(currentTransac.length - 3);
+// //console.log(xhr.status);
+// //}
+// //}
 
-//xhr.open("GET",`https://user.api.xade.finance?address=${currentTransac}`);
-//xhr.send(null);
-//console.log(finalVal);
-if (transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase())
-{
-transactionHistory[i].from = finalVal;
-}
-else{
-transactionHistory[i].to = finalVal;
-}
-}
-},[]);
+// //xhr.open("GET",`https://user.api.xade.finance?address=${currentTransac}`);
+// //xhr.send(null);
+// //console.log(finalVal);
+// if (transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase())
+// {
+// transactionHistory[i].from = finalVal;
+// }
+// else{
+// transactionHistory[i].to = finalVal;
+// }
+// }
+// },[]);
 
 
 return (
@@ -613,7 +613,7 @@ return (
   
 
     const handleLoginWithEmail2=(e: FormEvent<HTMLFormElement>) => {
-      var error = document.getElementById("error");
+    /*  var error = document.getElementById("error");
   cc = document.getElementById("cc").value;
   num = document.getElementById("num").value;
 
@@ -633,19 +633,20 @@ return (
         
   }
 
-  // else {
-  //   error.textContent = "";
-  //   error.style.color="#020202";
-  //   e.preventDefault();
+   else {
+     error.textContent = "";
+     error.style.color="#020202";
+     e.preventDefault();
   else {
-  e.preventDefault();
+*/  
+e.preventDefault();
     const email=(e.target as any)[0].value
     login(WALLET_ADAPTERS.OPENLOGIN, "email_passwordless", email);
-          storenum(cc,num);
+  //        storenum(cc,num);
 
         // }
 
-  }
+  
 }
 
     /*const [username, setUser] = useState("");
@@ -909,29 +910,29 @@ const calculateTimeLeft = () => {
 }
 
 
-const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+// const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setTimeLeft(calculateTimeLeft());
-  }, 1000);
+// useEffect(() => {
+//   const timer = setTimeout(() => {
+//     setTimeLeft(calculateTimeLeft());
+//   }, 1000);
 
-  return () => clearTimeout(timer);
-});
+//   return () => clearTimeout(timer);
+// });
 
-const timerComponents = [];
+// const timerComponents = [];
 
-Object.keys(timeLeft).forEach((interval) => {
-  if (!timeLeft[interval]) {
-    return;
-  }
+// Object.keys(timeLeft).forEach((interval) => {
+//   if (!timeLeft[interval]) {
+//     return;
+//   }
 
-  timerComponents.push(
-    <span>
-      {timeLeft[interval]} {interval}{" "}
-    </span>
-  );
-});
+//   timerComponents.push(
+//     <span>
+//       {timeLeft[interval]} {interval}{" "}
+//     </span>
+//   );
+// });
 /*const [hoursLeft, setHours] = useState(timeLeft["hours"]);
 if(timeLeft["hours"] < 10){
 setHours("0"+timeLeft["hours"]);
@@ -997,7 +998,7 @@ Object.keys(timeLeft).forEach((interval) => {
 
 useEffect(() => {
 console.log(timeLeft);
-});*/
+});
 
    function addZero(a:number)
     {
@@ -1009,7 +1010,7 @@ console.log(timeLeft);
     const endDate = new Date('November 30, 2022 00:00:00');
 
     const [brokenUp, setBrokenUp] = React.useState({
-        days: 19, 
+        days: 0, 
         hours: 0, 
         minutes: 0,
         seconds: 0
@@ -1027,8 +1028,38 @@ console.log(timeLeft);
         }, 1000);
         return () => clearInterval(interval);
         }, []);
+*/
 const CountDown = () => {
-    return (
+   function addZero(a:number)
+    {
+        if(a.toString().length == 1)
+            return '0' + (a.toString());
+        return a.toString();
+    }
+
+    const endDate = new Date('November 30, 2022 00:00:00');
+
+    const [brokenUp, setBrokenUp] = React.useState({
+        days: 19,
+        hours: 0,
+        minutes: 0,
+        seconds: 0
+    })
+
+   useEffect(() => {
+        const interval = setInterval(() => {
+            console.log('This will run every second!');
+            const now = new Date();
+            const days = Math.floor(Math.abs(endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(Math.abs(endDate.getTime() - now.getTime()) / (1000 * 60 * 60) % 24);
+            const minutes = Math.floor(Math.abs(endDate.getTime() - now.getTime()) / (1000 * 60) % 60);
+            const seconds = Math.floor(Math.abs(endDate.getTime() - now.getTime()) / (1000) % 60);
+            setBrokenUp({...brokenUp, days: days, hours: hours, minutes: minutes, seconds: seconds})
+        }, 1000);
+        return () => clearInterval(interval);
+        }, []);
+
+return (
         <>
         <div className = {count.center}>
             <div className = {count.heading}>     
