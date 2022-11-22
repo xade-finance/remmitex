@@ -1379,8 +1379,8 @@ return (
 <br/>
 <br />
       <div className="web3aunth-div">
-        <div className="secured-by-div">Secured by</div>
-        <img
+{/*}        <div className="secured-by-div">Secured by</div>
+    {*/}    <img
           className="logo-for-dark-navbar-2-1"
           alt=""
           src="https://www.xade.finance/media/logofordarknavbar-2-1.svg"
@@ -1732,8 +1732,8 @@ function Box3() {
 <br/>
 <br />
       <div className="web3aunth-div">
-        <div className="secured-by-div">Secured by</div>
-        <img
+{/*}        <div className="secured-by-div">Secured by</div>
+    {*/}    <img
           className="logo-for-dark-navbar-2-1"
           alt=""
           src="https://www.xade.finance/media/logofordarknavbar-2-1.svg"

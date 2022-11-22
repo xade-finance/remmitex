@@ -3,12 +3,12 @@ import { CHAIN_NAMESPACES, CustomChainConfig } from "@web3auth/base";
 export const CHAIN_CONFIG = {
   celo: {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
-    rpcTarget: "https://alfajores-forno.celo-testnet.org/",
-    blockExplorer: "https://alfajores-blockscout.celo-testnet.org/",
-    chainId: "0xaef3",
-    displayName: "Celo",
-    ticker: "CELO",
-    tickerName: "CELO",
+    rpcTarget: "https://polygon-rpc.com/",
+    blockExplorer: "https://polygonscan.com",
+    chainId: "0x89",
+    displayName: "Polygon",
+    ticker: "MATIC",
+    tickerName: "MATIC",
   } as CustomChainConfig,
 } as const;
 
