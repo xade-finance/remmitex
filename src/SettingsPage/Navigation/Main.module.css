@@ -26,8 +26,8 @@
     /* margin-left: 25rem; */
     font-family: inherit;
     display: flex;
-    justify-content: center;
-    width: 50%;
+    justify-content: space-evenly;
+    width: 90%;
 }
 
 
@@ -57,7 +57,7 @@
 }
 
 .component div .heading {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem   ;
     /* text-align: center;  */
     font-size: 1.2rem;
 }
@@ -103,7 +103,7 @@
     height: 3rem;
 }
 .component div {
-    width: 50%;
+    width: 30%;
 }
 @media (max-width: 800px) {
     .component div {

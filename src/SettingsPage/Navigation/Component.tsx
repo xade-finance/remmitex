@@ -3,9 +3,8 @@ import styles from './Main.module.css'
 import { FcSettings } from 'react-icons/fc'
 import { CgProfile } from 'react-icons/cg'
 import { BiTransferAlt, BiSupport, BiHelpCircle } from 'react-icons/bi'
-import { Switch, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { FiLogOut } from 'react-icons/fi'
-
 
 
 
@@ -55,8 +54,8 @@ const MainComponent = () => {
                         </p>
                     </div>
                 </div>
-                <hr className = {styles.hr}></hr>
-              <div className={styles.component + " " + styles.C}>
+                {/* <hr className = {styles.hr}></hr> */}
+              {/* <div className={styles.component + " " + styles.C}>
                     <p className = {styles.logo}>
                         <BiSupport />
                     </p>
@@ -70,7 +69,7 @@ const MainComponent = () => {
                             Customer support and your queries
                         </p>
                     </div>
-              </div>
+              </div> */}
               <hr className = {styles.hr}></hr>
               <div className={styles.component + " " + styles.D}>
                     <p className = {styles.logo}>
@@ -98,8 +97,9 @@ const MainComponent = () => {
                         Switch to <p style = {{'display':'inline', 'color': 'lightblue'}}>Mainnet</p>
                     </button>
               </div>
+            <br />
               <hr className = {styles.hr}></hr>
-
+            <br />
               <div className = {styles.logoutButton}>
               <Button endIcon = {<FiLogOut />}sx = {{'height': '2'}} variant="contained" color="error" fullWidth = {true}>
         Log Out

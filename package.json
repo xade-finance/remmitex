@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@livechat/widget-react": "^1.2.1",
     "@mui/material": "^5.10.4",
     "@onramper/widget": "^2.2.20",
     "@react-icons/all-files": "^4.1.0",
@@ -15,6 +16,7 @@
     "@types/react-slick": "^0.23.10",
     "@walletconnect/qrcode-modal": "^1.8.0",
     "@web3auth/base": "^0.8.2",
+    "@web3auth/modal": "^3.0.4",
     "@web3auth/openlogin-adapter": "^0.8.2",
     "@web3auth/ui": "^3.0.3",
     "@web3auth/web3auth": "^0.8.2",
