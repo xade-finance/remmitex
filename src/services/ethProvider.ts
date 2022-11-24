@@ -1,4 +1,4 @@
-import USDC from "./USDC.json";
+import Token from "./CUSD.json";
 import { SafeEventEmitterProvider } from "@web3auth/base";
 import Web3 from "web3";
 import { IWalletProvider } from "./walletProvider";
@@ -80,8 +80,8 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
     try {
       const web3 = new Web3(provider as any);
       const accounts = await web3.eth.getAccounts();
-      const contractAddress = "0x2791bca1f2de4661ed88a30c99a7a9449aa84174";
-      const contract = new web3.eth.Contract(USDC.abi, contractAddress);
+      const contractAddress = "0x874069fa1eb16d44d622f2e0ca25eea172369bc1";
+      const contract = new web3.eth.Contract(Token.abi, contractAddress);
       // Send transaction to smart contract to update message and wait to finish
       const txRes = await contract.methods.transfer(toAddress, Web3.utils.toBN(Web3.utils.toWei(amount,'ether'))).send({
         from: accounts[0],
@@ -101,7 +101,7 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
     } catch (error) {
       console.log("Could not process transaction!")
       console.log("error", error);
-      console.log(USDC.abi);
+      console.log(Token.abi);
       return false;
     }
   };

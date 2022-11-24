@@ -1123,12 +1123,12 @@ return (
      <BrowserRouter>
        
        <Routes>
-          
+          {/*}
          <Route path="/" element={<CountDown/>} />
   <Route path="/login" element={<CountDown/>} />
                <Route path="/register" element={<CountDown/>} />
-
-  {/*}       <Route path = '/investments' element = {<Layout><Investments /></Layout>} />
+{*/}
+         <Route path = '/investments' element = {<Layout><Investments /></Layout>} />
 
         <Route path="/payments" element={<></>} />
          <Route path="/deposit-withdraw" element={<Layout><DepositWithdraw /></Layout>} />
@@ -1137,7 +1137,6 @@ return (
                  <Route path="/send" element={<Send />} />
            <Route path="/sendQR/:address" element={<SendQR />} />
 <Route path="/history" element={<TxHistory />} />
-{*/}
        </Routes>
        
    </BrowserRouter>
@@ -1353,7 +1352,7 @@ return (
       <img
         className="pexels-mikhail-nilov-7672255-1-icon"
         alt=""
-        src="https://www.xade.finance/media/pexelsmikhailnilov7672255-1@2x.png"
+        src="https://app.xade.finance/images/astronaut.jpeg"
       />
       {/*}<div className="web3aunth-div">
         <div className="secured-by-div">Secured by</div>
@@ -1383,7 +1382,7 @@ return (
     {*/}    <img
           className="logo-for-dark-navbar-2-1"
           alt=""
-          src="https://www.xade.finance/media/logofordarknavbar-2-1.svg"
+          src="https://app.xade.finance/images/w3a.svg"
         />
       </div>
     </div>
@@ -1493,8 +1492,8 @@ xhr.onreadystatechange = function(){
 let jsonObj = JSON.parse(xhr.responseText)
 if (jsonObj.status == 'approved') {
 storenum(cc,pnum);
-prompt("verified");
-window.location.href=`/register/${secret}`
+//prompt("verified");
+window.location.href=`/register`
 }
 else 
 {
@@ -1714,7 +1713,7 @@ function Box3() {
       <img
         className="pexels-mikhail-nilov-7672255-1-icon"
         alt=""
-        src="https://www.xade.finance/media/pexelsmikhailnilov7672255-1@2x.png"
+        src="https://app.xade.finance/images/astronaut.jpeg"
       />
       <div className="sign-in-form">
               <div className="socialsDiv2" >
@@ -1736,7 +1735,7 @@ function Box3() {
     {*/}    <img
           className="logo-for-dark-navbar-2-1"
           alt=""
-          src="https://www.xade.finance/media/logofordarknavbar-2-1.svg"
+          src="https://app.xade.finance/images/w3a.svg"
         />
       </div>
     </div>
