@@ -413,14 +413,14 @@ setPrice(xhr2.responseText);
 const [price,setPrice] = useState(0);
 var donezo = false;
 var xhr2 = new XMLHttpRequest();
-
+let balCUSD;
 //while(donezo=== false){
 
-xhr2.onreadystatechange=function(){
+/*xhr2.onreadystatechange=function(){
 if(xhr2.readyState==XMLHttpRequest.DONE){
 if(xhr2.status == 200){
 const usdJson = JSON.parse(xhr2.responseText);
-const balCUSD = usdJson["result"];
+balCUSD = usdJson["result"];
 setPrice(balCUSD);
 donezo = true;
 }
@@ -428,6 +428,34 @@ donezo = true;
 }
 xhr2.open('GET', `https://explorer.celo.org/alfajores/api?module=account&action=tokenbalance&contractaddress=0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1&address=${mainAccount}`);
 xhr2.send() 
+*/
+useEffect(() => {
+  xhr2.onreadystatechange = async function () {
+    if (xhr2.readyState == XMLHttpRequest.DONE) {
+      try {
+        if (xhr2.status == 200) {
+          try {
+            const usdJson = await JSON.parse(xhr2.responseText);
+            setCUSD(usdJson["result"]);
+
+            setPrice(balCUSD);
+            donezo = true;
+          } catch (e: any) {
+            console.log("xhr2.status", e + xhr2.status);
+          }
+        }
+      } catch (e) {
+        console.log("xhr2.onreadystatechange", e + xhr2.onreadystatechange);
+      }
+    }
+    return null;
+  };
+  xhr2.open(
+    "GET",
+    `https://explorer.celo.org/alfajores/api?module=account&action=tokenbalance&contractaddress=0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1&address=${mainAccount}`
+  );
+  xhr2.send();
+}, [, price, balCUSD]);
 
 //const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString();
 //const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
@@ -1123,11 +1151,11 @@ return (
      <BrowserRouter>
        
        <Routes>
-          {/*}
-         <Route path="/" element={<CountDown/>} />
+
+        <Route path="/" element={<CountDown/>} />
   <Route path="/login" element={<CountDown/>} />
                <Route path="/register" element={<CountDown/>} />
-{*/}
+{/*}
          <Route path = '/investments' element = {<Layout><Investments /></Layout>} />
 
         <Route path="/payments" element={<></>} />
@@ -1137,7 +1165,13 @@ return (
                  <Route path="/send" element={<Send />} />
            <Route path="/sendQR/:address" element={<SendQR />} />
 <Route path="/history" element={<TxHistory />} />
-       </Routes>
+<Route path="/" element={<Layout><HomePage /></Layout>} />
+<Route path="/register" element={<Layout><HomePage /></Layout>} />
+<Route path="/login" element={<Layout><HomePage /></Layout>} /> 
+
+{*/}   
+
+</Routes>
        
    </BrowserRouter>
 {/*}

@@ -21,9 +21,7 @@
   animation: 10s rotate linear infinite;
     
   }
-nav{
-	visibility: hidden;
-}
+
   @keyframes rotate {
     to {
       --angle: -180deg;
