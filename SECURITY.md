@@ -1,6 +1,6 @@
 ## Security
 
-Xade takes the security of our software products and services seriously, which includes all source code repositories managed through our GitHub organizations, which include [Microsoft](https://github.com/Microsoft), [Azure](https://github.com/Azure), [DotNet](https://github.com/dotnet), [AspNet](https://github.com/aspnet), [Xamarin](https://github.com/xamarin), and [our GitHub organizations](https://opensource.microsoft.com/).
+Xade takes the security of our software products and services seriously, which includes all source code repositories managed through our GitHub organization i.e. [Xade Finance](https://github.com/xade-finance/)
 
 If you believe you have found a security vulnerability in any Xade-owned repository, please report it to us as described below.
 
