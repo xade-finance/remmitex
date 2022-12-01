@@ -1,22 +1,28 @@
 .container {
-    height: 300px;
-    display: flex;
+/*    height: 300px;
+*//*    display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;*/
     overflow-x: hidden;
   }
-  
+  @font-face{
+    font-family: "VelaSans-M";
+    src: url("./VelaSans-Medium.otf");
+  }
   .box {
 display:flex; 
 margin:10px;
+font-family: "VelaSans-M";
     overflow: hidden;
 border-radius:20px;  
+text-align: left;
 padding: 20px;
 background-color:#0c0c0c;
 }
 .labelText{
         color:white;
 font-family: Sora;
+text-align: left;
 }
 .labelText:hover{
         color:white;

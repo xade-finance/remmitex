@@ -30,6 +30,7 @@ export interface IWeb3AuthContext {
     readAddress: () => Promise<any>;
 userData: () => Promise<any>;
 userPic: () => Promise<any>;
+userEmail: () => Promise<any>;
 }
 
 export const Web3AuthContext = createContext<IWeb3AuthContext>({
@@ -48,6 +49,7 @@ export const Web3AuthContext = createContext<IWeb3AuthContext>({
     readAddress: async () => {},
 userData: async() => {},
 userPic: async() => {},
+userEmail: async() => {},
 });
 
 export function useWeb3Auth() {
@@ -205,6 +207,16 @@ const userPic = async() => {
 return data["profileImage"];
 }
 
+const userEmail = async() => {
+    if (!web3Auth) {
+      console.log("web3auth not initialized yet");
+      uiConsole("web3auth not initialized yet");
+      return;
+    }
+  const data = await web3Auth.getUserInfo();
+return data["email"];
+}
+
   const getUserInfo = async (secret) => {
 
     if (!web3Auth) {
@@ -313,7 +325,8 @@ emailSend.send(em)
     getBalance,
     signMessage,
     userData,
-    userPic,
+userEmail,    
+userPic,
     signAndSendTransaction,
     loginWithWalletConnect
   };

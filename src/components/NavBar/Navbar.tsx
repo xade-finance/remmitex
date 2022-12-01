@@ -39,12 +39,12 @@ const Navbar = (props: Props) => {
           </div>
           
           <ul className={click ? 'nav-menu navActive' : 'nav-menu'}>
-            <li className='nav-item'>
-              <Link to='/' className='nav-links' onClick={closeMobileMenu}>
+            <li style={{color:"#fff"}} className='desktopstuff nav-item'>
+              <Link to='/' className='nav-links' style={{color:"#fff"}} onClick={closeMobileMenu}>
                 Home
               </Link>
             </li>
-  {/*          <li className='nav-item'>
+  {/*          <li stylclassName='nav-item'>
               <Link
                 to='/payments'
                 className='nav-links'
@@ -55,14 +55,14 @@ const Navbar = (props: Props) => {
             </li>*/}
             <li className='nav-item'>
               <Link
-                to='/investments'
+                to='/investments/1'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
                 Investments
               </Link>
             </li>
-                        <li className='nav-item'>
+            <li className='nav-item'>
               <Link
                 to='/savings'
                 className='nav-links'
@@ -71,22 +71,14 @@ const Navbar = (props: Props) => {
                 Savings
               </Link>
             </li>
+
             <li className='nav-item'>
               <Link
-                to='/deposit-withdraw'
+                to='/settings'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Deposit/Withdraw
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                to='/request'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Request Money
+                Settings
               </Link>
             </li>
            

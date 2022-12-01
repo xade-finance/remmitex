@@ -1,3 +1,5 @@
+//import L2oginBox from './Login/Login';
+//import "./countdown.css";
 import count from "./CountDown.module.css";
 import countries from "./allCountries";
 import { Country, PhoneNumber } from "./allCountries";
@@ -5,9 +7,10 @@ import "./NewLogin.css";
 import Popup from "reactjs-popup";
 import OnramperWidget from "@onramper/widget";
 import "reactjs-popup/dist/index.css";
+import tickStyles2 from './tickStyles2.module.css';
 import Web3 from "web3";
 import { FaCopy, FaExternalLinkAlt } from "react-icons/fa";
-import { getNormalTransactionsByAddress } from "../services/polyScan";
+import { getNormalTransactionsByAddress } from "../services/celoScan";
 import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
 import React from "react";
 import styles from "../styles/Home.module.css";
@@ -18,7 +21,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "reactjs-popup/dist/index.css";
 import { FormEvent, useEffect, useState } from "react";
-import Investments from "./INVESTMENTS";
+//import ComingSoon from './ComingSoon'
 import styles3 from "./send.module.css";
 import { WALLET_ADAPTERS } from "@web3auth/base";
 import { useWeb3Auth } from "../services/web3auth";
@@ -29,6 +32,7 @@ import "./QrPage.css";
 import { ImCross } from "react-icons/im";
 import { FiShare } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
+// import { Avatar } from 'web3uikit'
 import QRCode from "react-qr-code";
 import "./qrscan.css";
 import { Html5QrcodeScanner } from "html5-qrcode";
@@ -36,6 +40,7 @@ import CarouselCard1 from "./CarouselCard/CarouselCard1";
 import CarouselCard3 from "./CarouselCard/CarouselCard3";
 import CarouselCard4 from "./CarouselCard/CarouselCard4";
 import CarouselCard2 from "./CarouselCard/CarouselCard2";
+//import Popup from 'reactjs-popup'
 import { Layout } from "./Layout";
 import "./HomePage.css";
 import { TbQrcode } from "react-icons/tb";
@@ -43,6 +48,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Send from "./Send.tsx";
 import { alertTitleClasses } from "@mui/material";
+import Settings from './SettingsPage/Navigation'
+import FAQs from './SettingsPage/FAQs'
+import Investments from './INVESTMENTS/index';
+import ReactDOM from 'react-dom'
+import DW from './SettingsPage/DW'
+import Savings from './SavingsPage/Component'
 
 var cc;
 var num;
@@ -220,9 +231,33 @@ const Main = () => {
   }, [mainAccount]);
 
   const handleLoginWithEmail = (e: FormEvent<HTMLFormElement>) => {
+    //     var error = document.getElementById("error");
+    // cc = document.getElementById("cc").value;
+    // num = document.getElementById("num").value;
+    // var re = /\S+@\S+\.\S+/;
+
+    // if(cc == 0)
+    // {
+    //               error.textContent = "Please select a valid country code";
+    //           error.style.color = "red";
+    //           return;
+
+    // }
+    // else if (num.length != 10){
+    //      error.textContent = "Please enter a valid phone number";
+    //           error.style.color = "red";
+    //           return;
+
+    // }
+
+    // // else {
+    // //   error.textContent = "";
+    // //   error.style.color="#020202";
+    // //   e.preventDefault();
     e.preventDefault();
     const email = (e.target as any)[0].value;
     login(WALLET_ADAPTERS.OPENLOGIN, "email_passwordless", email);
+    // }
   };
 
   const TxHistory = () => {
@@ -233,10 +268,12 @@ const Main = () => {
           mainAccount.toString().toLowerCase()
             ? transactionHistory[i].from
             : transactionHistory[i].to;
+        //var currentTransac = "0xa13414fa08c8ae49a9cceabdae4ff8d2d82ec139";
         var finalVal =
           currentTransac.substring(0, 6) +
           "..." +
           currentTransac.substring(currentTransac.length - 3);
+        //console.log(finalVal);
         if (
           transactionHistory[i].to.toString().toLowerCase() ===
           mainAccount.toString().toLowerCase()
@@ -273,23 +310,19 @@ const Main = () => {
       <div>
         <br />
         <div className="topBar">
-          <Link to="/">
-            <div className="goBack">
-              <ImCross />
-            </div>
-          </Link>
+          
           <div className="buttonHolderQrPage">
             <div
               className="qrButtonLeftinActive"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              <h2>Transaction</h2>
+             <h2> <ImCross style={{fontSize:"25px"}} /> Transaction<a style={{color:"black"}}>_</a></h2>
             </div>
             <div
               className="qrButtonRightActive"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              <h2>&nbsp;History</h2>
+              <h2><ImCross style={{fontSize:"25px","visibility":"hidden"}} />History</h2>
             </div>
           </div>
 
@@ -299,11 +332,11 @@ const Main = () => {
         </div>
         <div className="activityContent">
           <br />
+          {/* <br />
           <br />
           <br />
           <br />
-          <br />
-          <br />
+          <br /> */}
           {transactionHistory.map((transaction, index) => (
             <div key={index} className="transactionHistory-pills">
               <div className="rightHalf-pill">
@@ -441,10 +474,41 @@ const Main = () => {
       }
     }, [provider, amount]);
     const amountStr = amount.toString();
+    //const [price,setPrice] = useState(0);
+    //var donezo = false;
+    /* useEffect(() => {
+const handleGetCelo = async () => {
+var xhr2 = new XMLHttpRequest();
+xhr2.onreadystatechange=function(){
+if(xhr2.readyState==XMLHttpRequest.DONE){
+if(xhr2.status == 200){
+setPrice(xhr2.responseText);
+}
+}
+}
+}
+
+}, [price]);
+*/
     const [price, setPrice] = useState(0);
     var donezo = false;
     var xhr2 = new XMLHttpRequest();
     let balCUSD;
+    //while(donezo=== false){
+
+    /*xhr2.onreadystatechange=function(){
+if(xhr2.readyState==XMLHttpRequest.DONE){
+if(xhr2.status == 200){
+const usdJson = JSON.parse(xhr2.responseText);
+balCUSD = usdJson["result"];
+setPrice(balCUSD);
+donezo = true;
+}
+}
+}
+xhr2.open('GET', `https://explorer.celo.org/alfajores/api?module=account&action=tokenbalance&contractaddress=0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1&address=${mainAccount}`);
+xhr2.send() 
+*/
     useEffect(() => {
       xhr2.onreadystatechange = async function () {
         if (xhr2.readyState == XMLHttpRequest.DONE) {
@@ -468,12 +532,15 @@ const Main = () => {
       };
       xhr2.open(
         "GET",
-        `https://explorer.celo.org/alfajores/api?module=account&action=tokenbalance&contractaddress=0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1&address=${mainAccount}`
+        `https://explorer.celo.org/mainnet/api?module=account&action=tokenbalance&contractaddress=0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1&address=${mainAccount}`
       );
       xhr2.send();
     }, [, price, balCUSD]);
 
+    //const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString();
+    //const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
     const usdBal = (parseFloat(price) / Math.pow(10, 18)).toFixed(2);
+    //alert(price);
 
     function returnUser(walletAddr: any) {
       var finalVal = "";
@@ -492,11 +559,44 @@ const Main = () => {
 
       return finalVal;
     }
+
+    // useEffect(() => {
+    // for(var i = 0; i < transactionHistory.length; i++)
+    // {
+
+    // var currentTransac = transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase()? transactionHistory[i].from : transactionHistory[i].to;
+    // //var currentTransac = "0xa13414fa08c8ae49a9cceabdae4ff8d2d82ec139";
+    // //var xhr = new XMLHttpRequest();
+    // var finalVal;
+    // //xhr.onreadystatechange = function(){
+
+    // //if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200){
+    // //finalVal = xhr.responseText;
+    // //}
+    // //else if(xhr.status != 200){
+    // finalVal = currentTransac.substring(0,6)+"..."+currentTransac.substring(currentTransac.length - 3);
+    // //console.log(xhr.status);
+    // //}
+    // //
+
+    // //xhr.open("GET",`https://user.api.xade.finance?address=${currentTransac}`);
+    // //xhr.send(null);
+    // //console.log(finalVal);
+    // if (transactionHistory[i].to.toString().toLowerCase() === mainAccount.toString().toLowerCase())
+    // {
+    // transactionHistory[i].from = finalVal;
+    // }
+    // else{
+    // transactionHistory[i].to = finalVal;
+    // }
+    // }
+    // },[]);
+
     const latest = transactionHistory.slice(0, 5);
 
     return (
       <div className="container">
-        <div className="carouselHolder">
+        <div className="carouselHolder text-center">
           <Slider {...settings}>
             <CarouselCard1 />
 
@@ -507,13 +607,6 @@ const Main = () => {
             <CarouselCard4 />
           </Slider>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <div className="myActivity">
           <div className="totalBalance">
             <p className="label">Checking Account</p>
@@ -521,8 +614,15 @@ const Main = () => {
           </div>
           <br />
           <br />
+                 <div className="activityContent">
+          <br />
+          {/* <br />
+          <br />
+          <br />
+          <br />
+          <br /> */}
           {latest.map((transaction, index) => (
-            <div key={index} className="transactionHistory-pills2">
+            <div key={index} className="transactionHistory-pills">
               <div className="rightHalf-pill">
                 <div className="transactionIndicator-arrows">
                   <svg
@@ -560,7 +660,7 @@ const Main = () => {
                   <div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a
-                      href={`https://alfajores-blockscout.celo-testnet.org/tx/${transaction.hash}`}
+                      href={`https://https://explorer.celo.org/mainnet/tx/${transaction.hash}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -587,14 +687,13 @@ const Main = () => {
               </div>
             </div>
           ))}
-          <br />
-          <br />
-          <button className="txBtn">
+        </div>
+          <button className="txBtn" style={{backgroundColor:"#000"}}>
             <a
               href="/history"
-              style={{ color: "#fff", textDecoration: "none" }}
+              style={{ color: "#fff", textDecoration: "none", backgroundColor:"#000" }}
             >
-              View Transaction History
+              View Transaction History &nbsp;&nbsp;<FaExternalLinkAlt />
             </a>
           </button>
           <br />
@@ -602,6 +701,47 @@ const Main = () => {
         </div>
         <br />
         <br />
+        {/*<div className='activityContent'>
+            {transactionHistory.map((transaction, index) => (
+              <div key={index} className='transactionHistory-pills'>
+                <div className='rightHalf-pill'>
+                <div className='transactionIndicator-arrows'>
+                      <svg stroke="currentColor" fill={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? "green" : "red"} stroke-width="0" viewBox="0 0 16 16" height="2em" width="2em" xmlns="http://www.w3.org/2000/svg"><path d={transaction.to.toString().toLowerCase() === mainAccount.toString().toLowerCase() ? "M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z" : "M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z"}></path></svg>
+                </div>
+                </div>
+                <div className='leftHalf-pill'>
+                  <div className='transaction-history-line1'>
+                    
+                    &nbsp;&nbsp;
+                    <div className="address-styling">
+                      {addressShortner(transaction)}
+                    </div>
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href={`https://explorer.celo.org/alfajores/tx/${transaction.hash}/token-transfers`} target="_blank" rel="noopener noreferrer"> <FaExternalLinkAlt /></a>
+                    </div>
+                  </div>
+                  <div className='transaction-history-line2'>
+
+
+
+                    &nbsp;&nbsp;
+                    <div className="amount-time-stlying">
+                    {transaction.value}
+                      
+                    </div >
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div className="amount-time-stlying">
+                      {(new Date(transaction.timeStamp * 1000).toString()).substring(4, 21)}
+                    </div>
+                    &nbsp;&nbsp;
+                   
+                  </div>
+                </div>
+              </div>
+            ))}
+   </div> 
+  </div>
+   */}
         <br />
         <div className="utilityButtons">
           <div className="buttonHolder">
@@ -625,21 +765,93 @@ const Main = () => {
           </div>
         </div>
         <br />
-{" "}
+        {/*<br />
+ <br />
+ <br />
+ <br />
+ <br /> 
+ <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />     
+    */}{" "}
       </div>
     );
   };
 
   const handleLoginWithEmail2 = (e: FormEvent<HTMLFormElement>) => {
-   
+    /*  var error = document.getElementById("error");
+  cc = document.getElementById("cc").value;
+  num = document.getElementById("num").value;
+
+  if(cc == 0)
+  {
+    e.preventDefault();
+                error.textContent = "Please select a valid country code";
+            error.style.color = "red";
+            return;
+      
+  }
+  else if (num.length != 10){
+    e.preventDefault();
+       error.textContent = "Please enter a valid phone number";
+            error.style.color = "red";
+            return;
+        
+  }
+
+   else {
+     error.textContent = "";
+     error.style.color="#020202";
+     e.preventDefault();
+  else {
+*/
     e.preventDefault();
     const email = (e.target as any)[0].value;
     login(WALLET_ADAPTERS.OPENLOGIN, "email_passwordless", email);
+    //        storenum(cc,num);
+
+    // }
   };
+
+  /*const [username, setUser] = useState("");
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+    if (xhr.status == 200)
+{
+        setUser(xhr.responseText);
+    
+}
+else{
+    setUser("User");
+}
+}
+    }
+xhr.open('GET', `https://user.api.xade.finance?address=${mainAccount}`, true);
+xhr.send(null);
+*/
+  // const [phoneNum, setPhone] = useState("");
+
+  //     var xhr = new XMLHttpRequest();
+  //     xhr.onreadystatechange = function() {
+  //         if (xhr.readyState == XMLHttpRequest.DONE) {
+  //     if (xhr.status == 200)
+  // {
+  //         setPhone(xhr.responseText);
+
+  // }
+  // else{
+  //     setPhone("Phone Number");
+  // }
+  // }
+
+  //     }
+  // xhr.open('GET', `https://mobile.api.xade.finance?address=0x6f994FcccBd601D164E3743714F5D0D315Eda41b`, true);
+  // xhr.send(null);
+
   const SendQR = () => {
     const params = useParams();
     let [current, setCurrent] = React.useState(0); // Phone number accept
-
+const addr = params.address;
+let [receipt, setReceipt] = React.useState<any>(null);
     let [amount, setAmount] = React.useState(0);
     let [error, setError] = React.useState({
       message: "",
@@ -648,7 +860,7 @@ const Main = () => {
     });
     const handleSendAmountToAddress = async (e: any) => {
       e.preventDefault();
-      const addr = params.address;
+      // const addr = params.address;
 
       if (amount <= 0) {
         setError({
@@ -660,57 +872,104 @@ const Main = () => {
         return;
       }
       alert(`Address: ${addr} | Amt: ${amount}`);
-      setCurrent(1);
-      await signAndSendTransaction(addr, amount.toString());
+     const account = await provider?.signAndSendTransaction(addr, amount.toString()); 
+     if(account == false)
+    {
+       setReceipt({message: 'Invalid parameters, please try again.'})
+       setCurrent(3);
+    }
+    else if(account.status == false)
+    {
+      setReceipt(account)
+      setCurrent(3);
+    }
+    else if(account.status == true)
+    {
+    console.log('yeahh')
+    account.effectiveGasPrice = Web3.utils.fromWei(account.effectiveGasPrice?.toString() || '', 'ether')
+    setReceipt(account)
+    setCurrent(2);
+    }
+    else
+    {
+        console.log('fuck')
+    }
     };
     return (
       <div>
-        {current == 0 ? (
-          <>
+ {(current == 0) ?          <>
             <br />
             <br />
             <br />
             <br />
             <h1 className={styles3.element}>Enter amount</h1>
-            <p id="error" style={error.style} className={styles.error}>
-              {error.message}
-            </p>
+            <p id="error" style={error.style} className={styles.error}>{error.message}</p>
 
-            <form
-              onSubmit={(e) => {
-                handleSendAmountToAddress(e);
-              }}
-            >
-              <section className={styles.phoneNumber}>
+            <form onSubmit={(e) => {
+              // Some web3auth function
+              handleSendAmountToAddress(e);
+            }}>
+              <section className={styles.phoneNumber} style={{"backgroundColor":"#000"}}>
                 <div className={styles.flexContainerCountry}>
                   <section className={styles.callingCodeTitle}>
-                    Amount <a className={styles.red}>*</a>
+                    <a style={{"color":"#fff","fontSize":"25px"}}>$</a> <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
                   </section>
 
                   <section>
-                    <input
-                      id="num"
-                      onChange={(e) => setAmount(parseInt(e.target.value))}
-                      value={amount}
-                      className={styles.inputForm}
-                      type="number"
-                      autoFocus
-                    />
                   </section>
                 </div>
               </section>
               <br />
               <br />
-              <br />
+          {/* <h3 className={styles3.element2}>Transaction Details</h3> */}
+          <br />
+          <br />
+          <br />
+          <br />
+
+              <div className = {styles3.contentWrapper}>
+        <div className = {styles3.information}>
+          <p className = {styles3.informationInformation}>Recipient (Name) &nbsp;&nbsp;</p>
+          <p className = {styles3.informationInformation} style={{"color":"white"}}>{username}</p>
+        </div>
+    </div>
+            
+
+    <div className = {styles3.contentWrapper}>
+        <div className = {styles3.information}>
+          <p className = {styles3.informationInformation}>Recipient (Address)</p>
+          <p style={{"color":"white"}} onClick = {() => alert(receipt.to)}className = {styles3.informationInformation} >{addr.slice(0, 6)}...{addr.slice(-3)} </p>
+        </div>
+    </div>  
+
+    <div className = {styles3.contentWrapper}>
+        <div className = {styles3.information}>
+          <p className = {styles3.informationInformation}>Amount</p>
+          <p className = {styles3.informationInformation} style={{"color":"white"}}>{amount}</p>
+        </div>
+    </div>
+            
+    <div className = {styles3.contentWrapper}>
+        <div className = {styles3.information}>
+          <p className = {styles3.informationInformation}>Estimated Fees</p>
+          <p className = {styles3.informationInformation} style={{"color":"white"}}>yes</p>
+        </div>
+    </div>
+           
+            
+
+    <br />
+    <br />
+    <br />
+    
 
               <div className={styles3.submitSection}>
-                <button type="submit" className={styles3.submitButton2}>
-                  Confirm transaction
-                </button>
+                <button type="submit" className={styles3.submitButton2}>Confirm transaction</button>
+
               </div>
             </form>
-          </>
-        ) : (
+            </>
+       : (current == 2) ?
           <>
             <div className={tickStyles.wrapper}>
               {" "}
@@ -737,7 +996,30 @@ const Main = () => {
 
             <div className={tickStyles.and}>Transaction successful! </div>
           </>
-        )}
+          : (current == 3) ?
+          <>
+           <div className={tickStyles2.wrapper}> <svg className={tickStyles2.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className={tickStyles2.checkmark__circle} cx="26" cy="26" r="25" fill="none" /> <path className={tickStyles2.checkmark__check} fill="none" d="M16 16 36 36 M36 16 16 36" />
+            </svg>
+            </div>
+          
+          
+          
+                  <div className = {styles3.contentWrapper}>
+          <div className={tickStyles2.and}>Transaction unsuccessful! </div>
+                </div>
+          <br />
+    
+          </>
+
+          : 
+
+          (current == 4)?
+          <>
+          
+          
+          </>
+          :<></>
+        }
       </div>
     );
   };
@@ -758,22 +1040,27 @@ const Main = () => {
     useEffect(() => {
       function onScanSuccess(decodedText, decodedResult) {
         window.stop();
+        // handle the scanned code as you like, for example:
         console.log(`Code matched = ${decodedText}`, decodedResult);
+        // setScannedCodes(scannedCodes.concat([{ decodedText, decodedResult }]));
         const walletAddr = decodedText.split("@")[1];
         window.location.href = "/sendQR/" + walletAddr;
       }
 
       function onScanFailure(error) {
+        // handle scan failure, usually better to ignore and keep scanning.
+        // for example:
         console.warn(`Code scan error = ${error}`);
       }
 
       let html5QrcodeScanner = new Html5QrcodeScanner(
         "reader",
         { fps: 10, qrbox: { width: 250, height: 250 } },
-        false
+        /* verbose= */ false
       );
       html5QrcodeScanner.render(onScanSuccess, onScanFailure);
     });
+    //alert(scannedCodes);
     return (
       <div>
         <br />
@@ -849,7 +1136,9 @@ const Main = () => {
         >
           <div className="contentWrapper">
             <div className="infoHolder">
-              <div>
+<br />
+<br />              
+<div>
                 <img className="pfp" src={img} />
               </div>
               <br />
@@ -859,7 +1148,7 @@ const Main = () => {
               </div>
               <div>
                 <button className="blackBtn" onClick={displayAddr}>
-                  <h4>
+                  <h4 style={{fontSize:"20px","fontFamily":"Arial"}}>
                     {mainAccount.substring(0, 6)}...
                     {mainAccount.substring(mainAccount.length - 3)}
                   </h4>
@@ -870,8 +1159,9 @@ const Main = () => {
               </div>
               <br />
               <div>
-                <button className="pillBtn">🟢 Celo Alfajores Testnet</button>
+                <button className="pillBtn">🟢 Ceo Mainnet</button>
               </div>
+<br />
             </div>
             <div className="QrHolder">
               <div className="QrWrapper">
@@ -912,7 +1202,125 @@ const Main = () => {
     return timeLeft;
   };
 
- 
+  // const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setTimeLeft(calculateTimeLeft());
+  //   }, 1000);
+
+  //   return () => clearTimeout(timer);
+  // });
+
+  // const timerComponents = [];
+
+  // Object.keys(timeLeft).forEach((interval) => {
+  //   if (!timeLeft[interval]) {
+  //     return;
+  //   }
+
+  //   timerComponents.push(
+  //     <span>
+  //       {timeLeft[interval]} {interval}{" "}
+  //     </span>
+  //   );
+  // });
+  /*const [hoursLeft, setHours] = useState(timeLeft["hours"]);
+if(timeLeft["hours"] < 10){
+setHours("0"+timeLeft["hours"]);
+}*/
+
+  /*const CountDown = () => {
+return (
+<div className="text-center main-countdown">
+    <div className="countdown-div">
+      <div className="the-countdown-has-already-begu">
+        <div className="take-part-in-private-beta">
+          <b className="take-part-in-private-beta1"><a style = {{'color':'white','textDecoration': 'none'}} href="https://discord.com/channels/1023970802099572847/1039229895781404692">Take part in private beta</a></b>
+
+        </div>
+        <div className="the-countdown-has-already-begu1">
+          The countdown has already begun.
+        </div>
+      </div>
+      <div className="countdown-div1">
+        <div className="days-div">
+          <img className="ellipse-icon" alt="" src="https://app.xade.finance/images/ellipse-123.svg" />
+          <div className="div">{timeLeft["days"]}</div>
+          <div className="days-div1">days</div>
+        </div>
+        <div className="div1">{timeLeft["hours"]}</div>
+        <div className="hours-div">hours</div>
+        <div className="div2">{timeLeft["minutes"]}</div>
+        <div className="minutes-div">minutes</div>
+        <div className="div3">{timeLeft["seconds"]}</div>
+        <div className="seconds-div">seconds</div>
+      </div>
+      <b className="xade-mainnet-v1-is-launching-o"
+        >Xade Mainnet V1 is launching on 30th November 2022</b
+      >
+    </div>
+</div>
+);
+}*/
+
+  /*const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+
+useEffect(() => {
+  const timer = setTimeout(() => {
+    setTimeLeft(calculateTimeLeft());
+  }, 1000);
+
+  return () => clearTimeout(timer);
+});
+
+const timerComponents = [];
+
+Object.keys(timeLeft).forEach((interval) => {
+  if (!timeLeft[interval]) {
+    return;
+  }
+
+  timerComponents.push(
+    <span>
+      {timeLeft[interval]} {interval}{" "}
+    </span>
+  );
+});
+
+useEffect(() => {
+console.log(timeLeft);
+});
+
+   function addZero(a:number)
+    {
+        if(a.toString().length == 1)
+            return '0' + (a.toString());
+        return a.toString();
+    }
+
+    const endDate = new Date('November 30, 2022 00:00:00');
+
+    const [brokenUp, setBrokenUp] = React.useState({
+        days: 0, 
+        hours: 0, 
+        minutes: 0,
+        seconds: 0
+    })
+
+   useEffect(() => {
+        const interval = setInterval(() => {
+            console.log('This will run every second!');
+            const now = new Date();
+            const days = Math.floor(Math.abs(endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(Math.abs(endDate.getTime() - now.getTime()) / (1000 * 60 * 60) % 24);
+            const minutes = Math.floor(Math.abs(endDate.getTime() - now.getTime()) / (1000 * 60) % 60);
+            const seconds = Math.floor(Math.abs(endDate.getTime() - now.getTime()) / (1000) % 60);
+            setBrokenUp({...brokenUp, days: days, hours: hours, minutes: minutes, seconds: seconds})
+        }, 1000);
+        return () => clearInterval(interval);
+        }, []);
+*/
   const CountDown = () => {
     function addZero(a: number) {
       if (a.toString().length == 1) return "0" + a.toString();
@@ -1017,14 +1425,37 @@ const Main = () => {
   <Route path="/login" element={<CountDown/>} />
                <Route path="/register" element={<CountDown/>} /> */}
               <Route
-                path="/investments"
+                path="/investments/:addr"
                 element={
                   <Layout>
                     <Investments />
                   </Layout>
                 }
               />
-
+              <Route
+                path="/investments/:addr"
+                element={
+                  <Layout>
+                    <Investments />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/faqs"
+                element={
+                  <Layout>
+                    <FAQs />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/deposits"
+                element={
+                  <Layout>
+                    <DW />
+                  </Layout>
+                }
+              />
               <Route path="/payments" element={<></>} />
               <Route
                 path="/deposit-withdraw"
@@ -1039,7 +1470,15 @@ const Main = () => {
                 path="/savings"
                 element={
                   <Layout>
-                    <Saving />
+                    <Savings />
+                  </Layout>
+                }
+              />
+              <Route
+                path="/settings"
+                element={
+                  <Layout>
+                    <Settings />
                   </Layout>
                 }
               />
@@ -1072,16 +1511,197 @@ const Main = () => {
               />
             </Routes>
           </BrowserRouter>
+          {/*}
+  <div>
+    {timerComponents.length ? timerComponents : <span>Time's up!</span>}
+  </div>     
+
+    <div class="countdown-div">
+      <div class="the-countdown-has-already-begu">
+        <div class="take-part-in-private-beta">
+          <b class="take-part-in-private-beta1">Take part in private beta</b>
+        </div>
+        <div class="the-countdown-has-already-begu1">
+          The countdown has already begun.
+        </div>
+      </div>
+      <div class="countdown-div1">
+        <div class="days-div">
+          <img class="ellipse-icon" alt="" src="public/ellipse-123.svg" />
+          <div class="div">{timeLeft["days"]}</div>
+          <div class="days-div1">days</div>
+        </div>
+        <div class="div1">{timeLeft["hours"]}</div>
+        <div class="hours-div">hours</div>
+        <div class="div2">{timeLeft["minutes"]}</div>
+        <div class="minutes-div">minutes</div>
+        <div class="div3">{timeLeft["seconds"]}</div>
+        <div class="seconds-div">seconds</div>
+      </div>
+      <b class="xade-mainnet-v1-is-launching-o"
+        >Xade Mainnet V1 is launching on 30th November 2022</b
+      >
+    </div>
+    <div className="countdown-div">
+      <div className="the-countdown-has-already-begu">
+        <div className="take-part-in-private-beta">
+          <b className="take-part-in-private-beta1">Take part in private beta</b>
+        </div>
+        <div className="the-countdown-has-already-begu1">
+          The countdown has already begun.
+        </div>
+      </div>
+      <div className="countdown-div1">
+        <div className="days-div">
+          <img className="ellipse-icon" alt="" src="public/ellipse-123.svg" />
+          <div className="div">{timeLeft["days"]}</div>
+          <div className="days-div1">days</div>
+        </div>
+        <div className="div1">{timeLeft["hours"]}</div>
+        <div className="hours-div">hours</div>
+        <div className="div2">{timeLeft["minutes"]}</div>
+        <div className="minutes-div">minutes</div>
+        <div className="div3">{timeLeft["seconds"]}</div>
+        <div className="seconds-div">seconds</div>
+      </div>
+      <b className="xade-mainnet-v1-is-launching-o"
+        >Xade Mainnet V1 is launching on 30th November 2022</b
+      >
+    </div>
+
+<div className="countdown">
+i
+          >{timeLeft["days"]}</div>
+          <div className="days-div1">days</div>
+        <div className="div1">{timeLeft["hours"]}</div>
+        <div className="hours-div">hours</div>
+        <div className="div2">{timeLeft["minutes"]}</div>
+        <div className="minutes-div">minutes</div>
+        <div className="div3">{timeLeft["seconds"]}</div>
+        <div className="seconds-div">seconds</div>
+</div>
+
+    <div className="main">
+
+
+        <div className="clock"></div>
+        <div className="display">
+            <span>{timeLeft["days"]} Days</span>
+            <span>{timeLeft["hours"]} Hours</span>
+            <span>{timeLeft["minutes"]} Minutes</span>            
+<span>{timeLeft["seconds"]} Seconds</span>
+        </div>
+    </div>
+
+</div>
+
+
+<div className="text-center main-countdown">
+    <div className="countdown-div">
+      <div className="the-countdown-has-already-begu">
+        <div className="take-part-in-private-beta">
+          <b className="take-part-in-private-beta1">Take part in private beta</b>
+        </div>
+        <div className="the-countdown-has-already-begu1">
+          The countdown has already begun.
+        </div>
+      </div>
+      <div className="countdown-div1">
+        <div className="days-div">
+          <img className="ellipse-icon" alt="" src="https://app.xade.finance/images/ellipse-123.svg" />
+          <div className="div">19</div>
+          <div className="days-div1">days</div>
+        </div>
+        <div className="div1">21</div>
+        <div className="hours-div">hours</div>
+        <div className="div2">35</div>
+        <div className="minutes-div">minutes</div>
+        <div className="div3">42</div>
+        <div className="seconds-div">seconds</div>
+      </div>
+      <b className="xade-mainnet-v1-is-launching-o"
+        >Xade Mainnet V1 is launching on 25th November 2022</b
+      >
+    </div>
+</div>
+{*/}
         </div>
       </>
     ));
 
   function registerSocial(social: string) {
+    /*  var error = document.getElementById("error");
+cc = document.getElementById("cc").value;
+num = document.getElementById("num").value;
 
+if(parseInt(cc) == 0)
+{
+        error.textContent = "Please select a valid country code";
+    error.style.color = "red";
+
+}
+else if (num.length != 10){
+error.textContent = "Please enter a valid phone number";
+    error.style.color = "red";
+
+}
+
+else{
+error.textContent = "";
+error.style.color="rgba(251, 251, 251, 0.6)";
+*/
     login(WALLET_ADAPTERS.OPENLOGIN, social);
+    //storenum(cc,num);
   }
 
+  //     <>
+  //     <script>
+  //     alert("hello");
+  //     </script>
+  //       <head>
+  //       <title>Xade | Dashboard</title>
+  //       </head>
+  // {/*      <body onLoad={getUserInfo}>
+  // */}{/*      {{getUserInfo()}}
+  // */}      <div className={styles.logindone}>
+  // {/*<script>
+  // window.onload=function() {
+  //   {getUserInfo()}
+  // }*/}
+  // {/*</script>*/}
+  //       <h1 className={styles.dash}>Dashboard</h1>
+  //       <div className={styles.logindone2}>
+  //       <div className={styles.console} id="console">
+  //         <p className={styles.code}></p>
+  //       </div>
+  //       <script src="details.js"></script>
+  //       <button id="mybtn" onClick={getUserInfo} className={styles.loggedIn}>
+  //         <b>Get User Info</b>
+  //       </button>
+  //       <div>
+  //       </div>
 
+  //       {/*<br/>
+  //       <br/>
+  //       <button onClick={getAccounts} className={styles.loggedIn}>
+  //         <b>Get Accounts</b>
+  //       </button>
+  //       <br/>
+  //       <br/>
+  //       <button onClick={getBalance} className={styles.loggedIn}>
+  //         <b>Get Balance</b>
+  //       </button>*/}
+  //       <br/>
+  //       <br/>
+  //       <button onClick={logout} className={styles.loggedIn}>
+  //         <b>Log Out</b>
+
+  //       </button>
+  //       </div>
+
+  //       </div>
+  //           </>
+  //   );
 
   function loginSocial(social: string) {
     login(WALLET_ADAPTERS.OPENLOGIN, social);
@@ -1096,7 +1716,14 @@ const Main = () => {
             alt=""
             src="https://app.xade.finance/images/astronaut.jpeg"
           />
-          
+          {/*}<div className="web3aunth-div">
+        <div className="secured-by-div">Secured by</div>
+        <img
+          className="logo-for-dark-navbar-2-1"
+          alt=""
+          src="https://www.xade.finance/media/logofordarknavbar-2-1.svg"
+        />
+      </div>{*/}
           <div className="sign-in-form">
             <div className="socialsDiv2">
               <button
@@ -1144,7 +1771,8 @@ const Main = () => {
               <br />
               <br />
               <div className="web3aunth-div">
-         
+                {/*}        <div className="secured-by-div">Secured by</div>
+    {*/}{" "}
                 <img
                   className="logo-for-dark-navbar-2-1"
                   alt=""
@@ -1174,6 +1802,13 @@ const Main = () => {
               <button type="submit" className="sign-in-button">
                 <b className="sign-in-text">Sign in</b>
               </button>
+
+              {/*}        <div className="email-field-div">
+<br />
+<br />      
+    <input type={'email'} placeholder={'Enter your email'} className="your-email-div"/>          <div className="rectangle-div"></div>
+        </div>
+{*/}
             </form>
             <div className="or-create-account">
               <br />
@@ -1191,6 +1826,7 @@ const Main = () => {
             <br />
           </div>
           <b className="were-all-explorers-and-now-y"></b>
+          {/*}<img className="xade-icon" alt="" src="https://www.xade.finance/media/xade.svg" />{*/}
         </div>
       </div>
     );
@@ -1221,6 +1857,10 @@ const Main = () => {
         return;
       }
 
+      // else {
+      //   error.textContent = "";
+      //   error.style.color="#020202";
+      //   e.preventDefault();
       else {
         e.preventDefault();
         var xhr = new XMLHttpRequest();
@@ -1239,6 +1879,7 @@ const Main = () => {
 
         xhr.send(null);
 
+        // }
       }
     };
 
@@ -1253,6 +1894,7 @@ const Main = () => {
         document.getElementById("numberinput4").value.toString() +
         document.getElementById("numberinput5").value.toString() +
         document.getElementById("numberinput6").value.toString();
+      // Call verify API
       alert(otpEntered);
       var xhr = new XMLHttpRequest();
 
@@ -1260,6 +1902,8 @@ const Main = () => {
         let jsonObj = JSON.parse(xhr.responseText);
         if (jsonObj.status == "approved") {
           storenum(cc, pnum);
+          //prompt("verified");
+          // window.location.href=`/register`
           setState(2);
         } else {
           alert("Incorrect code");
@@ -1278,12 +1922,36 @@ const Main = () => {
 
     const handleLoginWithEmail2 = (e: FormEvent<HTMLFormElement>) => {
       var error = document.getElementById("error");
-    
+      /* cc = document.getElementById("cc").value;
+num = document.getElementById("num").value;
+
+if(cc == 0)
+{
+e.preventDefault();
+        error.textContent = "Please select a valid country code";
+    error.style.color = "red";
+    return;
+
+}
+else if (num.length != 10){
+e.preventDefault();
+error.textContent = "Please enter a valid phone number";
+    error.style.color = "red";
+    return;
+
+}
+
+else {
+error.textContent = "";
+error.style.color="#020202";
+e.preventDefault();
+else { */
       e.preventDefault();
       const email = (e.target as any)[0].value;
       login(WALLET_ADAPTERS.OPENLOGIN, "email_passwordless", email);
       storenum(cc, num);
 
+      // }
     };
 
     function skipRegister() {
@@ -1294,7 +1962,7 @@ const Main = () => {
       <div>
         <div className={"container" + styles.login}>
           <div className={styles.loginTitleText}>
-            <h1 className="text-center text-white" id="loginTitle">
+            <h1 style={{fontSize:"45px"}} className="text-center text-white" id="loginTitle">
               {state == 0 ? "Register" : state == 1 ? "Enter OTP" : ""}
             </h1>
           </div>
@@ -1306,7 +1974,9 @@ const Main = () => {
                   <p className={styles.subheading}>
                     Step 1: Enter your registered mobile number
                   </p>
+<br />
                   <p id="error" className={styles.error}></p>
+<br />
 
                   <div className={styles.number_input} id="phonenums">
                     <div className={styles.number_form}>
@@ -1319,7 +1989,18 @@ const Main = () => {
 
                             <section>
                               <select id="cc" className={styles.selectForm}>
-                            
+                                {/*}<option value="0">Select your country code</option>
+                                        <option value="1">United States of America/Canada</option>
+                                 <option value="44">United Kingdom</option>
+                                <option value="91">India</option>
+                                <option value="61">Australia</option>                                    
+                                <option value="971">United Arab Emirates</option>
+                                <option value="852">Hong Kong</option>
+                                <option value="49">Germany</option>
+                                <option value="33">France</option>
+                                <option value="81">Japan</option>
+                                <option value="234">Nigeria</option>
+                                    {*/}
                                 {countries.map((countryName) => (
                                   <option
                                     value={countryName["code"]}
@@ -1346,7 +2027,9 @@ const Main = () => {
                           </div>
                         </section>
 
-                    
+                        {/*  <section className={styles.submitSection}>
+                        <button className={styles.submitButton} onClick={test} id="cont">Continue</button>
+                    </section>*/}
                       </div>
                     </div>
                   </div>
@@ -1512,7 +2195,8 @@ const Main = () => {
                     <br />
                     <br />
                     <div className="web3aunth-div">
-             
+                      {/*}        <div className="secured-by-div">Secured by</div>
+    {*/}{" "}
                       <img
                         className="logo-for-dark-navbar-2-1"
                         alt=""
@@ -1542,6 +2226,13 @@ const Main = () => {
                     <button type="submit" className="sign-in-button">
                       <b className="sign-in-text">Create</b>
                     </button>
+
+                    {/*}        <div className="email-field-div">
+<br />
+<br />      
+    <input type={'email'} placeholder={'Enter your email'} className="your-email-div"/>          <div className="rectangle-div"></div>
+        </div>
+{*/}
                   </form>
                   <div className="or-create-account">
                     <br />
@@ -1559,6 +2250,7 @@ const Main = () => {
                   <br />
                 </div>
                 <b className="were-all-explorers-and-now-y"></b>
+                {/*}<img className="xade-icon" alt="" src="https://www.xade.finance/media/xade.svg" />{*/}
               </div>
             </>
           )}
@@ -1625,7 +2317,8 @@ const Main = () => {
               <br />
               <br />
               <div className="web3aunth-div">
-        
+                {/*}        <div className="secured-by-div">Secured by</div>
+    {*/}{" "}
                 <img
                   className="logo-for-dark-navbar-2-1"
                   alt=""
@@ -1655,6 +2348,13 @@ const Main = () => {
               <button type="submit" className="sign-in-button">
                 <b className="sign-in-text">Create</b>
               </button>
+
+              {/*}        <div className="email-field-div">
+<br />
+<br />      
+    <input type={'email'} placeholder={'Enter your email'} className="your-email-div"/>          <div className="rectangle-div"></div>
+        </div>
+{*/}
             </form>
             <div className="or-create-account">
               <br />
@@ -1672,6 +2372,7 @@ const Main = () => {
             <br />
           </div>
           <b className="were-all-explorers-and-now-y"></b>
+          {/*}<img className="xade-icon" alt="" src="https://www.xade.finance/media/xade.svg" />{*/}
         </div>
       </div>
     );
@@ -1742,7 +2443,7 @@ const Main = () => {
                   />
                   <br />
                   <br />{" "}
-                  <h1 className="text-white">
+                  <h1 style={{fontSize:"35px"}} className="text-white">
                     One app to manage all your finance
                   </h1>
                   <br />{" "}
@@ -1777,6 +2478,7 @@ const Main = () => {
           />
           <Route path="/register" element={<Box />} />
           <Route path="/login" element={<Box2 />} />
+          {/* <Route path="/register" element={<Box3 />}/>  */}
         </Routes>
       </BrowserRouter>
     </div>

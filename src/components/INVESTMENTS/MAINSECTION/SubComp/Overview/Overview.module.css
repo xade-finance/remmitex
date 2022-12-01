@@ -3,8 +3,8 @@
     display: inline-block;
     margin: 0;
     padding: 0 !important;
-    width: 50vw;
-    height: 60vh;
+    width: 90%;
+    height: 90%;
     margin-top: 0;
     /* z-index: 2; */
 }
@@ -15,7 +15,9 @@
     padding: 0;
     justify-content: center;
     width: 100vw;
-    padding-top: 4vh;
+    height: 90vh;
+    align-items: center;
+    /* padding-top: 4vh; */
 }
 
 @media screen and (max-width:600px){
@@ -25,5 +27,9 @@
         width: 95%; 
         /* margin-left: 2.5vw; */
         
+    }
+
+    .setChart {
+        height: 70vh;
     }
 }

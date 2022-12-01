@@ -5,7 +5,8 @@ import styles3 from './send.module.css'
 import styles from "./../styles/Home.module.css";
 import tickStyles from './tickStyles.module.css';
 import tickStyles2 from './tickStyles2.module.css';
-
+import countries from './allCountries';
+import { Country, PhoneNumber } from './allCountries';
 const Send = () => {
 
 
@@ -14,7 +15,7 @@ const Send = () => {
   let [receipt, setReceipt] = React.useState<any>(null);
   let [cc, setCC] = React.useState(0);
   let [num, setNum] = React.useState(0);
-  let [amount, setAmount] = React.useState(0);
+  let [amount, setAmount] = React.useState(0.0);
   let [error, setError] = React.useState({ 'message': '', 'style': { 'color': 'rgba(251, 251, 251, 0.6)' }, 'error': false })
   const { provider } = useWeb3Auth();
   const[username,setUser]=React.useState<any>(""); 
@@ -32,7 +33,7 @@ const Send = () => {
     if(account == false)
     {
        setReceipt({message: 'Invalid parameters, please try again.'})
-       setCurrent(4);
+       setCurrent(3);
     }
     else if(account.status == false)
     {
@@ -98,7 +99,7 @@ const Send = () => {
         }
 
       }
-      xhr.open('GET', `https://mobile.api.xade.finance?phone=448017276276`, true);
+      xhr.open('GET', `https://mobile.api.xade.finance?phone=${String(cc) + String(num)}`, true);
       xhr.send(null);
     }
 
@@ -133,18 +134,21 @@ const Send = () => {
                         console.log(cc)
                       }
                       } >
-                        <option value="0">Select your country code</option>
-                        <option value="1">United States of America/Canada</option>
-                        <option value="44">United Kingdom</option>
-                        <option value="91">India</option>
-                        <option value="61">Australia</option>
-                        <option value="971">United Arab Emirates</option>
-                        <option value="852">Hong Kong</option>
-                        <option value="49">Germany</option>
-                        <option value="33">France</option>
-                        <option value="81">Japan</option>
-                        <option value="234">Nigeria</option>
-                      </select>
+                                           {/*}<option value="0">Select your country code</option>
+                                        <option value="1">United States of America/Canada</option>
+                                 <option value="44">United Kingdom</option>
+                                <option value="91">India</option>
+                                <option value="61">Australia</option>                                    
+                                <option value="971">United Arab Emirates</option>
+                                <option value="852">Hong Kong</option>
+                                <option value="49">Germany</option>
+                                <option value="33">France</option>
+                                <option value="81">Japan</option>
+                                <option value="234">Nigeria</option>
+                                    {*/}
+                                   { countries.map((countryName) => <option value = {countryName['code']}>{`${countryName['name']}`}</option>) }
+
+</select>
                     </section>
                   </div>
                 </section>
@@ -190,27 +194,28 @@ const Send = () => {
               // Some web3auth function
               handleSendAmountToAddress(e);
             }}>
-              <section className={styles.phoneNumber}>
+              <section className={styles.phoneNumber} style={{"backgroundColor":"#000"}}>
                 <div className={styles.flexContainerCountry}>
                   <section className={styles.callingCodeTitle}>
-                    Amount <a className={styles.red}>*</a>
+                    <a style={{"color":"#fff","fontSize":"25px"}}>$</a> <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
                   </section>
 
                   <section>
-                    <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} className={styles.inputForm} type='number' autoFocus />
                   </section>
                 </div>
               </section>
               <br />
               <br />
-              <br />
-          <h3 className={styles3.element2}>Transaction Details</h3>
+          {/* <h3 className={styles3.element2}>Transaction Details</h3> */}
           <br />
-      
+          <br />
+          <br />
+          <br />
+
               <div className = {styles3.contentWrapper}>
         <div className = {styles3.information}>
-          <p className = {styles3.informationInformation}>Recipient (Name)</p>
-          <p className = {styles3.informationInformation}>{username}</p>
+          <p className = {styles3.informationInformation}>Recipient (Name) &nbsp;&nbsp;</p>
+          <p className = {styles3.informationInformation} style={{"color":"white"}}>{username}</p>
         </div>
     </div>
             
@@ -218,21 +223,21 @@ const Send = () => {
     <div className = {styles3.contentWrapper}>
         <div className = {styles3.information}>
           <p className = {styles3.informationInformation}>Recipient (Address)</p>
-          <p onClick = {() => alert(receipt.to)}className = {styles3.informationInformation} >{address.slice(0, 6)}...{address.slice(-3)}</p>
+          <p style={{"color":"white"}} onClick = {() => alert(receipt.to)}className = {styles3.informationInformation} >{address.slice(0, 6)}...{address.slice(-3)} </p>
         </div>
     </div>  
 
     <div className = {styles3.contentWrapper}>
         <div className = {styles3.information}>
           <p className = {styles3.informationInformation}>Amount</p>
-          <p className = {styles3.informationInformation}>{amount}</p>
+          <p className = {styles3.informationInformation} style={{"color":"white"}}>{amount}</p>
         </div>
     </div>
             
     <div className = {styles3.contentWrapper}>
         <div className = {styles3.information}>
           <p className = {styles3.informationInformation}>Estimated Fees</p>
-          <p className = {styles3.informationInformation}>yes</p>
+          <p className = {styles3.informationInformation} style={{"color":"white"}}>yes</p>
         </div>
     </div>
            

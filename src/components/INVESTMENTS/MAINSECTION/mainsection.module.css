@@ -54,6 +54,13 @@
     height: 100vh;
 }
 
+.main {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    /* flex-direction: ; */
+}
 
 @media (min-width: 700px)
 {

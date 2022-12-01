@@ -1,7 +1,18 @@
-@font-face {
-    font-family: Inter;
-    src: url('./fonts/Inter.ttf');
+@font-face{
+    font-family: "NeueMontreal";
+    src: url("https://app.xade.finance/fonts/NeueMontreal.otf");
 }
+
+@font-face{
+    font-family: "NeueMontreal";
+    src: url("./NeueMontreal-Medium.otf");
+  }
+
+
+  @font-face{
+    font-family: boldfont;
+    src: url("./NeueMontreal-Bold.otf");
+  }
 .infobar {
 
     margin: 2%;
@@ -18,8 +29,10 @@
 }
 
 .horicenter {
+    width: 90%;
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    margin: auto;
 }
 
 .details {
@@ -37,8 +50,10 @@
     /* height: 100%; */
     font-size: 1.5em;
     margin-left: 1rem;
-    font-family: Inter;
+    font-family: NeueMontreal;
     color: #848884;
+    font-weight: 300;
+    
 }
 
 .logo {
@@ -56,8 +71,9 @@
     font-size: 2em;
     /* border: 1px solid black; */
     /* border-radius: 1rem; */
-    font-family: Inter;
+    font-family: boldfont;
     color: #e0e0e0;
+    text-align: start;
 }
 
 @media screen and (max-width:600px)

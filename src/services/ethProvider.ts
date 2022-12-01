@@ -80,7 +80,7 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
     try {
       const web3 = new Web3(provider as any);
       const accounts = await web3.eth.getAccounts();
-      const contractAddress = "0x874069fa1eb16d44d622f2e0ca25eea172369bc1";
+      const contractAddress = "0x765de816845861e75a25fca122bb6898b8b1282a";
       const contract = new web3.eth.Contract(Token.abi, contractAddress);
       // Send transaction to smart contract to update message and wait to finish
       const txRes = await contract.methods.transfer(toAddress, Web3.utils.toBN(Web3.utils.toWei(amount,'ether'))).send({
@@ -110,4 +110,3 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
 };
 
 export default ethProvider;
-

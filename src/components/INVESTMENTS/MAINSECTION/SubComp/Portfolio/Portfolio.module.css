@@ -1,6 +1,12 @@
-@font-face {
+/* @font-face {
     font-family: Inter;
-    src: url("../../../../../Assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf");
+    src: url("../Assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf");
+} */
+
+@font-face
+{
+    font-family: VB;
+    src: url("./VelaSans-Bold.otf")
 }
 
 .center {
@@ -10,16 +16,29 @@
     width: 100vw;
     /* height: 100%; */
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     color: white;
 }
+.content {
+    /* width: 20%; */
+}
 
+.subHead2 {
+    width: 19%;
+    /* text-align: center; */
+}
+.title {
+    display: flex;
+    flex: 1 1 0px;
+    width: 100%;
+    justify-content: space-between;
+}
 .head {
     color: white;
-    padding: 0.5rem;
-    font-family: Inter;
+    /* padding: 0.5rem; */
+    font-family: VB;
     font-size: 1.5rem;
-    display: inline-block;
+    display: inline;
 }
 
 .green {
@@ -37,8 +56,8 @@
 }
 
 .container {
-    width: 90vw;
-    height: 10vh;
+    width: 98vw;
+    /* height: 10vh; */
     background-color: #111111;
     border-radius: 1.5rem;
     display: flex;
@@ -58,12 +77,44 @@
     font-weight: 700;
 }
 
+.sub {
 
+}
 
+.subHead2 {
+color: grey;
+font-weight: 500;
+font-size: 0.8rem;
+/* width: 20%;  */
+/* width:33%; */
+}
+
+.subHead {
+    color: grey;
+    font-weight: 500;
+    width: 33%;
+}
+
+.options {
+    color: white;
+    font-size: 1.5rem;  
+}
+
+.container1 {
+    width: 90vw;
+}
+
+.sub, .goneCase {
+    visibility: hidden ;
+}
 @media screen and (min-width: 800px)
 {
     .container {
-        width: 50vw;
+        width: 45vw;
+    }
+
+    .container1 {
+        width: 95vw;
     }
 
     .green, .red {
@@ -71,21 +122,35 @@
     }
 
     .head {
-        width: 100vw;
+        /* width: 100vw; */
         text-align: center;
     }
 
     .g {
-        color: rgb(60, 211, 60);
+        color: snow;
     }
 
     .r {
         color: magenta;
     }
 
-    hr {
+    .hr {
         width: 50%;
         margin-left: 25vw !important;
         padding: 0;
+    }
+}
+
+
+@media screen and (max-width: 800px)
+{
+    .center {
+        flex-direction: column;
+
+    }
+
+    .container {
+        margin-top: 2rem;
+        width: 99vw;
     }
 }

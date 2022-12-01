@@ -1,12 +1,12 @@
 
 .container{
-    display: flex;
-    flex-direction: column;
+/*    display: flex;
+    flex-direction: column;*/
     background: #000;
     
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
+    max-height: 500vh;
+/*    justify-content: center;
+    align-items: center;*/
     
  
 }
@@ -16,12 +16,18 @@
 body{
     overflow-x: hidden;
 }
+
+.txBtn{
+	margin-top:-295px;
+}
+
 .carouselHolder{
-        /* display: block; */
+        display: block; 
         max-width: 775px;
-        /* align-items: center; */
-        /* justify-content: center; */
- margin-top:200px;
+position: re5%;
+         align-items: center; 
+         justify-content: center; 
+ margin-top:75px;
  	max-height: 350px;
         overflow: visible;
 }
@@ -40,7 +46,11 @@ body{
     width: 100%;
     justify-content: flex-start;
     flex-direction: column;
-
+     align-items: center;
+        /*display: inline-block;*/
+    justify-content: center;
+    position: relative;
+    right: 12%;
 }
 .label{
     font-size: 0.8rem;
@@ -53,7 +63,7 @@ body{
 
 
 .carouselHolder {
-	position:absolute;
+	position:relative;
         top:0;
 	margin-bottom:0;
         justify-content: space-between;
@@ -81,6 +91,8 @@ margin-right:100px;
     min-height: 368px;
     height: 100%;
     color: #fff;
+    position: relative;
+    left: 5%;
     }
 
 .utilityButtons{
@@ -91,6 +103,8 @@ margin-right:100px;
     /* border-width: 301px; */
     border-top: 1px solid rgba(53, 53, 53, 0.7);
     align-items: center;
+            position: relative;
+        left: 30%;
 }
 .buttonHolder{
     width: 100%;
@@ -103,7 +117,7 @@ margin-right:100px;
 
 .paymentsButton{
     
-    width: 100%;
+    width: 9rem;
     display: flex;
     padding: 10px 20px;
     justify-content: center;
@@ -200,7 +214,9 @@ width:140px;
     .carouselHolder{
         max-width: 380px;
      	max-height: 350px;
-	margin-top:100px;
+	margin-top:50px;
+    position: relative;
+left: 0%;
     }
     
     .myActivity{
@@ -218,7 +234,8 @@ width:140px;
         width: 100%;
         justify-content: flex-start;
         flex-direction: column;
-    
+        position: relative;
+    right: 30%;
     }
     .label{
         font-size: 0.8rem;
@@ -236,6 +253,8 @@ width:140px;
         min-height: 368px;
         height: 100%;
         color: #fff;
+            position: relative;
+    left: 0%;
     }
     .utilityButtons{
         display: flex;
@@ -244,6 +263,8 @@ width:140px;
         justify-content: center;
         border-top: 1px solid rgba(53, 53, 53, 0.7);
         align-items: center;
+       position: relative;
+        left: 0%;
     }
     .buttonHolder{
         width: 80%;

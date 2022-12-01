@@ -1,50 +1,70 @@
 import React from 'react'
 import styles from './Portfolio.module.css'
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import styles2 from './../Trade/Trade.module.css'
 
 export default function Portfolio()
 {
-    let [amt, setAmt] = React.useState({i: 0.0, c:0.0});
     return (
         <>
-        <br></br><br />
-        <div className = {styles.green}></div>
-        <div className = {styles.head + " " +  styles.g}>Holdings</div>
         <div className={styles.center}>
-            <div className = {styles.container}>
-                <div className = {styles.element}>
-                        <p className = {styles.p}>Invested</p>
-                        <p className = {styles.p}>${(amt.i).toFixed(2)}</p>
+
+            <div className = {styles.container + " " + styles.container1}> 
+                <div style = {{'width': '100%', 'height': '100%'}}>
+                <div className = {styles.title}>
+                <div className = {styles.head + " " +  styles.g}>Portfolio</div>
                 </div>
-                 <div className = {styles.element}>
-                        <p className = {styles.p}>Current</p>
-                        <p className = {styles.p}>${(amt.c).toFixed(2)}</p>
+
+
+                <hr style = {{'width': '100%', 'color': 'grey'}}></hr>
+                <>
+                <div style = {{'visibility': 'visible'}}className = {styles.title + " " + styles.sub}>
+                <div className = {styles.subHead2 + " "}>SIZE</div>
+                <div style = {{'textAlign':"left"}} className = {styles.subHead2 + " "}>TIME</div>
+                <div style = {{'textAlign':"left"}} className = {styles.subHead2 + " "}>REALIZED PNL</div>
+                <div style = {{'textAlign':"center"}} className = {styles.subHead2 + " "}>TRADING FEE</div>
+                <div style = {{'textAlign':"right"}} className = {styles.subHead2 + " "}>NOTES</div>
+
                 </div>
-                <div className = {styles.element}>
-                        <p className = {styles.p}>Returns</p>
-                        <p className = {styles.p}>${(amt.c - amt.i).toFixed(2)}</p>
+                <hr style = {{'width': '100%', 'color': 'grey'}}></hr>
+                <div className = {styles.title + " " + styles.sub}>
+                       <div className = {styles.subHead2 + " "}>SIZE</div>
+                <div style = {{'textAlign':"left"}} className = {styles.subHead2 + " "}>35.99</div>
+                <div style = {{'textAlign':"left"}} className = {styles.subHead2 + " "}> yes</div>
+                <div style = {{'textAlign':"center"}} className = {styles.subHead2 + " "}>yes </div>
+                <div style = {{'textAlign':"right"}} className = {styles.subHead2 + " "}>yes</div>
                 </div>
-               
-            </div>
+                <hr className = {styles.goneCase}style = {{'width': '100%', 'color': 'grey'}}></hr>
+                <div className = {styles.title + " " + styles.sub}>
+                
+                </div>
+                <hr className = {styles.goneCase}style = {{'width': '100%', 'color': 'grey'}}></hr>
+                <div className = {styles.title + " " + styles.sub}>
+                <div style = {{'color': 'green'}} className = {styles.content}>35.99</div>
+                <div style = {{'color': 'grey'}}  className = {styles.content + " "}>3.008</div>
+                <div style = {{'color': 'white'}} className = {styles.content + " "}>36.99</div>
+                </div>
+                <div style = {{'width': '100%', 'textAlign': 'center'}}>YOUR ACTIVITY APPEARS HERE</div>
+                <hr className = {styles.goneCase}style = {{'width': '100%', 'color': 'grey'}}></hr>
+                <div className = {styles.title + " " + styles.sub}>
+                <div style = {{'color': 'green'}} className = {styles.content}>35.99</div>
+                <div style = {{'color': 'grey'}}  className = {styles.content + " "}>3.008</div>
+                <div style = {{'color': 'white'}} className = {styles.content + " "}>36.99</div>
+                </div>
+                <hr className = {styles.goneCase}style = {{'width': '100%', 'color': 'grey'}}></hr>
+                <div className = {styles.title + " " + styles.sub}>
+                <div style = {{'color': 'green'}} className = {styles.content}>35.99</div>
+                <div style = {{'color': 'grey'}}  className = {styles.content + " "}>3.008</div>
+                <div style = {{'color': 'white'}} className = {styles.content + " "}>36.99</div>
+                </div>
+                </>
+                </div>
+                
         </div>
 
-        <div className = {styles.center}>
-            <p>Your holdings will appear here</p>
-        </div>
         
-        <br /> <br />
-        <hr style = {{
-            "border": "1px solid #222",
-            "margin": "1rem",
-            "borderRadius": "1rem"
-        }}></hr>
-        <br /> <br />
-        <div className = {styles.red}></div>
-        <div className = {styles.head + " " +  styles.r}>Activity</div>
-        <div className = {styles.center}>
-            <p>Your activities will appear here</p>
         </div>
-                
-        <br /> <br /> <br /> <br />
         </>
-    );
+   );
 }
