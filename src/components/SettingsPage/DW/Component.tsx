@@ -30,9 +30,9 @@ const MainComponent = () => {
                         Settings
                     </p>
                 </div> */}
-                <div className={styles.component + " " + styles.A} onClick = {showSidebar}>
+                <div className={styles.component + " " + styles.A} >
                     <p className = {styles.logo}>
-                        <CgProfile />
+                    <img src="%PUBLIC_URL%/images/icons/p2p.png" />
                     </p>
 
                 <div>
@@ -48,7 +48,7 @@ const MainComponent = () => {
                 <hr className = {styles.hr}></hr>
                 <div className={styles.component + " " + styles.B}>
                     <p className ={styles.logo}>
-                            <CgProfile />
+                    
                     </p>
 
                     <div>

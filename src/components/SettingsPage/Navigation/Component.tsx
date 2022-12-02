@@ -12,7 +12,10 @@ import * as AiIcons from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { FaCopy } from 'react-icons/fa'
 import "./style.css";
-import { IconContext } from "react-icons";
+import { IconContext } from "react-icons"
+import { useNavigate } from "react-router-dom";
+
+
 
 /*const { provider, userPic, readAddress, userData } = useWeb3Auth();
 const[username,setUser]=React.useState<any>(""); 
@@ -101,6 +104,7 @@ const Navbar =() =>  {
   );
 }
 const MainComponent = () => {
+  const navigate = useNavigate();
     const [sidebar, setSidebar] = React.useState(false);
     function copyAddr(){
       navigator.clipboard.writeText("0xabcd...123");
@@ -235,8 +239,12 @@ window.location.href="/"
                 </div>
                 </div>
                 <hr className = {styles.hr}></hr>
-                <a href="/deposit">
-                <div className={styles.component + " " + styles.B}>
+                           
+                    <div className={styles.component + " " + styles.B} onClick = {() => { 
+        navigate("/deposits");
+
+}}>
+                    
                     <p className ={styles.logo}>
                             <BiTransferAlt style={{color:"white"}} />
                     </p>
@@ -251,8 +259,10 @@ window.location.href="/"
                             Add Funds to your account via Xade P2P or via our ramp partners
                         </p>
                     </div>
+                    
                 </div>
-                </a>
+          
+                
                 {/* <hr className = {styles.hr}></hr> */}
               {/* <div className={styles.component + " " + styles.C}>
                     <p className = {styles.logo}>
@@ -271,23 +281,27 @@ window.location.href="/"
               </div> */}
 
               <hr className = {styles.hr}></hr>
-              <a href="/faqs">
-              <div className={styles.component + " " + styles.D}>
+              
+              <div className={styles.component + " " + styles.D} onClick = {() => {  
+          
+                navigate("/faqs");
+
+}}>
                     <p className = {styles.logo}>
                         <BiSupport style={{color:"white"}} />
                     </p>
 
                     <div>
                         <p className = {styles.heading} style={{color:"white"}} >
-                            Frequently Asked Questions
+                            Help and Support
                         </p>
 
                         <p className={styles.content}>
-                            Answers to the most common questions
+                            Customer support and answers to Frequently Asked Questions
                         </p>
                     </div>
               </div>
-              </a>
+              
               <hr className = {styles.hr}></hr>
               <br />
               <div className = {styles.switchButton}>

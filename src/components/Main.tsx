@@ -1457,13 +1457,7 @@ console.log(timeLeft);
                 }
               />
               <Route path="/payments" element={<></>} />
-              <Route
-                path="/deposit-withdraw"
-                element={
-                  <Layout>
-                    <DepositWithdraw />
-                  </Layout>
-                }
+              
               />
               <Route path="/qr" element={<QrCodePage />} />
               <Route

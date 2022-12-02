@@ -70,6 +70,13 @@ export default function Portfolio()
                 </div>
 
                 <hr className = {styles.goneCase}style = {{'width': '100%', 'color': 'grey'}}></hr>
+                <div className = {styles.title + " " + styles.sub}>
+                <div style = {{'color': 'green'}} className = {styles.content}>35.99</div>
+                <div style = {{'color': 'grey'}}  className = {styles.content + " "}>3.008</div>
+                <div style = {{'color': 'white'}} className = {styles.content + " "}>36.99</div>
+                </div>
+
+                <hr className = {styles.goneCase}style = {{'width': '100%', 'color': 'grey'}}></hr>
                 </div>
         </div>
         </>

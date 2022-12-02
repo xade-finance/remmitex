@@ -144,7 +144,7 @@ export default function Trade() {
         return (
         <div className = {styles.conversion_usd_element} style = {{width: '35%'}}> 
               <button onClick={() => {
-                    navigate(`/${index + 1}`)
+                    navigate(`/investments/${index + 1}`)
                     handleClose();
               }} 
         style = {{
@@ -217,7 +217,7 @@ export default function Trade() {
                     </div>
 
                     <div className = {styles.entry_price}>
-                        <p className = {styles.entry_price_title}>Mark Price</p>
+                        <p className = {styles.entry_price_title}>Index Price</p>
                         <p className = {styles.entry_price_price}>${exchange}</p>
                     </div>
 
@@ -242,7 +242,7 @@ export default function Trade() {
             </div>
             <div className = {styles.center} style = {{'marginBottom': '1rem'}}>
                 
-                    <button  onClick = {setPosition} className = {styles.order_confirmation}>Confirm order</button>
+                    <button   className = {styles.order_confirmation}>Coming soon!</button>
         
             </div>
 
