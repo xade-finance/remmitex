@@ -9,12 +9,11 @@ import countries from './allCountries';
 import { Country, PhoneNumber } from './allCountries';
 const Send = () => {
 
-
   let [current, setCurrent] = React.useState(0); // Phone number accept
   let [address, setAddress] = React.useState('');
   let [receipt, setReceipt] = React.useState<any>(null);
   let [cc, setCC] = React.useState(0);
-  let [num, setNum] = React.useState(0);
+  let [num, setNum] = React.useState("");
   let [amount, setAmount] = React.useState(0.0);
   let [error, setError] = React.useState({ 'message': '', 'style': { 'color': 'rgba(251, 251, 251, 0.6)' }, 'error': false })
   const { provider } = useWeb3Auth();
@@ -59,10 +58,50 @@ const Send = () => {
  
     alert('yo');
     e.preventDefault();
-    if (cc == 0) {
-      setError({ ...error, 'message': 'Please select a valid country code', 'style': { 'color': 'red' }, 'error': true })
+    if (cc == 0){
+      setError({ ...error, 'message': 'Please select a valid phone number', 'style': { 'color': 'red' }, 'error': true });
     }
-    else if (num.toString().length != 10) {
+    else if(cc == 145155141151154){
+      
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+          if (xhr.status == 404 || xhr.status == 500) {
+            setError({ ...error, 'message': 'Please select a valid email address', 'style': { 'color': 'red' }, 'error': true })
+return;         
+ }
+          else {
+             let xhr3=new XMLHttpRequest(); 
+ 
+              xhr3.onreadystatechange=function(){ 
+              if(xhr3.readyState==XMLHttpRequest.DONE){ 
+                  if(xhr3.status==200) 
+              {
+
+                setUser(xhr3.responseText); 
+              
+              } 
+              else{ 
+                setUser("")  
+              } 
+              }  
+              } 
+            xhr3.open('GET',`https://user.api.xade.finance?address=${xhr.responseText}`,true); 
+            xhr3.send(null);
+            console.log(`https://emailfind.api.xade.finance?phone=${String(cc) + String(num)}`);
+            setAddress(xhr.responseText);
+            console.log(xhr.responseText)
+            setCurrent(1);
+            setError({ 'error': false, 'message': '', style: { 'color': 'rgba(251, 251, 251, 0.6)' } })
+          }
+        }
+
+      }
+      xhr.open('GET', `https://emailfind.api.xade.finance?email=${String(num)}`, true);
+      xhr.send(null);
+    }
+
+    else if (cc != 145155141151154 && num.toString().length != 10 && typeof(num) != "number") {
       setError({ ...error, 'message': 'Please select a valid phone number', 'style': { 'color': 'red' }, 'error': true })
     }
     else {
@@ -155,11 +194,11 @@ const Send = () => {
                 <section className={styles.phoneNumber}>
                   <div className={styles.flexContainerCountry}>
                     <section className={styles.callingCodeTitle}>
-                      Mobile Number <a className={styles.red}>*</a>
+                      Mobile Number/Email Address
                     </section>
 
                     <section>
-                      <input id='num' onChange={(e) => setNum(parseInt(e.target.value))} value={num} className={styles.inputForm} type='number' autoFocus />
+                      <input id='num' onChange={(e) => setNum(e.target.value)} type='text' className={styles.inputForm} autoFocus />
                     </section>
                   </div>
                 </section>
@@ -197,7 +236,7 @@ const Send = () => {
               <section className={styles.phoneNumber} style={{"backgroundColor":"#000"}}>
                 <div className={styles.flexContainerCountry}>
                   <section className={styles.callingCodeTitle}>
-                    <a style={{"color":"#fff","fontSize":"25px"}}>$</a> <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
+                    <a style={{"display":"inline-block","color":"#fff","fontSize":"25px"}}>$</a> <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"display":"inline-block","width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
                   </section>
 
                   <section>

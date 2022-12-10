@@ -532,7 +532,7 @@ xhr2.send()
       };
       xhr2.open(
         "GET",
-        `https://explorer.celo.org/mainnet/api?module=account&action=tokenbalance&contractaddress=0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1&address=${mainAccount}`
+        `https://explorer.celo.org/alfajores/api?module=account&action=tokenbalance&contractaddress=0x874069fa1eb16d44d622f2e0ca25eea172369bc1&address=${mainAccount}`
       );
       xhr2.send();
     }, [, price, balCUSD]);
