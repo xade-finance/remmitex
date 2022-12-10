@@ -14,7 +14,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    
+    margin-top:2rem;
 }
 
 
@@ -23,9 +23,9 @@
 }
 
 .buttonHolderQrPage{
-    width: 220px;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     height: 60px;
     border-radius: 20px;
@@ -125,7 +125,7 @@
 .contentWrapper{
     display: flex;
     height: 65%;
-    justify-content: space-around;
+    justify-content: flex-end;
     width: 100%;
     align-items: center;
     flex-direction: column;

@@ -318,7 +318,7 @@ window.location.href="/"
               <hr className = {styles.hr}></hr>
             <br />
               <div className = {styles.logoutButton}>   
-                  <p>  Logout <button style={{backgroundColor:"black"}} onClick={logout}><FiLogOut /></button>  </p>
+                  <p>  Logout <button style={{backgroundColor:"#090909"}} onClick={logout}><FiLogOut /></button>  </p>
               </div>
               <br />
               <br />
