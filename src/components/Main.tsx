@@ -3,7 +3,6 @@
 import count from "./CountDown.module.css";
 import countries from "./allCountries";
 import { Country, PhoneNumber } from "./allCountries";
-import { useNavigate } from 'react-router-dom'
 import "./NewLogin.css";
 import Popup from "reactjs-popup";
 import OnramperWidget from "@onramper/widget";
@@ -110,8 +109,6 @@ const DepositWithdraw = () => {
           height: "660px",
         }}
       >
-        <br />
-        <br />
         <OnramperWidget
           API_KEY="pk_test_63xw5VXNG2SXKi4Xo49L3NpUGoNfTA95rhVkNn07x4Y0"
           color="#000000"
@@ -299,6 +296,16 @@ const Main = () => {
       return addressShortened;
     };
 
+    const [price, setPrice] = useState("");
+    var xhr2 = new XMLHttpRequest();
+    xhr2.onreadystatechange = function () {
+      if (xhr2.readyState == XMLHttpRequest.DONE) {
+        setPrice(xhr2.responseText);
+      }
+    };
+
+    xhr2.open("GET", "https://price.api.xade.finance/celo");
+    xhr2.send();
     return (
       <div>
         <br />
@@ -309,13 +316,13 @@ const Main = () => {
               className="qrButtonLeftinActive"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-            <a href="/" style={{color:"black"}}> <h2> <ImCross style={{fontSize:"25px"}} /> </h2></a>
+             <h2> <ImCross style={{fontSize:"25px"}} /> Transaction<a style={{color:"black"}}>_</a></h2>
             </div>
             <div
               className="qrButtonRightActive"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              <h2><ImCross style={{fontSize:"25px","visibility":"hidden"}} />Transaction History</h2>
+              <h2><ImCross style={{fontSize:"25px","visibility":"hidden"}} />History</h2>
             </div>
           </div>
 
@@ -323,7 +330,7 @@ const Main = () => {
             <FiShare />
           </div>
         </div>
-        <div className="activityContent newContentTx">
+        <div className="activityContent">
           <br />
           {/* <br />
           <br />
@@ -509,8 +516,9 @@ xhr2.send()
             if (xhr2.status == 200) {
               try {
                 const usdJson = await JSON.parse(xhr2.responseText);
+                setCUSD(usdJson["result"]);
 
-                setPrice(usdJson["result"]);
+                setPrice(balCUSD);
                 donezo = true;
               } catch (e: any) {
                 console.log("xhr2.status", e + xhr2.status);
@@ -604,8 +612,10 @@ xhr2.send()
             <p className="label">Checking Account</p>
             <p className="value">${usdBal}</p>
           </div>
-   
+          <br />
+          <br />
                  <div className="activityContent">
+          <br />
           {/* <br />
           <br />
           <br />
@@ -683,7 +693,7 @@ xhr2.send()
               href="/history"
               style={{ color: "#fff", textDecoration: "none", backgroundColor:"#000" }}
             >
-              Your Activity Appears here &nbsp;&nbsp;<FaExternalLinkAlt />
+              View Transaction History &nbsp;&nbsp;<FaExternalLinkAlt />
             </a>
           </button>
           <br />
@@ -1068,50 +1078,23 @@ let [receipt, setReceipt] = React.useState<any>(null);
     );
   };
 
-  const ShowReader = () => {
-      return (
-        
-        <div className={"mainContent" + "active"}>
-    <div className="topBar">
-          <Link to="/">
-            <div className="goBack">
-              <ImCross />
-            </div>
-          </Link>
-          <div className="buttonHolderQrPage">
-            <div
-              className={"qrButtonLeft " + "active"}
-              onClick={() => window.location.href="/qr"}
-            >
-              My Code
-            </div>
-            <div
-              className={"qrButtonRight " + "inActive"}
-              onClick={() => window.location.href="/scan"}
-            >
-              Scan
-            </div>
-          </div>
-
-          <div style={{"visibility":"hidden"}} className="share">
-            <FiShare />
-          </div>
-        </div>            
-          <div className={"contentWrapper"}>
-            <QRScanner />
-          </div>
-        </div>
-      );
-  };
-
   const QrCodePage = (props: Props) => {
     const [isActive, setActive] = useState(false);
 
     function displayAddr() {
       alert(mainAccount);
     }
-    let navigate = useNavigate();
 
+    const showReader = () => {
+      if (isActive)
+        return (
+          <div className={"mainContent" + "active"}>
+            <div className={"contentWrapper"}>
+              <QRScanner />
+            </div>
+          </div>
+        );
+    };
 
     function copyAddr() {
       navigator.clipboard.writeText(mainAccount);
@@ -1127,20 +1110,20 @@ let [receipt, setReceipt] = React.useState<any>(null);
           </Link>
           <div className="buttonHolderQrPage">
             <div
-              className={"qrButtonLeft " + "inActive"}
-              onClick={ () => {navigate(`/qr`)}}
+              className={"qrButtonLeft " + (isActive ? "active" : "inActive")}
+              onClick={() => setActive(!isActive)}
             >
-              <a href="/qr" style={{"color":"white","textDecoration":"none"}}>My Code</a>
+              My Code
             </div>
             <div
-              className={"qrButtonRight " + "active"}
-              onClick={() => { navigate(`/scan`)}}
+              className={"qrButtonRight " + (isActive ? "inActive" : "active")}
+              onClick={() => setActive(!isActive)}
             >
-              <a href="/scan" style={{"color":"white","textDecoration":"none"}}>Scan</a>
+              Scan
             </div>
           </div>
 
-          <div style={{"visibility":"hidden"}} className="share">
+          <div className="share">
             <FiShare />
           </div>
         </div>
@@ -1156,7 +1139,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
 <br />
 <br />              
 <div>
-                {/* <img className="pfp" src={img} /> */}
+                <img className="pfp" src={img} />
               </div>
               <br />
               <br />
@@ -1176,7 +1159,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
               </div>
               <br />
               <div>
-                <button className="pillBtn">🟢 Celo Testnet</button>
+                <button className="pillBtn">🟢 Ceo Mainnet</button>
               </div>
 <br />
             </div>
@@ -1187,6 +1170,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
             </div>
           </div>
         </div>
+        {showReader()}
       </div>
     );
   };
@@ -1456,14 +1440,6 @@ console.log(timeLeft);
                   </Layout>
                 }
               />
-          <Route
-                path="/scan"
-                element={
-                  <Layout>
-                    <ShowReader />
-                  </Layout>
-                }
-              />
               <Route
                 path="/faqs"
                 element={
@@ -1489,14 +1465,6 @@ console.log(timeLeft);
                 element={
                   <Layout>
                     <Savings />
-                  </Layout>
-                }
-              />
-       <Route
-                path="/institutional-ramps"
-                element={
-                  <Layout>
-                    <DepositWithdraw />
                   </Layout>
                 }
               />

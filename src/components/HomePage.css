@@ -27,7 +27,7 @@ body{
 position: re5%;
          align-items: center; 
          justify-content: center; 
- margin-top:25px;
+ margin-top:75px;
  	max-height: 350px;
         overflow: visible;
 }
@@ -38,10 +38,6 @@ position: re5%;
     flex-direction: column;
     padding: 25px;
     background: #000;
-}
-
-.value, .label{
-    min-width: 8rem;
 }
 
 .totalBalance {
@@ -85,10 +81,6 @@ position: re5%;
     max-height: 40vh;
     overflow-y: auto;  
 }*/
-
-.newContentTx{
-    align-items: flex-start;
-}
 
 .activityContent{
 	display: inline-block;
@@ -222,6 +214,7 @@ width:140px;
     .carouselHolder{
         max-width: 380px;
      	max-height: 350px;
+	margin-top:50px;
     position: relative;
 left: 0%;
     }
@@ -254,7 +247,7 @@ left: 0%;
     .activityContent{
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         flex-direction: column;
         width: 100%;
         min-height: 368px;
