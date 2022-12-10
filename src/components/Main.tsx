@@ -693,7 +693,7 @@ xhr2.send()
               href="/history"
               style={{ color: "#fff", textDecoration: "none", backgroundColor:"#000" }}
             >
-              View Transaction History &nbsp;&nbsp;<FaExternalLinkAlt />
+              Your activity appears here &nbsp;&nbsp;<FaExternalLinkAlt />
             </a>
           </button>
           <br />
@@ -1458,7 +1458,7 @@ console.log(timeLeft);
               />
               <Route path="/payments" element={<></>} />
               
-              />
+             
               <Route path="/qr" element={<QrCodePage />} />
               <Route
                 path="/savings"

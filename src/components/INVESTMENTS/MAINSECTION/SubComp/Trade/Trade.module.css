@@ -43,11 +43,11 @@
     color: #ff0000;
 }
 
-.long:hover {
+.long {
     background-color: rgb(73, 255, 0, 0.07);
 }
 
-.short:hover {
+.short {
     background-color: rgb(255, 0, 0, 0.1);
 }
 
