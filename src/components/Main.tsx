@@ -679,12 +679,12 @@ let navigate = useNavigate();
             </div>
           ))}
         </div>
-          <button className="txBtn" style={{backgroundColor:"#000"}} onClick={ () => {navigate(`/qr`)}}>
+          <button className="txBtn" style={{backgroundColor:"#000"}} onClick={ () => {navigate(`/history`)}}>
             <Link
               to="/history"
               style={{ color: "#fff", textDecoration: "none", backgroundColor:"#000" }}
             >
-              Your Activity Appears here &nbsp;&nbsp;<FaExternalLinkAlt />
+                {(transactionHistory.length === 0) ? <div>Your Activity Appears here</div> : <div>View Transaction History &nbsp;&nbsp; <FaExternalLinkAlt  /></div>}
             </Link>
           </button>
           <br />
