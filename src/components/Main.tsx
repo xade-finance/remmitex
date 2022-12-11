@@ -1193,7 +1193,7 @@ xhr.send(null);
     }
     return (
       <div className="containerQrPage">
-        <div className="topBar">
+        <div className="topBar"  style={{position:"relative", left:"0%"}}>
           <Link to="/">
             <div className="goBack2">
               <ImCross />
@@ -1201,27 +1201,16 @@ xhr.send(null);
           </Link>
           <div className="buttonHolderQrPage">
             <div
-              className={"qrButtonLeft " + "inActive"}
-              onClick={() => {
-                navigate(`/qr`);
-              }}
+              className={"qrButtonLeft " + "active"}
+              onClick={() => (window.location.href = "/qr")}
             >
-              <a href="/qr" style={{ color: "white", textDecoration: "none" }}>
-                My Code
-              </a>
+              My Code
             </div>
             <div
-              className={"qrButtonRight " + "active"}
-              onClick={() => {
-                navigate(`/scan`);
-              }}
+              className={"qrButtonRight " + "inActive"}
+              onClick={() => (window.location.href = "/scan")}
             >
-              <a
-                href="/scan"
-                style={{ color: "white", textDecoration: "none" }}
-              >
-                Scan
-              </a>
+              Scan
             </div>
           </div>
 
