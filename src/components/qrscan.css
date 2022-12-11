@@ -128,5 +128,8 @@ a:hover {
 
 video {
   height: 181px !important;
-  margin-bottom: 5rem;
+}
+
+#reader__dashboard {
+  margin-top: 5rem;
 }
