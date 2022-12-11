@@ -33,6 +33,7 @@ export default function Trade() {
     let addr = parseInt(params.addr)
     if(!(addr >= 1 && addr <= 5)) 
       addr = 1;
+ var options = ["btc","tsla","sona","eth","euro"] 
     const contract = Contracts[addr-1]
     let [marketLS, setMarketLS] = React.useState('L');
     let [leverage, setLeverage] = React.useState(5);
@@ -54,7 +55,7 @@ export default function Trade() {
         return `${value}°C`;
     }
 
-    xhr2.open('GET', "https://price.api.xade.finance/btc")
+    xhr2.open('GET', `https://price.api.xade.finance/${options[addr-1]}`)
     xhr2.send()
 
     function setPosition() {
@@ -83,7 +84,7 @@ export default function Trade() {
                 </button>
 
 
-                <button style = {{'display': 'flex'}}className = {styles.short + " " + ((marketLS === 'S')? styles.shortSelected: '')} onClick = {() => {setMarketLS('S')}}>
+                <button style = {{'display': 'flex','justifyContent': 'center', 'alignItems': 'center'}}className = {styles.short + " " + ((marketLS === 'S')? styles.shortSelected: '')} onClick = {() => {setMarketLS('S')}}>
                     Short
                     <img className = {styles.shortMoji} alt = 'short'  src = {process.env.PUBLIC_URL + `/images/icons/short.svg`}/>
                     &nbsp;                </button>
