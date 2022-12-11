@@ -34,17 +34,17 @@ const Navbar = (props: Props) => {
             XADE
           </Link>
           <div onClick={handleClick} className="menu-icon">
-            <i className={"fas fa-bars desktopstuff"}></i>
+            <i className={"fas fa-bars desktopstuff"} id={"3bars"}></i>
           </div>
           <div className="nav-menu">
             <ul className={click ? "nav-menu navActive" : "nav-menu"}>
               <div onClick={closeMobileMenu}>
                 <div className="goBack">
-<br />                
-  <ImCross />
+                  <br />
+                  <ImCross />
                 </div>
               </div>
-             {/*} <li style={{ color: "#fff" }} className="desktopstuff nav-item">
+              {/*} <li style={{ color: "#fff" }} className="desktopstuff nav-item">
                 <Link
                   to="/"
                   className="nav-links"
@@ -63,12 +63,8 @@ const Navbar = (props: Props) => {
                 Payments
               </Link>
             </li>*/}
- <li className="nav-item">
-                <Link
-                  to="/"
-                  className="nav-links"
-                  onClick={closeMobileMenu}
-                >
+              <li className="nav-item">
+                <Link to="/" className="nav-links" onClick={closeMobileMenu}>
                   Home
                 </Link>
               </li>

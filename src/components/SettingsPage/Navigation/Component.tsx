@@ -14,6 +14,7 @@ import { FaCopy } from "react-icons/fa";
 import "./style.css";
 import { IconContext } from "react-icons";
 import { useNavigate } from "react-router-dom";
+import { ImCross } from "react-icons/im";
 
 /*const { provider, userPic, readAddress, userData } = useWeb3Auth();
 const[username,setUser]=React.useState<any>(""); 
@@ -51,20 +52,24 @@ const Navbar = () => {
   }
   const showSidebar = () => setSidebar(!sidebar);
 
+  function removeBars() {
+    document.getElementById("3bars").style.visibility = "hidden";
+    showSidebar();
+  }
   return (
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
         <div className="navbar">
           <Link to="#" className="menu-bars">
-            <FaIcons.FaBars onClick={showSidebar} />
+            <FaIcons.FaBars onClick={removeBars} />
           </Link>
         </div>
         <nav className={sidebar ? "nav--menu active" : "nav--menu"}>
-          <ul className="nav-menu-items" onClick={showSidebar}>
+          <ul className="nav-menu-items" onClick={removeBars}>
             <li className="navbar-toggle">
-              <Link to="#" className="menu-bars">
-                <AiIcons.AiOutlineClose />
-              </Link>
+              <div className="goBack">
+                <ImCross />
+              </div>
             </li>
 
             <li>
@@ -176,15 +181,19 @@ const MainComponent = () => {
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
         <nav className={sidebar ? "nav--menu active" : "nav--menu"}>
-          <ul className="nav-menu-items" onClick={showSidebar}>
+          <ul className="nav-menu-items">
             <li className="navbar-toggle">
-              <Link to="#" className="menu-bars">
-                <AiIcons.AiOutlineClose />
-              </Link>
+              <div
+                className="goBack"
+                style={{ marginTop: "-2rem", width: "2rem" }}
+              >
+                <br />
+                <ImCross />
+              </div>
             </li>
 
             <li>
-             {/*} <img
+              {/*} <img
                 className="nav-text"
                 style={{ width: "50%", height: "50%", borderRadius: "100px" }}
                 src={img}
@@ -211,7 +220,7 @@ const MainComponent = () => {
             </li>
             <div className="bar"></div>
 
-            <li className="nav-text vela">🟢Celo Mainnet</li>
+            <li className="nav-text vela">🟢 Celo Testnet</li>
 
             <li className="nav-text vela">Chain ID: 0xa4ec (42220)</li>
             <div className="bar"></div>
@@ -322,8 +331,11 @@ const MainComponent = () => {
           <p>
             {" "}
             Logout{" "}
-            <button style={{ backgroundColor: "#090909", "border":"none" }} onClick={logout}>
-              <FiLogOut/>
+            <button
+              style={{ backgroundColor: "#090909", border: "none" }}
+              onClick={logout}
+            >
+              <FiLogOut />
             </button>{" "}
           </p>
         </div>
