@@ -1056,7 +1056,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
     );
   };
 
-  const ShowReader = () => {
+  /*const ShowReader = () => {
       return (
         
         <div className={"mainContent" + "active"}>
@@ -1091,7 +1091,136 @@ let [receipt, setReceipt] = React.useState<any>(null);
         </div>
       );
   };
+*/
+const ShowReader = () => {
+    return (
+      <div className={"mainContent" + "active"}>
+        <div className="topBar">
+          <Link to="/">
+            <div className="goBack">
+              <ImCross />
+            </div>
+          </Link>
+          <div className="buttonHolderQrPage">
+            <div
+              className={"qrButtonLeft " + "active"}
+              onClick={() => (window.location.href = "/qr")}
+            >
+              My Code
+            </div>
+            <div
+              className={"qrButtonRight " + "inActive"}
+              onClick={() => (window.location.href = "/scan")}
+            >
+              Scan
+            </div>
+          </div>
 
+          <div style={{ visibility: "hidden" }} className="share">
+            <FiShare />
+          </div>
+        </div>
+        <div className={"contentWrapper"} style={{ border: "none" }}>
+          <QRScanner />
+        </div>
+      </div>
+    );
+  };
+const QrCodePage = (props: Props) => {
+    const [isActive, setActive] = useState(false);
+
+    function displayAddr() {
+      alert(mainAccount);
+    }
+    let navigate = useNavigate();
+
+    function copyAddr() {
+      navigator.clipboard.writeText(mainAccount);
+      alert("Address copied");
+    }
+    return (
+      <div className="containerQrPage">
+        <div className="topBar">
+          <Link to="/">
+            <div className="goBack">
+              <ImCross />
+            </div>
+          </Link>
+          <div className="buttonHolderQrPage">
+            <div
+              className={"qrButtonLeft " + "inActive"}
+              onClick={() => {
+                navigate(`/qr`);
+              }}
+            >
+              <a href="/qr" style={{ color: "white", textDecoration: "none" }}>
+                My Code
+              </a>
+            </div>
+            <div
+              className={"qrButtonRight " + "active"}
+              onClick={() => {
+                navigate(`/scan`);
+              }}
+            >
+              <a
+                href="/scan"
+                style={{ color: "white", textDecoration: "none" }}
+              >
+                Scan
+              </a>
+            </div>
+          </div>
+
+          <div style={{ visibility: "hidden" }} className="share">
+            <FiShare />
+          </div>
+        </div>
+        <br />
+        <br />
+        <div
+          className={
+            "mainContent " + (isActive ? "myInfoInActive" : "myInfoActive")
+          }
+        >
+          <div className="contentWrapper">
+            <div className="infoHolder">
+              <br />
+              <br />
+              <div>{/* <img className="pfp" src={img} /> */}</div>
+              <br />
+              <br />
+              <div>
+                <h2>{username}</h2>
+              </div>
+              <div>
+                <button className="blackBtn" onClick={displayAddr}>
+                  <h4 style={{ fontSize: "20px", fontFamily: "Arial" }}>
+                    {mainAccount.substring(0, 6)}...
+                    {mainAccount.substring(mainAccount.length - 3)}
+                  </h4>
+                </button>
+                <button className="blackBtn">
+                  <FaCopy onClick={copyAddr} />
+                </button>
+              </div>
+              <br />
+              <div>
+                <button className="pillBtn">🟢 Celo Testnet</button>
+              </div>
+              <br />
+            </div>
+            <div className="QrHolder">
+              <div className="QrWrapper">
+                <QRCode value={QRCodeValue} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+/*
   const QrCodePage = (props: Props) => {
     const [isActive, setActive] = useState(false);
 
@@ -1144,7 +1273,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
 <br />
 <br />              
 <div>
-                {/* <img className="pfp" src={img} /> */}
+                
               </div>
               <br />
               <br />
@@ -1178,7 +1307,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
       </div>
     );
   };
-
+*/
   const handleSendAmountToAddress = async () => {
     var toAddr = document.getElementById("toAddr").value;
     var amt = document.getElementById("amount").value;
