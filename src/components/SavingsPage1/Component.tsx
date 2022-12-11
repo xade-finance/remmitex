@@ -5,6 +5,14 @@ import Slider from '@mui/material/Slider';
 
 
 export default function Main() {
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const d = new Date();
+    const month = months[d.getMonth()];
+    const day = d.getDate();
+    const year = d.getFullYear();
+
+    const date = month + " " + day + ", " + year;
+
     return (
         <>
         <div>
@@ -18,7 +26,7 @@ export default function Main() {
                     </div>
 
                     <div className = {styles.amountDep}>
-                        $1000.0
+                        $0.0
                     </div>
 
                     <button style = {{'color': '#5566FF'}}className = {styles.rightBottom}>
@@ -31,7 +39,7 @@ export default function Main() {
                     </div>
 
                     <div className = {styles.amountInterest}>
-                        $100.0
+                        $0.0
                     </div>
 
                     {/* <button style = {{'color': '#E24949'}} className = {styles.rightBottom}>
@@ -45,8 +53,8 @@ export default function Main() {
                     </div>
 
                     <div className = {styles.yieldAmount}>
-                        <p className = {styles.first}>9.1%</p>
-                        <p className = {styles.second}>November 30th 2022</p>
+                        <p className = {styles.first}>7.1%</p>
+                        <p className = {styles.second}>{date}</p>
                     </div>  
 
                     <div className = {styles.savingsRate}>
