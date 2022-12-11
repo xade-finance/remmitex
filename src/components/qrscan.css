@@ -6,18 +6,21 @@
   font-family: "Roboto", sans-serif;
 }
 
-#reader__dashboard_section_swaplink{
-  color:black;
+#reader__dashboard_section_swaplink {
+  color: black;
 }
-#reader__camera_permission_button{
-  border-radius:100px;
-  background-color:black;
-  color:#7DF9FF;
+#reader__camera_permission_button {
+  border-radius: 100px;
+  background-color: black;
+  color: #7df9ff;
 }
 
-#reader{
+#reader {
   border: none !important;
+}
 
+.navbar-container {
+  display: none;
 }
 /* .stats-group {
   display: flex;
@@ -116,4 +119,3 @@ a:hover {
 .main-image {
   align-self: end;
 } */
-
