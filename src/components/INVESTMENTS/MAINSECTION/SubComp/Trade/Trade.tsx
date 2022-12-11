@@ -12,7 +12,6 @@ import Contracts from '../../../constants'
 import { useNavigate } from 'react-router-dom'
 import { openPosition } from '../../../functions'
 import { Slide } from "@mui/material";
-import Info from './info'
 // import Button from '@mui/material/Button';
 
 const style = {
@@ -77,17 +76,15 @@ export default function Trade() {
         <div className = {styles.tradeAlign}>
         <div>
             <div className = {styles.market_ls}>
-                <button style = {{'display': 'flex'}} className = {styles.long + " " + ((marketLS === 'L')? styles.longSelected: '')} onClick = {() => {setMarketLS('L')}}>
+                <button className = {styles.long + " " + ((marketLS === 'L')? styles.longSelected: '')} onClick = {() => {setMarketLS('L')}}>
                     Long
                     <img alt = 'long' className = {styles.longMoji}src = {process.env.PUBLIC_URL + `/images/icons/long.svg`}/>
-                    <Info />
                 </button>
 
 
-                <button style = {{'display': 'flex'}}className = {styles.short + " " + ((marketLS === 'S')? styles.shortSelected: '')} onClick = {() => {setMarketLS('S')}}>
+                <button className = {styles.short + " " + ((marketLS === 'S')? styles.shortSelected: '')} onClick = {() => {setMarketLS('S')}}>
                     Short
                     <img className = {styles.shortMoji} alt = 'short'  src = {process.env.PUBLIC_URL + `/images/icons/short.svg`}/>
-                    &nbsp; <Info />
                 </button>
             </div>
 
@@ -215,27 +212,27 @@ export default function Trade() {
                     </p>
 
                     <div className = {styles.entry_price}>
-                        <p style = {{'display': 'flex'}} className = {styles.entry_price_title}>Entry Price &nbsp; <Info /></p>
+                        <p className = {styles.entry_price_title}>Entry Price</p>
                         <p className = {styles.entry_price_price}>${exchange}</p>
                     </div>
 
                     <div className = {styles.entry_price}>
-                        <p style = {{'display': 'flex'}} className = {styles.entry_price_title}>Index Price &nbsp; <Info /></p>
+                        <p className = {styles.entry_price_title}>Index Price</p>
                         <p className = {styles.entry_price_price}>${exchange}</p>
                     </div>
 
                     <div className = {styles.trading_fee}>
-                        <p style = {{'display': 'flex'}} className = {styles.trading_fee_title}>Funding Rate &nbsp; <Info /></p>
+                        <p className = {styles.trading_fee_title}>Funding Rate</p>
                         <p className = {styles.trading_fee_price}>0%</p>
                     </div>
 
                     <div className = {styles.entry_price}>
-                        <p style = {{'display': 'flex'}} className = {styles.entry_price_title}>Trading Fees &nbsp; <Info /></p>
+                        <p className = {styles.entry_price_title}>Trading Fees</p>
                         <p className = {styles.entry_price_price}>${amount[2]}</p>
                     </div>
 
                     <div className = {styles.entry_price}>
-                        <p style = {{'display': 'flex'}} className = {styles.entry_price_title}>Position Size &nbsp; <Info /></p>
+                        <p className = {styles.entry_price_title}>Position Size</p>
                         <p className = {styles.entry_price_price}>${leverage * amount[0]}</p>
                     </div>
 
