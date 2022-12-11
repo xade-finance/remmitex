@@ -41,8 +41,8 @@
   max-width: 1500px;
 }
 
-.navbar-logo:hover{
-	color:white;
+.navbar-logo:hover {
+  color: white;
 }
 
 .navbar-logo {
@@ -271,19 +271,19 @@
 
   .goBack {
     display: block;
-    margin-top: -65%;
+    margin-top: -72%;
     margin-left: 4%;
     color: #fff;
     height: 100%;
   }
 }
 
-.nav-item:hover{
-	color:white;
+.nav-item:hover {
+  color: white;
 }
 
-.nav-links:hover{
-        color:white;
+.nav-links:hover {
+  color: white;
 }
 
 .nav-desktop {
