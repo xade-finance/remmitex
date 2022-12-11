@@ -34,18 +34,10 @@ const QRScanner = () => {
     html5QrcodeScanner.render(onScanSuccess, onScanFailure);
   });
 
+
   return (
     <div>
-    <br />
-     <br />
-      <br />
-          <br />
-     <br />
-      <br />
-          <br />
-     <br />
-      <br />
-      <div id="reader" width="600px"></div>
+      <div id="reader" style={{"border":"none"}} width="600px"></div>
       <ol>
         {scannedCodes.map((scannedCode, index) => (
           <li key={index}>{scannedCode.decodedText}</li>

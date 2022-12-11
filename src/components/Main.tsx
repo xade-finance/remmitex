@@ -3,6 +3,7 @@
 import count from "./CountDown.module.css";
 import countries from "./allCountries";
 import { Country, PhoneNumber } from "./allCountries";
+import { useNavigate } from 'react-router-dom'
 import "./NewLogin.css";
 import Popup from "reactjs-popup";
 import OnramperWidget from "@onramper/widget";
@@ -105,10 +106,13 @@ const DepositWithdraw = () => {
     <div className="container">
       <div
         style={{
-          width: "460px",
+          width: "400px",
           height: "660px",
-        }}
+overflow:"hidden"        
+}}
       >
+        <br />
+        <br />
         <OnramperWidget
           API_KEY="pk_test_63xw5VXNG2SXKi4Xo49L3NpUGoNfTA95rhVkNn07x4Y0"
           color="#000000"
@@ -296,16 +300,6 @@ const Main = () => {
       return addressShortened;
     };
 
-    const [price, setPrice] = useState("");
-    var xhr2 = new XMLHttpRequest();
-    xhr2.onreadystatechange = function () {
-      if (xhr2.readyState == XMLHttpRequest.DONE) {
-        setPrice(xhr2.responseText);
-      }
-    };
-
-    xhr2.open("GET", "https://price.api.xade.finance/celo");
-    xhr2.send();
     return (
       <div>
         <br />
@@ -316,13 +310,13 @@ const Main = () => {
               className="qrButtonLeftinActive"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-             <h2> <ImCross style={{fontSize:"25px"}} /> Transaction<a style={{color:"black"}}>_</a></h2>
+            <a href="/" style={{color:"black"}}> <h2> <ImCross style={{fontSize:"25px"}} /> </h2></a>
             </div>
             <div
               className="qrButtonRightActive"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              <h2><ImCross style={{fontSize:"25px","visibility":"hidden"}} />History</h2>
+              <h2><ImCross style={{fontSize:"25px","visibility":"hidden"}} />Transaction History</h2>
             </div>
           </div>
 
@@ -330,7 +324,7 @@ const Main = () => {
             <FiShare />
           </div>
         </div>
-        <div className="activityContent">
+        <div className="activityContent newContentTx">
           <br />
           {/* <br />
           <br />
@@ -516,9 +510,8 @@ xhr2.send()
             if (xhr2.status == 200) {
               try {
                 const usdJson = await JSON.parse(xhr2.responseText);
-                setCUSD(usdJson["result"]);
 
-                setPrice(balCUSD);
+                setPrice(usdJson["result"]);
                 donezo = true;
               } catch (e: any) {
                 console.log("xhr2.status", e + xhr2.status);
@@ -540,7 +533,7 @@ xhr2.send()
     //const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString();
     //const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
     const usdBal = (parseFloat(price) / Math.pow(10, 18)).toFixed(2);
-    //alert(price);
+    //alert(price)
 
     function returnUser(walletAddr: any) {
       var finalVal = "";
@@ -592,8 +585,8 @@ xhr2.send()
     // }
     // },[]);
 
-    const latest = transactionHistory.slice(0, 5);
-
+    const latest = transactionHistory.slice(0, 3);
+let navigate = useNavigate();
     return (
       <div className="container">
         <div className="carouselHolder text-center">
@@ -612,10 +605,8 @@ xhr2.send()
             <p className="label">Checking Account</p>
             <p className="value">${usdBal}</p>
           </div>
-          <br />
-          <br />
+   
                  <div className="activityContent">
-          <br />
           {/* <br />
           <br />
           <br />
@@ -660,7 +651,7 @@ xhr2.send()
                   <div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a
-                      href={`https://https://explorer.celo.org/mainnet/tx/${transaction.hash}`}
+                      href={`https://explorer.celo.org/alfajores/tx/${transaction.hash}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -688,13 +679,13 @@ xhr2.send()
             </div>
           ))}
         </div>
-          <button className="txBtn" style={{backgroundColor:"#000"}}>
-            <a
-              href="/history"
+          <button className="txBtn" style={{backgroundColor:"#000"}} onClick={ () => {navigate(`/qr`)}}>
+            <Link
+              to="/history"
               style={{ color: "#fff", textDecoration: "none", backgroundColor:"#000" }}
             >
-              View Transaction History &nbsp;&nbsp;<FaExternalLinkAlt />
-            </a>
+              Your Activity Appears here &nbsp;&nbsp;<FaExternalLinkAlt />
+            </Link>
           </button>
           <br />
           <br />
@@ -912,8 +903,10 @@ let [receipt, setReceipt] = React.useState<any>(null);
               <section className={styles.phoneNumber} style={{"backgroundColor":"#000"}}>
                 <div className={styles.flexContainerCountry}>
                   <section className={styles.callingCodeTitle}>
-                    <a style={{"color":"#fff","fontSize":"25px"}}>$</a> <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
-                  </section>
+<div className={styles.inputForAmt}>  
+                  <a style={{"color":"#fff","fontSize":"25px"}}>$</a> <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
+</div>                  
+</section>
 
                   <section>
                   </section>
@@ -1063,19 +1056,48 @@ let [receipt, setReceipt] = React.useState<any>(null);
     //alert(scannedCodes);
     return (
       <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+<br />
         <br />
         <div id="reader" width="600px"></div>
         <a>{error}</a>
       </div>
     );
+  };
+
+  const ShowReader = () => {
+      return (
+        
+        <div className={"mainContent" + "active"}>
+    <div className="topBar">
+          <Link to="/">
+            <div className="goBack">
+              <ImCross />
+            </div>
+          </Link>
+          <div className="buttonHolderQrPage">
+            <div
+              className={"qrButtonLeft " + "active"}
+              onClick={() => window.location.href="/qr"}
+            >
+              My Code
+            </div>
+            <div
+              className={"qrButtonRight " + "inActive"}
+              onClick={() => window.location.href="/scan"}
+            >
+              Scan
+            </div>
+          </div>
+
+          <div style={{"visibility":"hidden"}} className="share">
+            <FiShare />
+          </div>
+        </div>            
+          <div className={"contentWrapper"} style={{"border":"none"}}>
+            <QRScanner />
+          </div>
+        </div>
+      );
   };
 
   const QrCodePage = (props: Props) => {
@@ -1084,17 +1106,8 @@ let [receipt, setReceipt] = React.useState<any>(null);
     function displayAddr() {
       alert(mainAccount);
     }
+    let navigate = useNavigate();
 
-    const showReader = () => {
-      if (isActive)
-        return (
-          <div className={"mainContent" + "active"}>
-            <div className={"contentWrapper"}>
-              <QRScanner />
-            </div>
-          </div>
-        );
-    };
 
     function copyAddr() {
       navigator.clipboard.writeText(mainAccount);
@@ -1110,20 +1123,20 @@ let [receipt, setReceipt] = React.useState<any>(null);
           </Link>
           <div className="buttonHolderQrPage">
             <div
-              className={"qrButtonLeft " + (isActive ? "active" : "inActive")}
-              onClick={() => setActive(!isActive)}
+              className={"qrButtonLeft " + "inActive"}
+              onClick={ () => {navigate(`/qr`)}}
             >
-              My Code
+              <a href="/qr" style={{"color":"white","textDecoration":"none"}}>My Code</a>
             </div>
             <div
-              className={"qrButtonRight " + (isActive ? "inActive" : "active")}
-              onClick={() => setActive(!isActive)}
+              className={"qrButtonRight " + "active"}
+              onClick={() => { navigate(`/scan`)}}
             >
-              Scan
+              <a href="/scan" style={{"color":"white","textDecoration":"none"}}>Scan</a>
             </div>
           </div>
 
-          <div className="share">
+          <div style={{"visibility":"hidden"}} className="share">
             <FiShare />
           </div>
         </div>
@@ -1139,7 +1152,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
 <br />
 <br />              
 <div>
-                <img className="pfp" src={img} />
+                {/* <img className="pfp" src={img} /> */}
               </div>
               <br />
               <br />
@@ -1159,7 +1172,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
               </div>
               <br />
               <div>
-                <button className="pillBtn">🟢 Ceo Mainnet</button>
+                <button className="pillBtn">🟢 Celo Testnet</button>
               </div>
 <br />
             </div>
@@ -1170,7 +1183,6 @@ let [receipt, setReceipt] = React.useState<any>(null);
             </div>
           </div>
         </div>
-        {showReader()}
       </div>
     );
   };
@@ -1440,6 +1452,14 @@ console.log(timeLeft);
                   </Layout>
                 }
               />
+          <Route
+                path="/scan"
+                element={
+                  <Layout>
+                    <ShowReader />
+                  </Layout>
+                }
+              />
               <Route
                 path="/faqs"
                 element={
@@ -1465,6 +1485,14 @@ console.log(timeLeft);
                 element={
                   <Layout>
                     <Savings />
+                  </Layout>
+                }
+              />
+       <Route
+                path="/institutional-ramps"
+                element={
+                  <Layout>
+                    <DepositWithdraw />
                   </Layout>
                 }
               />

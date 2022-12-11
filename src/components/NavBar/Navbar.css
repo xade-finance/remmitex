@@ -41,6 +41,10 @@
   max-width: 1500px;
 }
 
+.navbar-logo:hover{
+	color:white;
+}
+
 .navbar-logo {
   color: #fff;
   justify-self: start;
@@ -272,6 +276,14 @@
     color: #fff;
     height: 100%;
   }
+}
+
+.nav-item:hover{
+	color:white;
+}
+
+.nav-links:hover{
+        color:white;
 }
 
 .nav-desktop {

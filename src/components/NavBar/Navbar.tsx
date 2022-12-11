@@ -40,10 +40,11 @@ const Navbar = (props: Props) => {
             <ul className={click ? "nav-menu navActive" : "nav-menu"}>
               <div onClick={closeMobileMenu}>
                 <div className="goBack">
-                  <ImCross />
+<br />                
+  <ImCross />
                 </div>
               </div>
-              <li style={{ color: "#fff" }} className="desktopstuff nav-item">
+             {/*} <li style={{ color: "#fff" }} className="desktopstuff nav-item">
                 <Link
                   to="/"
                   className="nav-links"
@@ -52,7 +53,7 @@ const Navbar = (props: Props) => {
                 >
                   Home
                 </Link>
-              </li>
+              </li>{*/}
               {/*          <li stylclassName='nav-item'>
               <Link
                 to='/payments'
@@ -62,6 +63,15 @@ const Navbar = (props: Props) => {
                 Payments
               </Link>
             </li>*/}
+ <li className="nav-item">
+                <Link
+                  to="/"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Home
+                </Link>
+              </li>
               <li className="nav-item">
                 <Link
                   to="/investments/1"

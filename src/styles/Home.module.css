@@ -137,6 +137,11 @@ color: rgb(130, 139, 148);
     color: rgb(130, 139, 148);
         font-weight: 400;
 }
+
+.inputForAmt{
+	white-space: nowrap;
+}
+
 input:focus, select:focus {
     outline: none;
 }

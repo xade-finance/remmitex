@@ -53,7 +53,7 @@ const MainComponent = () => {
 
                     <div>
                         <p className = {styles.heading}>
-                          Institutional Ramps
+                          <a href="/institutional-ramps" style={{"color":"white", "textDecoration":"none"}}>Institutional Ramps</a>
                         </p>
 
                         <p className={styles.content}>

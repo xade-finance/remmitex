@@ -184,11 +184,11 @@ const MainComponent = () => {
             </li>
 
             <li>
-              <img
+             {/*} <img
                 className="nav-text"
                 style={{ width: "50%", height: "50%", borderRadius: "100px" }}
                 src={img}
-              />
+              />{*/}
             </li>
             <li className="nav-text">
               <b className="username">{username}</b>
@@ -322,8 +322,8 @@ const MainComponent = () => {
           <p>
             {" "}
             Logout{" "}
-            <button style={{ backgroundColor: "black" }} onClick={logout}>
-              <FiLogOut />
+            <button style={{ backgroundColor: "#090909", "border":"none" }} onClick={logout}>
+              <FiLogOut/>
             </button>{" "}
           </p>
         </div>
