@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
-import './Navbar.css'
-import {FaBars,FaTimes} from 'react-icons/fa'
-type Props = {}
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { ImCross } from "react-icons/im";
+
+type Props = {};
 
 const Navbar = (props: Props) => {
   const [click, setClick] = useState(false);
@@ -23,28 +25,36 @@ const Navbar = (props: Props) => {
     showButton();
   }, []);
 
-  window.addEventListener('resize', showButton);
+  window.addEventListener("resize", showButton);
   return (
     <>
-      <nav className='navbar'>
-        <div className='navbar-container'>
-          
-          <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+      <nav className="navbar">
+        <div className="navbar-container">
+          <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
             XADE
-           
           </Link>
-          <div onClick={handleClick} className='menu-icon'>
-             <i className={'fas fa-bars desktopstuff'} >
-                </i>
+          <div onClick={handleClick} className="menu-icon">
+            <i className={"fas fa-bars desktopstuff"}></i>
           </div>
-          
-          <ul className={click ? 'nav-menu navActive' : 'nav-menu'}>
-            <li style={{color:"#fff"}} className='desktopstuff nav-item'>
-              <Link to='/' className='nav-links' style={{color:"#fff"}} onClick={closeMobileMenu}>
-                Home
-              </Link>
-            </li>
-  {/*          <li stylclassName='nav-item'>
+          <div className="nav-menu">
+            <ul className={click ? "nav-menu navActive" : "nav-menu"}>
+              <div onClick={closeMobileMenu}>
+                <div className="goBack">
+<br />                
+  <ImCross />
+                </div>
+              </div>
+             {/*} <li style={{ color: "#fff" }} className="desktopstuff nav-item">
+                <Link
+                  to="/"
+                  className="nav-links"
+                  style={{ color: "#fff" }}
+                  onClick={closeMobileMenu}
+                >
+                  Home
+                </Link>
+              </li>{*/}
+              {/*          <li stylclassName='nav-item'>
               <Link
                 to='/payments'
                 className='nav-links'
@@ -53,47 +63,51 @@ const Navbar = (props: Props) => {
                 Payments
               </Link>
             </li>*/}
-            <li className='nav-item'>
-              <Link
-                to='/investments/1'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Investments
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                to='/savings'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Savings
-              </Link>
-            </li>
+ <li className="nav-item">
+                <Link
+                  to="/"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/investments/1"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Investments
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/savings"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Savings
+                </Link>
+              </li>
 
-            <li className='nav-item'>
-              <Link
-                to='/settings'
-                className='nav-links'
-                onClick={closeMobileMenu}
-              >
-                Settings
-              </Link>
-            </li>
-           
-           
+              <li className="nav-item">
+                <Link
+                  to="/settings"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                >
+                  Settings
+                </Link>
+              </li>
 
-            <li className='button-item'>
-      
-             
-            </li>
-          </ul>
-         
+              <li className="button-item"></li>
+            </ul>
+          </div>
         </div>
       </nav>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

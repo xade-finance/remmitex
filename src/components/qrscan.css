@@ -6,6 +6,19 @@
   font-family: "Roboto", sans-serif;
 }
 
+#reader__dashboard_section_swaplink{
+  color:black;
+}
+#reader__camera_permission_button{
+  border-radius:100px;
+  background-color:black;
+  color:#7DF9FF;
+}
+
+#reader{
+  border: none !important;
+
+}
 /* .stats-group {
   display: flex;
   flex-direction: column;

@@ -106,9 +106,10 @@ const DepositWithdraw = () => {
     <div className="container">
       <div
         style={{
-          width: "460px",
+          width: "400px",
           height: "660px",
-        }}
+overflow:"hidden"        
+}}
       >
         <br />
         <br />
@@ -532,7 +533,7 @@ xhr2.send()
     //const usdBal = (parseFloat(price)*parseFloat(Web3.utils.toWei(amountStr,'ether'))).toString();
     //const usdBal = parseInt(price)*parseInt(Web3.utils.toWei(amountStr,'ether'));
     const usdBal = (parseFloat(price) / Math.pow(10, 18)).toFixed(2);
-    //alert(price);
+    //alert(price)
 
     function returnUser(walletAddr: any) {
       var finalVal = "";
@@ -584,8 +585,8 @@ xhr2.send()
     // }
     // },[]);
 
-    const latest = transactionHistory.slice(0, 5);
-
+    const latest = transactionHistory.slice(0, 3);
+let navigate = useNavigate();
     return (
       <div className="container">
         <div className="carouselHolder text-center">
@@ -650,7 +651,7 @@ xhr2.send()
                   <div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a
-                      href={`https://https://explorer.celo.org/mainnet/tx/${transaction.hash}`}
+                      href={`https://explorer.celo.org/alfajores/tx/${transaction.hash}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -678,13 +679,13 @@ xhr2.send()
             </div>
           ))}
         </div>
-          <button className="txBtn" style={{backgroundColor:"#000"}}>
-            <a
-              href="/history"
+          <button className="txBtn" style={{backgroundColor:"#000"}} onClick={ () => {navigate(`/history`)}}>
+            <Link
+              to="/history"
               style={{ color: "#fff", textDecoration: "none", backgroundColor:"#000" }}
             >
-              Your Activity Appears here &nbsp;&nbsp;<FaExternalLinkAlt />
-            </a>
+                {(transactionHistory.length === 0) ? <div>Your Activity Appears here</div> : <div>View Transaction History &nbsp;&nbsp; <FaExternalLinkAlt  /></div>}
+            </Link>
           </button>
           <br />
           <br />
@@ -902,8 +903,10 @@ let [receipt, setReceipt] = React.useState<any>(null);
               <section className={styles.phoneNumber} style={{"backgroundColor":"#000"}}>
                 <div className={styles.flexContainerCountry}>
                   <section className={styles.callingCodeTitle}>
-                    <a style={{"color":"#fff","fontSize":"25px"}}>$</a> <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
-                  </section>
+<div className={styles.inputForAmt}>  
+                  <a style={{"color":"#fff","fontSize":"25px"}}>$</a> <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
+</div>                  
+</section>
 
                   <section>
                   </section>
@@ -1053,14 +1056,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
     //alert(scannedCodes);
     return (
       <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+<br />
         <br />
         <div id="reader" width="600px"></div>
         <a>{error}</a>
@@ -1097,7 +1093,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
             <FiShare />
           </div>
         </div>            
-          <div className={"contentWrapper"}>
+          <div className={"contentWrapper"} style={{"border":"none"}}>
             <QRScanner />
           </div>
         </div>

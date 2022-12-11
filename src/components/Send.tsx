@@ -154,7 +154,7 @@ return;
           <br />
           <br />
           <br />
-          <h1 className={styles3.element}>Enter mobile number</h1>
+          <h1 className={styles3.element}>Enter mobile number/email</h1>
           <p id="error" style={error.style} className={styles.error}>{error.message}</p>
 
 
@@ -164,7 +164,7 @@ return;
                 <section className={styles.countryCode}>
                   <div className={styles.flexContainerCountry}>
                     <section className={styles.callingCodeTitle}>
-                      Country Code <a className={styles.red}>*</a>
+                      Country Code <a className={styles.red}></a>
                     </section>
 
                     <section>
@@ -235,9 +235,13 @@ return;
             }}>
               <section className={styles.phoneNumber} style={{"backgroundColor":"#000"}}>
                 <div className={styles.flexContainerCountry}>
-                  <section className={styles.callingCodeTitle}>
-                    <a style={{"display":"inline-block","color":"#fff","fontSize":"25px"}}>$</a> <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"display":"inline-block","width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
-                  </section>
+                  <section className={styles.callingCodeTitle} >
+<div className={styles.inputForAmt}> 
+                  <a style={{"display":"inline-block","color":"#fff","fontSize":"25px"}}>$</a> 
+
+<input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"display":"inline-block","width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
+</div>                  
+</section>
 
                   <section>
                   </section>
