@@ -3,7 +3,7 @@
 import count from "./CountDown.module.css";
 import countries from "./allCountries";
 import { Country, PhoneNumber } from "./allCountries";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import "./NewLogin.css";
 import Popup from "reactjs-popup";
 import OnramperWidget from "@onramper/widget";
@@ -1147,9 +1147,9 @@ xhr.send(null);
   const ShowReader = () => {
     return (
       <div className={"mainContent" + "active"}>
-        <div className="topBar">
+        <div style={{position:"relative", left:"-8%"}} className="topBar">
           <Link to="/">
-            <div className="goBack">
+            <div className="goBack2">
               <ImCross />
             </div>
           </Link>
@@ -1195,7 +1195,7 @@ xhr.send(null);
       <div className="containerQrPage">
         <div className="topBar">
           <Link to="/">
-            <div className="goBack">
+            <div className="goBack2">
               <ImCross />
             </div>
           </Link>
@@ -1531,7 +1531,8 @@ console.log(timeLeft);
                   </Layout>
                 }
               />
-              <Route
+<Route path="/investments" element={ <Navigate to="/investments/1" /> }/>  
+            <Route
                 path="/investments/:addr"
                 element={
                   <Layout>
@@ -2561,7 +2562,8 @@ else { */
                   <button
                     id="btn"
                     onClick={takeToRegister}
-                    className={styles.buttonC}
+style={{border:"none"}}                    
+className={styles.buttonC}
                   >
                     <a className="text-center fs-5 text-white">
                       Create an Account
@@ -2569,7 +2571,8 @@ else { */
                   </button>
                   <br />{" "}
                   <button
-                    id="btn2"
+style={{border:"none"}}                    
+id="btn2"
                     onClick={takeToLogin}
                     className={styles.buttonC}
                   >

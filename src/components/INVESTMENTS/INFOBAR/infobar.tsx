@@ -13,7 +13,7 @@ export default function Component() {
       addr = 1;
     const contract = Contracts[addr-1]
     const amm = contract.address;
-    
+   var options = ["btc","tsla","sona","eth","euro"] 
     // let contra
 
     // let json = {data:[{"id":1, "quote": {"USD": {price:"21490.00"}}}]};
@@ -47,7 +47,7 @@ var xhr2 = new XMLHttpRequest();
 }
 }
 
-  xhr2.open('GET', "https://price.api.xade.finance/btc")
+  xhr2.open('GET', `https://price.api.xade.finance/${options[addr-1]}`)
   xhr2.send()
      // alert(JSON.stringify(json));
     
@@ -56,7 +56,7 @@ var xhr2 = new XMLHttpRequest();
         <div className={styles.horicenter}>
             <div className = {styles.infobar}>
                     <div className = {styles.details}>
-                        <img alt = 'btc' className = {styles.logo} src = {process.env.PUBLIC_URL + `/images/ticker/${contract.ticker}`}  />
+                        <img alt = 'btc' className = {styles.logo} src = {process.env.PUBLIC_URL + `/images/ticker/${options[addr-1]}.png`}  />
                         <p className = {styles.name}>{contract.symbol}</p>
                     </div>  
 
