@@ -304,28 +304,25 @@ const Main = () => {
       <div>
         <br />
         <div className="topBar">
-          
           <div className="buttonHolderQrPage">
             <div
               className="qrButtonLeftinActive"
-              style={{ color: "#fff", textDecoration: "none" }}
+              style={{ color: "#fff", textDecoration: "none", 'width':'10%' }}
             >
-            <a href="/" style={{color:"black"}}> <h2> <ImCross style={{fontSize:"25px"}} /> </h2></a>
+            <a href="/" style={{color:"black", textAlign: 'center'}}> <h2> <ImCross style={{fontSize:"25px"}} /> </h2></a>
             </div>
             <div
               className="qrButtonRightActive"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              <h2><ImCross style={{fontSize:"25px","visibility":"hidden"}} />Transaction History</h2>
+              <h2 style = {{'fontSize': '2rem'}}>Transaction History</h2>
             </div>
           </div>
 
-          <div className="share" style={{ visibility: "hidden" }}>
-            <FiShare />
-          </div>
+          
         </div>
         <div className="activityContent newContentTx">
-          <br />
+       
           {/* <br />
           <br />
           <br />
