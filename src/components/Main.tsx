@@ -3,12 +3,12 @@
 import count from "./CountDown.module.css";
 import countries from "./allCountries";
 import { Country, PhoneNumber } from "./allCountries";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import "./NewLogin.css";
 import Popup from "reactjs-popup";
 import OnramperWidget from "@onramper/widget";
 import "reactjs-popup/dist/index.css";
-import tickStyles2 from './tickStyles2.module.css';
+import tickStyles2 from "./tickStyles2.module.css";
 import Web3 from "web3";
 import { FaCopy, FaExternalLinkAlt } from "react-icons/fa";
 import { getNormalTransactionsByAddress } from "../services/celoScan";
@@ -49,12 +49,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Send from "./Send.tsx";
 import { alertTitleClasses } from "@mui/material";
-import Settings from './SettingsPage/Navigation'
-import FAQs from './SettingsPage/FAQs'
-import Investments from './INVESTMENTS/index';
-import ReactDOM from 'react-dom'
-import DW from './SettingsPage/DW'
-import Savings from './SavingsPage/Component'
+import Settings from "./SettingsPage/Navigation";
+import FAQs from "./SettingsPage/FAQs";
+import Investments from "./INVESTMENTS/index";
+import ReactDOM from "react-dom";
+import DW from "./SettingsPage/DW";
+import Savings from "./SavingsPage/Component";
 
 var cc;
 var num;
@@ -108,8 +108,8 @@ const DepositWithdraw = () => {
         style={{
           width: "400px",
           height: "660px",
-overflow:"hidden"        
-}}
+          overflow: "hidden",
+        }}
       >
         <br />
         <br />
@@ -304,19 +304,27 @@ const Main = () => {
       <div>
         <br />
         <div className="topBar">
-          
           <div className="buttonHolderQrPage">
             <div
               className="qrButtonLeftinActive"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-            <a href="/" style={{color:"black"}}> <h2> <ImCross style={{fontSize:"25px"}} /> </h2></a>
+              <a href="/" style={{ color: "black" }}>
+                {" "}
+                <h2>
+                  {" "}
+                  <ImCross style={{ fontSize: "25px" }} />{" "}
+                </h2>
+              </a>
             </div>
             <div
               className="qrButtonRightActive"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              <h2><ImCross style={{fontSize:"25px","visibility":"hidden"}} />Transaction History</h2>
+              <h2>
+                <ImCross style={{ fontSize: "25px", visibility: "hidden" }} />
+                Transaction History
+              </h2>
             </div>
           </div>
 
@@ -586,7 +594,7 @@ xhr2.send()
     // },[]);
 
     const latest = transactionHistory.slice(0, 3);
-let navigate = useNavigate();
+    let navigate = useNavigate();
     return (
       <div className="container">
         <div className="carouselHolder text-center">
@@ -605,86 +613,102 @@ let navigate = useNavigate();
             <p className="label">Checking Account</p>
             <p className="value">${usdBal}</p>
           </div>
-   
-                 <div className="activityContent">
-          {/* <br />
+
+          <div className="activityContent">
+            {/* <br />
           <br />
           <br />
           <br />
           <br /> */}
-          {latest.map((transaction, index) => (
-            <div key={index} className="transactionHistory-pills">
-              <div className="rightHalf-pill">
-                <div className="transactionIndicator-arrows">
-                  <svg
-                    stroke="currentColor"
-                    fill={
-                      transaction.to.toString().toLowerCase() ===
-                      mainAccount.toString().toLowerCase()
-                        ? "green"
-                        : "red"
-                    }
-                    stroke-width="0"
-                    viewBox="0 
-0 16 16"
-                    height="2em"
-                    width="2em"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d={
+            {latest.map((transaction, index) => (
+              <div key={index} className="transactionHistory-pills">
+                <div className="rightHalf-pill">
+                  <div className="transactionIndicator-arrows">
+                    <svg
+                      stroke="currentColor"
+                      fill={
                         transaction.to.toString().toLowerCase() ===
                         mainAccount.toString().toLowerCase()
-                          ? "M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z"
-                          : "M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z"
+                          ? "green"
+                          : "red"
                       }
-                    ></path>
-                  </svg>
-                </div>
-              </div>
-              <div className="leftHalf-pill">
-                <div className="transaction-history-line1">
-                  &nbsp;&nbsp;
-                  <div className="address-styling">
-                    {addressShortner(transaction)}
-                  </div>
-                  <div>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a
-                      href={`https://explorer.celo.org/alfajores/tx/${transaction.hash}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      stroke-width="0"
+                      viewBox="0 
+0 16 16"
+                      height="2em"
+                      width="2em"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      {" "}
-                      <FaExternalLinkAlt />
-                    </a>
+                      <path
+                        d={
+                          transaction.to.toString().toLowerCase() ===
+                          mainAccount.toString().toLowerCase()
+                            ? "M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-5.904-2.803a.5.5 0 1 1 .707.707L6.707 10h2.768a.5.5 0 0 1 0 1H5.5a.5.5 0 0 1-.5-.5V6.525a.5.5 0 0 1 1 0v2.768l4.096-4.096z"
+                            : "M0 8a8 8 0 1 0 16 0A8 8 0 0 0 0 8zm5.904 2.803a.5.5 0 1 1-.707-.707L9.293 6H6.525a.5.5 0 1 1 0-1H10.5a.5.5 0 0 1 .5.5v3.975a.5.5 0 0 1-1 0V6.707l-4.096 4.096z"
+                        }
+                      ></path>
+                    </svg>
                   </div>
                 </div>
-                <div className="transaction-history-line2">
-                  &nbsp;&nbsp;
-                  <div className="amount-time-stlying">
-                    {(parseFloat(transaction.value) / Math.pow(10, 18)).toFixed(
-                      2
-                    )}
+                <div className="leftHalf-pill">
+                  <div className="transaction-history-line1">
+                    &nbsp;&nbsp;
+                    <div className="address-styling">
+                      {addressShortner(transaction)}
+                    </div>
+                    <div>
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a
+                        href={`https://explorer.celo.org/alfajores/tx/${transaction.hash}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {" "}
+                        <FaExternalLinkAlt />
+                      </a>
+                    </div>
                   </div>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <div className="amount-time-stlying">
-                    {new Date(transaction.timeStamp * 1000)
-                      .toString()
-                      .substring(4, 21)}
+                  <div className="transaction-history-line2">
+                    &nbsp;&nbsp;
+                    <div className="amount-time-stlying">
+                      {(
+                        parseFloat(transaction.value) / Math.pow(10, 18)
+                      ).toFixed(2)}
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div className="amount-time-stlying">
+                      {new Date(transaction.timeStamp * 1000)
+                        .toString()
+                        .substring(4, 21)}
+                    </div>
+                    &nbsp;&nbsp;
                   </div>
-                  &nbsp;&nbsp;
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-          <button className="txBtn" style={{backgroundColor:"#000"}} onClick={ () => {navigate(`/history`)}}>
+            ))}
+          </div>
+          <button
+            className="txBtn"
+            style={{ backgroundColor: "#000" }}
+            onClick={() => {
+              navigate(`/history`);
+            }}
+          >
             <Link
               to="/history"
-              style={{ color: "#fff", textDecoration: "none", backgroundColor:"#000" }}
+              style={{
+                color: "#fff",
+                textDecoration: "none",
+                backgroundColor: "#000",
+              }}
             >
-                {(transactionHistory.length === 0) ? <div>Your Activity Appears here</div> : <div>View Transaction History &nbsp;&nbsp; <FaExternalLinkAlt  /></div>}
+              {transactionHistory.length === 0 ? (
+                <div>Your Activity Appears here</div>
+              ) : (
+                <div>
+                  View Transaction History &nbsp;&nbsp; <FaExternalLinkAlt />
+                </div>
+              )}
             </Link>
           </button>
           <br />
@@ -841,8 +865,8 @@ xhr.send(null);
   const SendQR = () => {
     const params = useParams();
     let [current, setCurrent] = React.useState(0); // Phone number accept
-const addr = params.address;
-let [receipt, setReceipt] = React.useState<any>(null);
+    const addr = params.address;
+    let [receipt, setReceipt] = React.useState<any>(null);
     let [amount, setAmount] = React.useState(0);
     let [error, setError] = React.useState({
       message: "",
@@ -863,106 +887,151 @@ let [receipt, setReceipt] = React.useState<any>(null);
         return;
       }
       alert(`Address: ${addr} | Amt: ${amount}`);
-     const account = await provider?.signAndSendTransaction(addr, amount.toString()); 
-     if(account == false)
-    {
-       setReceipt({message: 'Invalid parameters, please try again.'})
-       setCurrent(3);
-    }
-    else if(account.status == false)
-    {
-      setReceipt(account)
-      setCurrent(3);
-    }
-    else if(account.status == true)
-    {
-    console.log('yeahh')
-    account.effectiveGasPrice = Web3.utils.fromWei(account.effectiveGasPrice?.toString() || '', 'ether')
-    setReceipt(account)
-    setCurrent(2);
-    }
-    else
-    {
-        console.log('fuck')
-    }
+      const account = await provider?.signAndSendTransaction(
+        addr,
+        amount.toString()
+      );
+      if (account == false) {
+        setReceipt({ message: "Invalid parameters, please try again." });
+        setCurrent(3);
+      } else if (account.status == false) {
+        setReceipt(account);
+        setCurrent(3);
+      } else if (account.status == true) {
+        console.log("yeahh");
+        account.effectiveGasPrice = Web3.utils.fromWei(
+          account.effectiveGasPrice?.toString() || "",
+          "ether"
+        );
+        setReceipt(account);
+        setCurrent(2);
+      } else {
+        console.log("fuck");
+      }
     };
     return (
       <div>
- {(current == 0) ?          <>
+        {current == 0 ? (
+          <>
             <br />
             <br />
             <br />
             <br />
             <h1 className={styles3.element}>Enter amount</h1>
-            <p id="error" style={error.style} className={styles.error}>{error.message}</p>
+            <p id="error" style={error.style} className={styles.error}>
+              {error.message}
+            </p>
 
-            <form onSubmit={(e) => {
-              // Some web3auth function
-              handleSendAmountToAddress(e);
-            }}>
-              <section className={styles.phoneNumber} style={{"backgroundColor":"#000"}}>
+            <form
+              onSubmit={(e) => {
+                // Some web3auth function
+                handleSendAmountToAddress(e);
+              }}
+            >
+              <section
+                className={styles.phoneNumber}
+                style={{ backgroundColor: "#000" }}
+              >
                 <div className={styles.flexContainerCountry}>
                   <section className={styles.callingCodeTitle}>
-<div className={styles.inputForAmt}>  
-                  <a style={{"color":"#fff","fontSize":"25px"}}>$</a> <input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
-</div>                  
-</section>
-
-                  <section>
+                    <div className={styles.inputForAmt}>
+                      <a style={{ color: "#fff", fontSize: "25px" }}>$</a>{" "}
+                      <input
+                        id="num"
+                        step="any"
+                        onChange={(e) => setAmount(parseFloat(e.target.value))}
+                        value={amount}
+                        style={{
+                          width: "90%",
+                          backgroundColor: "#000",
+                          color: "#fff",
+                          fontSize: "80px",
+                        }}
+                        className={styles.inputForm}
+                        type="number"
+                        autoFocus
+                      />
+                    </div>
                   </section>
+
+                  <section></section>
                 </div>
               </section>
               <br />
               <br />
-          {/* <h3 className={styles3.element2}>Transaction Details</h3> */}
-          <br />
-          <br />
-          <br />
-          <br />
+              {/* <h3 className={styles3.element2}>Transaction Details</h3> */}
+              <br />
+              <br />
+              <br />
+              <br />
 
-              <div className = {styles3.contentWrapper}>
-        <div className = {styles3.information}>
-          <p className = {styles3.informationInformation}>Recipient (Name) &nbsp;&nbsp;</p>
-          <p className = {styles3.informationInformation} style={{"color":"white"}}>{username}</p>
-        </div>
-    </div>
-            
+              <div className={styles3.contentWrapper}>
+                <div className={styles3.information}>
+                  <p className={styles3.informationInformation}>
+                    Recipient (Name) &nbsp;&nbsp;
+                  </p>
+                  <p
+                    className={styles3.informationInformation}
+                    style={{ color: "white" }}
+                  >
+                    {username}
+                  </p>
+                </div>
+              </div>
 
-    <div className = {styles3.contentWrapper}>
-        <div className = {styles3.information}>
-          <p className = {styles3.informationInformation}>Recipient (Address)</p>
-          <p style={{"color":"white"}} onClick = {() => alert(receipt.to)}className = {styles3.informationInformation} >{addr.slice(0, 6)}...{addr.slice(-3)} </p>
-        </div>
-    </div>  
+              <div className={styles3.contentWrapper}>
+                <div className={styles3.information}>
+                  <p className={styles3.informationInformation}>
+                    Recipient (Address)
+                  </p>
+                  <p
+                    style={{ color: "white" }}
+                    onClick={() => alert(receipt.to)}
+                    className={styles3.informationInformation}
+                  >
+                    {addr.slice(0, 6)}...{addr.slice(-3)}{" "}
+                  </p>
+                </div>
+              </div>
 
-    <div className = {styles3.contentWrapper}>
-        <div className = {styles3.information}>
-          <p className = {styles3.informationInformation}>Amount</p>
-          <p className = {styles3.informationInformation} style={{"color":"white"}}>{amount}</p>
-        </div>
-    </div>
-            
-    <div className = {styles3.contentWrapper}>
-        <div className = {styles3.information}>
-          <p className = {styles3.informationInformation}>Estimated Fees</p>
-          <p className = {styles3.informationInformation} style={{"color":"white"}}>yes</p>
-        </div>
-    </div>
-           
-            
+              <div className={styles3.contentWrapper}>
+                <div className={styles3.information}>
+                  <p className={styles3.informationInformation}>Amount</p>
+                  <p
+                    className={styles3.informationInformation}
+                    style={{ color: "white" }}
+                  >
+                    {amount}
+                  </p>
+                </div>
+              </div>
 
-    <br />
-    <br />
-    <br />
-    
+              <div className={styles3.contentWrapper}>
+                <div className={styles3.information}>
+                  <p className={styles3.informationInformation}>
+                    Estimated Fees
+                  </p>
+                  <p
+                    className={styles3.informationInformation}
+                    style={{ color: "white" }}
+                  >
+                    yes
+                  </p>
+                </div>
+              </div>
+
+              <br />
+              <br />
+              <br />
 
               <div className={styles3.submitSection}>
-                <button type="submit" className={styles3.submitButton2}>Confirm transaction</button>
-
+                <button type="submit" className={styles3.submitButton2}>
+                  Confirm transaction
+                </button>
               </div>
             </form>
-            </>
-       : (current == 2) ?
+          </>
+        ) : current == 2 ? (
           <>
             <div className={tickStyles.wrapper}>
               {" "}
@@ -989,30 +1058,41 @@ let [receipt, setReceipt] = React.useState<any>(null);
 
             <div className={tickStyles.and}>Transaction successful! </div>
           </>
-          : (current == 3) ?
+        ) : current == 3 ? (
           <>
-           <div className={tickStyles2.wrapper}> <svg className={tickStyles2.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className={tickStyles2.checkmark__circle} cx="26" cy="26" r="25" fill="none" /> <path className={tickStyles2.checkmark__check} fill="none" d="M16 16 36 36 M36 16 16 36" />
-            </svg>
+            <div className={tickStyles2.wrapper}>
+              {" "}
+              <svg
+                className={tickStyles2.checkmark}
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 52 52"
+              >
+                {" "}
+                <circle
+                  className={tickStyles2.checkmark__circle}
+                  cx="26"
+                  cy="26"
+                  r="25"
+                  fill="none"
+                />{" "}
+                <path
+                  className={tickStyles2.checkmark__check}
+                  fill="none"
+                  d="M16 16 36 36 M36 16 16 36"
+                />
+              </svg>
             </div>
-          
-          
-          
-                  <div className = {styles3.contentWrapper}>
-          <div className={tickStyles2.and}>Transaction unsuccessful! </div>
-                </div>
-          <br />
-    
-          </>
 
-          : 
-
-          (current == 4)?
-          <>
-          
-          
+            <div className={styles3.contentWrapper}>
+              <div className={tickStyles2.and}>Transaction unsuccessful! </div>
+            </div>
+            <br />
           </>
-          :<></>
-        }
+        ) : current == 4 ? (
+          <></>
+        ) : (
+          <></>
+        )}
       </div>
     );
   };
@@ -1056,7 +1136,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
     //alert(scannedCodes);
     return (
       <div>
-<br />
+        <br />
         <br />
         <div id="reader" width="600px"></div>
         <a>{error}</a>
@@ -1065,10 +1145,9 @@ let [receipt, setReceipt] = React.useState<any>(null);
   };
 
   const ShowReader = () => {
-      return (
-        
-        <div className={"mainContent" + "active"}>
-    <div className="topBar">
+    return (
+      <div className={"mainContent" + "active"}>
+        <div className="topBar">
           <Link to="/">
             <div className="goBack">
               <ImCross />
@@ -1077,27 +1156,27 @@ let [receipt, setReceipt] = React.useState<any>(null);
           <div className="buttonHolderQrPage">
             <div
               className={"qrButtonLeft " + "active"}
-              onClick={() => window.location.href="/qr"}
+              onClick={() => (window.location.href = "/qr")}
             >
               My Code
             </div>
             <div
               className={"qrButtonRight " + "inActive"}
-              onClick={() => window.location.href="/scan"}
+              onClick={() => (window.location.href = "/scan")}
             >
               Scan
             </div>
           </div>
 
-          <div style={{"visibility":"hidden"}} className="share">
+          <div style={{ visibility: "hidden" }} className="share">
             <FiShare />
           </div>
-        </div>            
-          <div className={"contentWrapper"} style={{"border":"none"}}>
-            <QRScanner />
-          </div>
         </div>
-      );
+        <div className={"contentWrapper"} style={{ border: "none" }}>
+          <QRScanner />
+        </div>
+      </div>
+    );
   };
 
   const QrCodePage = (props: Props) => {
@@ -1107,7 +1186,6 @@ let [receipt, setReceipt] = React.useState<any>(null);
       alert(mainAccount);
     }
     let navigate = useNavigate();
-
 
     function copyAddr() {
       navigator.clipboard.writeText(mainAccount);
@@ -1124,19 +1202,30 @@ let [receipt, setReceipt] = React.useState<any>(null);
           <div className="buttonHolderQrPage">
             <div
               className={"qrButtonLeft " + "inActive"}
-              onClick={ () => {navigate(`/qr`)}}
+              onClick={() => {
+                navigate(`/qr`);
+              }}
             >
-              <a href="/qr" style={{"color":"white","textDecoration":"none"}}>My Code</a>
+              <a href="/qr" style={{ color: "white", textDecoration: "none" }}>
+                My Code
+              </a>
             </div>
             <div
               className={"qrButtonRight " + "active"}
-              onClick={() => { navigate(`/scan`)}}
+              onClick={() => {
+                navigate(`/scan`);
+              }}
             >
-              <a href="/scan" style={{"color":"white","textDecoration":"none"}}>Scan</a>
+              <a
+                href="/scan"
+                style={{ color: "white", textDecoration: "none" }}
+              >
+                Scan
+              </a>
             </div>
           </div>
 
-          <div style={{"visibility":"hidden"}} className="share">
+          <div style={{ visibility: "hidden" }} className="share">
             <FiShare />
           </div>
         </div>
@@ -1149,11 +1238,9 @@ let [receipt, setReceipt] = React.useState<any>(null);
         >
           <div className="contentWrapper">
             <div className="infoHolder">
-<br />
-<br />              
-<div>
-                {/* <img className="pfp" src={img} /> */}
-              </div>
+              <br />
+              <br />
+              <div>{/* <img className="pfp" src={img} /> */}</div>
               <br />
               <br />
               <div>
@@ -1161,7 +1248,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
               </div>
               <div>
                 <button className="blackBtn" onClick={displayAddr}>
-                  <h4 style={{fontSize:"20px","fontFamily":"Arial"}}>
+                  <h4 style={{ fontSize: "20px", fontFamily: "Arial" }}>
                     {mainAccount.substring(0, 6)}...
                     {mainAccount.substring(mainAccount.length - 3)}
                   </h4>
@@ -1174,7 +1261,7 @@ let [receipt, setReceipt] = React.useState<any>(null);
               <div>
                 <button className="pillBtn">🟢 Celo Testnet</button>
               </div>
-<br />
+              <br />
             </div>
             <div className="QrHolder">
               <div className="QrWrapper">
@@ -1452,14 +1539,7 @@ console.log(timeLeft);
                   </Layout>
                 }
               />
-          <Route
-                path="/scan"
-                element={
-                  <Layout>
-                    <ShowReader />
-                  </Layout>
-                }
-              />
+              <Route path="/scan" element={<ShowReader />} />
               <Route
                 path="/faqs"
                 element={
@@ -1477,8 +1557,7 @@ console.log(timeLeft);
                 }
               />
               <Route path="/payments" element={<></>} />
-              
-             
+
               <Route path="/qr" element={<QrCodePage />} />
               <Route
                 path="/savings"
@@ -1488,7 +1567,7 @@ console.log(timeLeft);
                   </Layout>
                 }
               />
-       <Route
+              <Route
                 path="/institutional-ramps"
                 element={
                   <Layout>
@@ -1984,7 +2063,11 @@ else { */
       <div>
         <div className={"container" + styles.login}>
           <div className={styles.loginTitleText}>
-            <h1 style={{fontSize:"45px"}} className="text-center text-white" id="loginTitle">
+            <h1
+              style={{ fontSize: "45px" }}
+              className="text-center text-white"
+              id="loginTitle"
+            >
               {state == 0 ? "Register" : state == 1 ? "Enter OTP" : ""}
             </h1>
           </div>
@@ -1996,9 +2079,9 @@ else { */
                   <p className={styles.subheading}>
                     Step 1: Enter your registered mobile number
                   </p>
-<br />
+                  <br />
                   <p id="error" className={styles.error}></p>
-<br />
+                  <br />
 
                   <div className={styles.number_input} id="phonenums">
                     <div className={styles.number_form}>
@@ -2465,7 +2548,7 @@ else { */
                   />
                   <br />
                   <br />{" "}
-                  <h1 style={{fontSize:"35px"}} className="text-white">
+                  <h1 style={{ fontSize: "35px" }} className="text-white">
                     One app to manage all your finance
                   </h1>
                   <br />{" "}
