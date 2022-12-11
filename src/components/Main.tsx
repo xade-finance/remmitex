@@ -315,11 +315,10 @@ const Main = () => {
               className="qrButtonRightActive"
               style={{ color: "#fff", textDecoration: "none" }}
             >
-              <h2 style = {{'fontSize': '2rem'}}>Transaction History</h2>
+              <div className="txHistoryTop" style={{"font-size":"10px","white-space":"nowrap"}}><h2 style={{display:"inline-block"}}><ImCross style={{fontSize:"5px","visibility":"hidden"}} />Transaction History</h2></div>
             </div>
           </div>
 
-          
         </div>
         <div className="activityContent newContentTx">
        
@@ -676,14 +675,10 @@ let navigate = useNavigate();
             </div>
           ))}
         </div>
-          <button className="txBtn" style={{backgroundColor:"#000"}} onClick={ () => {navigate(`/history`)}}>
-            <Link
-              to="/history"
-              style={{ color: "#fff", textDecoration: "none", backgroundColor:"#000" }}
-            >
-                {(transactionHistory.length === 0) ? <div>Your Activity Appears here</div> : <div>View Transaction History &nbsp;&nbsp; <FaExternalLinkAlt  /></div>}
-            </Link>
-          </button>
+
+          <div className="txBtn" style={{backgroundColor:"#000", color:"#fff"}}>
+             {(transactionHistory.length === 0) ? <div><a style={{color:"white"}} href="/history">Your Activity Appears here</a></div> : <a style={{color:"white"}} href="/history">View Transaction History &nbsp;&nbsp; <FaExternalLinkAlt  /></a>} 
+          </div>
           <br />
           <br />
         </div>
@@ -1475,7 +1470,7 @@ console.log(timeLeft);
               />
               <Route path="/payments" element={<></>} />
               
-             
+              />
               <Route path="/qr" element={<QrCodePage />} />
               <Route
                 path="/savings"
@@ -2474,6 +2469,7 @@ else { */
                   <br />
                   <button
                     id="btn"
+style={{"border":"none"}}
                     onClick={takeToRegister}
                     className={styles.buttonC}
                   >
@@ -2484,6 +2480,7 @@ else { */
                   <br />{" "}
                   <button
                     id="btn2"
+style={{"border":"none"}}
                     onClick={takeToLogin}
                     className={styles.buttonC}
                   >
