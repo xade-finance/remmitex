@@ -329,14 +329,6 @@ const MainComponent = () => {
         <hr className={styles.hr}></hr>
         <br />
         <div className={styles.switchButton}>
-          <button className={count.takePart}>
-            <a
-              className={count.btnTxt}
-              href="https://discord.com/channels/1023970802099572847/1039229895781404692"
-            >
-              Take part in Testnet
-            </a>
-          </button>
         </div>
         <br />
         <hr className={styles.hr}></hr>
