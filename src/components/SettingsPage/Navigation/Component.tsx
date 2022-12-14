@@ -46,6 +46,7 @@ const [mainAccount, setMainAccount] = useState("");
 
 const Navbar = () => {
   const [sidebar, setSidebar] = React.useState(false);
+  const [click, setClick] = useState(false);
   function copyAddr() {
     navigator.clipboard.writeText("0xabcd...123");
     alert("Address copied");
@@ -56,6 +57,9 @@ const Navbar = () => {
     document.getElementById("3bars").style.visibility = "hidden";
     showSidebar();
   }
+  function closeProfile() {
+    document.getElementById("profile").style.visibility = "hidden";
+  }
   return (
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
@@ -64,12 +68,18 @@ const Navbar = () => {
             <FaIcons.FaBars onClick={removeBars} />
           </Link>
         </div>
-        <nav className={sidebar ? "nav--menu active" : "nav--menu"}>
+        <nav
+          className={sidebar ? "nav--menu active" : "nav--menu"}
+          id="profile"
+        >
           <ul className="nav-menu-items" onClick={removeBars}>
             <li className="navbar-toggle">
-              <div className="goBack">
-                <ImCross />
-              </div>
+              {/*              
+            <Link to="/settings" onClick={closeProfile}>
+                <div className="goBack" onClick={closeProfile}>
+                  <ImCross />
+                </div>
+              </Link>*/}
             </li>
 
             <li>
@@ -177,19 +187,23 @@ const MainComponent = () => {
     logout();
     window.location.href = "/";
   }
+  function closeProfile() {
+    document.getElementById("profile").style.visibility = "hidden";
+  }
   return (
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
-        <nav className={sidebar ? "nav--menu active" : "nav--menu"}>
+        <nav
+          className={sidebar ? "nav--menu active" : "nav--menu"}
+          id="profile"
+        >
           <ul className="nav-menu-items">
             <li className="navbar-toggle">
-              <div
-                className="goBack"
-                style={{ marginTop: "-2rem", width: "2rem" }}
-              >
-                <br />
-                <ImCross />
-              </div>
+              <Link to="/settings" onClick={closeProfile}>
+                <div className="goBack">
+                  <ImCross />
+                </div>
+              </Link>
             </li>
 
             <li>

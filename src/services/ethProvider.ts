@@ -1,4 +1,4 @@
-import Token from "./CUSD.json";
+‹import Token from "./CUSD.json";
 import { SafeEventEmitterProvider } from "@web3auth/base";
 import Web3 from "web3";
 import { IWalletProvider } from "./walletProvider";
@@ -87,7 +87,8 @@ const signAndSendTransaction = async (toAddress: string, amount: string) => {
         from: accounts[0],
         gas: 80000,
         maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
-        maxFeePerGas: "6000000000000", // Max fee per gas
+        maxFeePerGas: "6000000000000",
+        feeCurrency: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1" ,
       });
       uiConsole("Receipt", txRes);
       console.log(parseInt(amount)*10);

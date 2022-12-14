@@ -41,8 +41,8 @@
   max-width: 1500px;
 }
 
-.navbar-logo:hover{
-	color:white;
+.navbar-logo:hover {
+  color: white;
 }
 
 .navbar-logo {
@@ -70,7 +70,7 @@
   justify-content: center;
   position: fixed;
   top: 1%;
-  left: 60%;
+  left: 60vw;
   transition: 850ms;
   opacity: 1;
 }
@@ -278,12 +278,12 @@
   }
 }
 
-.nav-item:hover{
-	color:white;
+.nav-item:hover {
+  color: white;
 }
 
-.nav-links:hover{
-        color:white;
+.nav-links:hover {
+  color: white;
 }
 
 .nav-desktop {
