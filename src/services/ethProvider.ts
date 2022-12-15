@@ -1,7 +1,7 @@
-import Token from "./CUSD.json";
 import { SafeEventEmitterProvider } from "@web3auth/base";
 import Web3 from "web3";
 import { IWalletProvider } from "./walletProvider";
+import { newKitFromWeb3, CeloContract } from "@celo/contractkit";
 
 var done = false;
 var address = "";
@@ -84,32 +84,36 @@ const ethProvider = (
   const signAndSendTransaction = async (toAddress: string, amount: string) => {
     try {
       const web3 = new Web3(provider as any);
-      const accounts = await web3.eth.getAccounts();
-      const contractAddress = "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1";
-      const contract = new web3.eth.Contract(Token.abi, contractAddress);
+      const kit = newKitFromWeb3(web3 as any);
+      
+      let accounts = await kit.web3.eth.getAccounts();
+      kit.defaultAccount = accounts[0];
+      await kit.setFeeCurrency(CeloContract.StableToken);
+
+      const contract = await kit.contracts.getStableToken();
       // Send transaction to smart contract to update message and wait to finish
-      const txRes = await contract.methods
-        .transfer(toAddress, Web3.utils.toBN(Web3.utils.toWei(amount, "ether")))
+      const txRes = await contract
+        .transfer(toAddress, kit.web3.utils.toWei(amount, "ether"))
         .send({
           from: accounts[0],
           gas: 80000,
           maxPriorityFeePerGas: "5000000000", // Max priority fee per gas
           maxFeePerGas: "6000000000000",
-          feeCurrency: "0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1",
+          feeCurrency: contract.address,
         });
       uiConsole("Receipt", txRes);
+      const txReceipt = await txRes.waitReceipt();
       console.log(parseInt(amount) * 10);
-      if (txRes.status == "0x1" || txRes.status == 1) {
-        console.log(`${txRes.status} Transaction Success`);
+      if (txReceipt.status == true) {
+        console.log(`${txReceipt.transactionHash} Transaction Success`);
         return txRes;
       } else {
-        console.log(`${txRes.status} Transaction Failed`);
+        console.log(`${txReceipt.transactionHash} Transaction Failed`);
         return txRes;
       }
     } catch (error) {
       console.log("Could not process transaction!");
       console.log("error", error);
-      console.log(Token.abi);
       return false;
     }
   };
