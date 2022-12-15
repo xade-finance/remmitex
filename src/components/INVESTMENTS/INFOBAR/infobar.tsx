@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './index.module.css';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -47,6 +47,27 @@ var xhr2 = new XMLHttpRequest();
 }
 }
 
+useEffect(() => {
+  const interval = setInterval(() => {
+    var xhr3 = new XMLHttpRequest();
+    xhr3.onreadystatechange=function(){
+      if(xhr3.readyState==XMLHttpRequest.DONE){
+        let yes;
+        try {
+          yes = parseFloat(xhr3.responseText);
+      } catch {
+          yes = false;
+      }
+        if(yes != false) setPrice(xhr3.responseText)
+      }
+        }
+    xhr3.open('GET', `https://price.api.xade.finance/${options[addr-1]}`)
+    xhr3.send()
+  }, 20000);
+  return () => clearInterval(interval);
+}, []);
+
+
   xhr2.open('GET', `https://price.api.xade.finance/${options[addr-1]}`)
   xhr2.send()
      // alert(JSON.stringify(json));
@@ -71,3 +92,7 @@ var xhr2 = new XMLHttpRequest();
         )
 
 }
+function float(a: any): any {
+  throw new Error('Function not implemented.');
+}
+

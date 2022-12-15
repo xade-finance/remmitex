@@ -47,7 +47,7 @@ import "./HomePage.css";
 import { TbQrcode } from "react-icons/tb";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Send from "./Send.tsx";
+import Send from "./Send";
 import { alertTitleClasses } from "@mui/material";
 import Settings from "./SettingsPage/Navigation";
 import FAQs from "./SettingsPage/FAQs";

@@ -7,8 +7,11 @@ import tickStyles from './tickStyles.module.css';
 import tickStyles2 from './tickStyles2.module.css';
 import countries from './allCountries';
 import { Country, PhoneNumber } from './allCountries';
-const Send = () => {
+import { BiArrowBack } from 'react-icons/bi'
+import { useNavigate } from "react-router-dom";
 
+const Send = () => {
+  const navigate = useNavigate();
   let [current, setCurrent] = React.useState(0); // Phone number accept
   let [address, setAddress] = React.useState('');
   let [receipt, setReceipt] = React.useState<any>(null);
@@ -146,6 +149,12 @@ return;
 
   return (
     <div style={{ "margin": '5px' }}>
+      <div onClick = {() => {navigate("/");}}>
+                <div style = {{'marginTop': '0', 'color': '#fff', 'height': '100%'}}>
+                  <br />
+                  <BiArrowBack />
+                </div>
+      </div>
       {(current == 0) ?
         <>
           <br />
@@ -220,6 +229,12 @@ return;
         : (current == 1) ?
 
           <>
+           <div onClick = {() => {navigate("/");}}>
+                <div className="goBack" style = {{'marginTop': '0'}}>
+                  <br />
+                  <BiArrowBack />
+                </div>
+              </div>
             <br />
             <br />
             <br />
@@ -302,6 +317,7 @@ return;
           : (current == 2)?
 
           <>
+          
             <div className={tickStyles.wrapper}> <svg className={tickStyles.checkmark} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className={tickStyles.checkmark__circle} cx="26" cy="26" r="25" fill="none" /> <path className={tickStyles.checkmark__check} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
             </svg>
             </div>

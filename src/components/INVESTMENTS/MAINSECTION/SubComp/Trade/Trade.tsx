@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from './Trade.module.css'
 import './leverage.css'
 import Popup from 'reactjs-popup';
@@ -12,6 +12,7 @@ import Contracts from '../../../constants'
 import { useNavigate } from 'react-router-dom'
 import { openPosition } from '../../../functions'
 import { Slide } from "@mui/material";
+import { BiArrowBack } from 'react-icons/bi'
 // import Button from '@mui/material/Button';
 
 const style = {
@@ -55,6 +56,27 @@ export default function Trade() {
         return `${value}°C`;
     }
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+          var xhr3 = new XMLHttpRequest();
+          xhr3.onreadystatechange=function(){
+            if(xhr3.readyState==XMLHttpRequest.DONE){
+              let yes;
+              try {
+                yes = parseFloat(xhr3.responseText);
+            } catch {
+                yes = false;
+            }
+              if(yes != false) {
+                setExchange(xhr3.responseText)
+              }
+            }
+              }
+          xhr3.open('GET', `https://price.api.xade.finance/${options[addr-1]}`)
+          xhr3.send()
+        }, 20000);
+        return () => clearInterval(interval);
+      }, []);
     xhr2.open('GET', `https://price.api.xade.finance/${options[addr-1]}`)
     xhr2.send()
 
@@ -138,6 +160,12 @@ export default function Trade() {
   aria-describedby="modal-modal-description"
 >
   <Box sx={style}>
+  <div onClick = {() => {navigate(`/investments/${addr}`);handleClose()}}>
+                <div style = {{'marginTop': '0', 'color': '#fff', 'height': '100%'}}>
+                  <br />
+                  <BiArrowBack />
+                </div>
+      </div>
     <p className = {styles.modalHeading}>Select an asset</p>
     <hr style = {{'color': '#fff'}}></hr>
     <div className = {styles.contracts}>
@@ -257,4 +285,9 @@ export default function Trade() {
     )
 }  
 
+
+
+function float(responseText: string): any {
+    throw new Error("Function not implemented.");
+}
 
