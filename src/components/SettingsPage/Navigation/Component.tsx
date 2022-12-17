@@ -14,9 +14,8 @@ import { FaCopy } from "react-icons/fa";
 import "./style.css";
 import { IconContext } from "react-icons";
 import { useNavigate } from "react-router-dom";
-import { ImCross} from "react-icons/im";
+import { ImCross } from "react-icons/im";
 import { BiArrowBack } from "react-icons/bi";
-
 
 /*const { provider, userPic, readAddress, userData } = useWeb3Auth();
 const[username,setUser]=React.useState<any>(""); 
@@ -47,7 +46,6 @@ const [mainAccount, setMainAccount] = useState("");
 */
 
 const Navbar = () => {
-  
   const [sidebar, setSidebar] = React.useState(false);
   const [click, setClick] = useState(false);
   function copyAddr() {
@@ -67,7 +65,7 @@ const Navbar = () => {
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
         <div className="navbar">
-        {/* <div onClick = {() => {navigate(`/investments/${addr}`);handleClose()}}>
+          {/* <div onClick = {() => {navigate(`/investments/${addr}`);handleClose()}}>
                 <div style = {{'marginTop': '0', 'color': '#fff', 'height': '100%'}}>
                   <br />
                   <BiArrowBack />
@@ -130,7 +128,6 @@ const Navbar = () => {
   );
 };
 const MainComponent = () => {
-
   const navigate = useNavigate();
   const [sidebar, setSidebar] = React.useState(false);
   function copyAddr() {
@@ -204,17 +201,21 @@ const MainComponent = () => {
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
         <nav
+<<<<<<< Updated upstream
           style = {{'justifyContent': 'left', 'paddingLeft': '2rem'}}
+=======
+          style={{ justifyContent: "left", paddingLeft: "5rem" }}
+>>>>>>> Stashed changes
           className={sidebar ? "nav--menu active" : "nav--menu"}
           id="profile"
         >
           <ul className="nav-menu-items">
-          <div onClick = {showSidebar}>
-                <div style = {{'marginTop': '0', 'color': '#fff', 'height': '100%'}}>
-                  <br />
-                  <BiArrowBack />
-                </div>
-      </div>
+            <div onClick={showSidebar}>
+              <div style={{ marginTop: "0", color: "#fff", height: "100%" }}>
+                <br />
+                <BiArrowBack />
+              </div>
+            </div>
 
             <li>
               {/*} <img
@@ -338,20 +339,16 @@ const MainComponent = () => {
         </div>
         <hr className={styles.hr}></hr>
         <br />
-        <div className={styles.switchButton}>
-        </div>
         <br />
-        <hr className={styles.hr}></hr>
+        <br />
         <br />
         <div className={styles.logoutButton}>
           <p>
-            {" "}
-            Logout{" "}
             <button
               style={{ backgroundColor: "#090909", border: "none" }}
               onClick={logout}
             >
-              <FiLogOut />
+              Logout{"  "} <FiLogOut />
             </button>{" "}
           </p>
         </div>
