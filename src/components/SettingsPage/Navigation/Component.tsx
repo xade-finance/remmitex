@@ -204,7 +204,7 @@ const MainComponent = () => {
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
         <nav
-          style = {{'justifyContent': 'left', 'paddingLeft': '5rem'}}
+          style = {{'justifyContent': 'left', 'paddingLeft': '2rem'}}
           className={sidebar ? "nav--menu active" : "nav--menu"}
           id="profile"
         >
@@ -228,7 +228,7 @@ const MainComponent = () => {
             </li>
             <div className="bar"></div>
             <li className="nav-text vela2">
-              <a className="vela2">Email Address: &nbsp;</a>
+              <a className="vela2">Email Address:&nbsp;</a>
               <a className="vela email">{email}</a>
             </li>
             {/*} <li  className="nav-text vela2">
@@ -236,7 +236,7 @@ const MainComponent = () => {
        </li>{*/}
             <div className="bar"></div>
             <li className="nav-text vela2">
-              <a className="vela2">Wallet Address: </a>
+              <a className="vela2">Wallet Address:</a>
               <a className="vela">
                 &nbsp;{mainAccount.slice(0, 6)}...{mainAccount.slice(-3)} &nbsp;{" "}
                 <FaCopy onClick={copyAddr} />
