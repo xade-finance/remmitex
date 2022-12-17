@@ -14,7 +14,9 @@ import { FaCopy } from "react-icons/fa";
 import "./style.css";
 import { IconContext } from "react-icons";
 import { useNavigate } from "react-router-dom";
-import { ImCross } from "react-icons/im";
+import { ImCross} from "react-icons/im";
+import { BiArrowBack } from "react-icons/bi";
+
 
 /*const { provider, userPic, readAddress, userData } = useWeb3Auth();
 const[username,setUser]=React.useState<any>(""); 
@@ -45,6 +47,7 @@ const [mainAccount, setMainAccount] = useState("");
 */
 
 const Navbar = () => {
+  
   const [sidebar, setSidebar] = React.useState(false);
   const [click, setClick] = useState(false);
   function copyAddr() {
@@ -64,6 +67,12 @@ const Navbar = () => {
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
         <div className="navbar">
+        {/* <div onClick = {() => {navigate(`/investments/${addr}`);handleClose()}}>
+                <div style = {{'marginTop': '0', 'color': '#fff', 'height': '100%'}}>
+                  <br />
+                  <BiArrowBack />
+                </div>
+      </div> */}
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={removeBars} />
           </Link>
@@ -121,6 +130,7 @@ const Navbar = () => {
   );
 };
 const MainComponent = () => {
+
   const navigate = useNavigate();
   const [sidebar, setSidebar] = React.useState(false);
   function copyAddr() {
@@ -194,17 +204,17 @@ const MainComponent = () => {
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
         <nav
+          style = {{'justifyContent': 'left', 'paddingLeft': '5rem'}}
           className={sidebar ? "nav--menu active" : "nav--menu"}
           id="profile"
         >
           <ul className="nav-menu-items">
-            <li className="navbar-toggle">
-              <Link to="/settings" onClick={closeProfile}>
-                <div className="goBack">
-                  <ImCross />
+          <div onClick = {showSidebar}>
+                <div style = {{'marginTop': '0', 'color': '#fff', 'height': '100%'}}>
+                  <br />
+                  <BiArrowBack />
                 </div>
-              </Link>
-            </li>
+      </div>
 
             <li>
               {/*} <img
