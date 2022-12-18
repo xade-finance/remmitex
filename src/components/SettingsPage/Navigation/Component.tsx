@@ -201,11 +201,9 @@ const MainComponent = () => {
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
         <nav
-<<<<<<< Updated upstream
+
           style = {{'justifyContent': 'left', 'paddingLeft': '2rem'}}
-=======
-          style={{ justifyContent: "left", paddingLeft: "5rem" }}
->>>>>>> Stashed changes
+
           className={sidebar ? "nav--menu active" : "nav--menu"}
           id="profile"
         >
