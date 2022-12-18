@@ -163,7 +163,7 @@ export default function Trade() {
   <div onClick = {() => {navigate(`/investments/${addr}`);handleClose()}}>
                 <div style = {{'marginTop': '0', 'color': '#fff', 'height': '100%'}}>
                   <br />
-                  <BiArrowBack />
+                  <BiArrowBack size = {30} />
                 </div>
       </div>
     <p className = {styles.modalHeading}>Select an asset</p>

@@ -15,7 +15,7 @@ import "./style.css";
 import { IconContext } from "react-icons";
 import { useNavigate } from "react-router-dom";
 import { ImCross } from "react-icons/im";
-import { BiArrowBack } from "react-icons/bi";
+// import { BiArrowBack } from "react-icons/bi";
 
 /*const { provider, userPic, readAddress, userData } = useWeb3Auth();
 const[username,setUser]=React.useState<any>(""); 
@@ -209,9 +209,9 @@ const MainComponent = () => {
         >
           <ul className="nav-menu-items">
             <div onClick={showSidebar}>
-              <div style={{ marginTop: "0", color: "#fff", height: "100%" }}>
+              <div style={{ position: 'absolute', top: '6rem',marginTop: "0", color: "#fff", height: "100%" }}>
                 <br />
-                <BiArrowBack />
+                <ImCross size={26}/>
               </div>
             </div>
 
@@ -262,6 +262,7 @@ const MainComponent = () => {
                     </p>
                 </div> */}
         <div
+          // style = {{'position': 'absolute', 'top': '2rem'}}
           className={styles.component + " " + styles.A}
           onClick={showSidebar}
         >
