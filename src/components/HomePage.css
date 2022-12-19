@@ -7,11 +7,9 @@
 i    justify-content: center;
     align-items: center;*/
 }
-
 body {
   overflow-x: hidden;
 }
-
 /*	margin-bottom:2rem !important;
 */
 /*margin-top:-1rem !important;*/
@@ -25,7 +23,6 @@ body {
   max-height: 350px;
   overflow: visible;
 }
-
 .myActivity {
   display: flex;
   justify-content: center;
@@ -33,12 +30,10 @@ body {
   padding: 25px;
   background: #000;
 }
-
 .value,
 .label {
   min-width: 8rem;
 }
-
 .totalBalance {
   color: #fff;
   display: flex;
@@ -59,7 +54,6 @@ body {
   font-size: 1.6rem;
   font-weight: 900;
 }
-
 .carouselHolder {
   position: relative;
   top: 0;
@@ -67,24 +61,12 @@ body {
   margin-bottom: 0;
   justify-content: space-between;
 }
-
 /*.activityContent{
-     display: inline-block;
-    justify-content: center;
- margin-right:100px; 
-    align-items: center;
-    width: 40vw;
-    min-height: 368px;
-    height: 100%;
-    color: #fff; 
-    max-height: 40vh;
     overflow-y: auto;  
 }*/
-
 .newContentTx {
   align-items: flex-start;
 }
-
 .activityContent {
   display: inline-block;
   justify-content: center;
@@ -98,7 +80,6 @@ body {
   left: 5%;
   /*margin-bottom:15rem;*/
 }
-
 .utilityButtons {
   display: flex;
   width: 40%;
@@ -118,7 +99,6 @@ body {
   height: 60px;
   border-radius: 20px;
 }
-
 .paymentsButton {
   width: 9rem;
   display: flex;
@@ -133,7 +113,6 @@ body {
   text-decoration: none;
   font-weight: 500;
 }
-
 .transactionHistory-pills {
   transform: translate(-50%, -50%);
   left: 46%;
@@ -165,31 +144,25 @@ body {
   border-top-left-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
 }
-
 .transaction-history-line1,
 .transaction-history-line2 {
   display: flex;
   flex-direction: row;
 }
-
 .address-styling {
   color: "#fff";
   font-weight: bold;
 }
-
 .amount-time-stlying {
   color: "#f8f8ff";
 }
-
 a {
   text-decoration: none;
 }
-
 .pfp {
   border-radius: 50%;
   width: 140px;
 }
-
 .scanner {
   display: flex;
   justify-content: center;
@@ -197,7 +170,6 @@ a {
   font-size: 3.2rem;
   color: rgba(255, 255, 255, 0.7);
 }
-
 @media screen and (max-width: 960px) {
   .container {
     display: flex;
@@ -209,7 +181,7 @@ a {
     align-items: center;
   }
   .txBtn {
-    margin-top: -5rem;
+    margin-top: 2rem;
   }
   .carouselHolder {
     max-width: 380px;
