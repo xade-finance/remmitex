@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useWeb3Auth } from "../../../services/web3auth";
+import { useWeb3Auth } from "../../../../services/web3auth";
 import styles from "./Main.module.css";
 import { FcSettings } from "react-icons/fc";
 import { CgProfile } from "react-icons/cg";

@@ -1,10 +1,14 @@
 import React from 'react';
 import Web3 from "web3";
-import { useWeb3Auth } from "../services/web3auth";
-import styles3 from './send.module.css'
-import styles from "./../styles/Home.module.css";
-import tickStyles from './tickStyles.module.css';
-import tickStyles2 from './tickStyles2.module.css';
+import { useWeb3Auth } from "../../../services/web3auth";
+import styles3 from '../../../styles/send.module.css'
+import styles from "../../../styles/Home.module.css";
+import tickStyles from '../../../styles/tickStyles.module.css';
+import tickStyles2 from "../../../styles/tickStyles2.module.css";
+import "../../../styles/qrscan.css"
+import "../../../styles/QrPage.css"
+import "../../../styles/HomePage.css"
+
 import countries from './allCountries';
 import { Country, PhoneNumber } from './allCountries';
 import { BiArrowBack } from 'react-icons/bi'
