@@ -2,9 +2,6 @@ import React from 'react'
 import styles from './Main.module.css'
 import { LiveChatWidget } from "@livechat/widget-react"
 
-function App() {
-  return <LiveChatWidget license="14754534" />
-}
 const MainComponent = () => {
     return (
         <>
@@ -53,7 +50,7 @@ const MainComponent = () => {
           </div>
         </div>
       </div>
-      <App />
+      <LiveChatWidget license = '14843754'/>
         </>
     )
 }

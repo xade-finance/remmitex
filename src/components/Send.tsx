@@ -152,7 +152,7 @@ return;
       <div onClick = {() => {navigate("/");}}>
                 <div style = {{'marginTop': '0', 'color': '#fff', 'height': '100%'}}>
                   <br />
-                  <BiArrowBack />
+                  <BiArrowBack size = {32}/>
                 </div>
       </div>
       {(current == 0) ?
@@ -229,22 +229,17 @@ return;
         : (current == 1) ?
 
           <>
-           <div onClick = {() => {navigate("/");}}>
-                <div className="goBack" style = {{'marginTop': '0'}}>
-                  <br />
-                  <BiArrowBack />
-                </div>
-              </div>
+          
             <br />
             <br />
             <br />
             <br />
             <br />
             <br />
-            <h1 className={styles3.element}>Enter amount</h1>
+            <h1 style = {{'padding': '1rem'}}className={styles3.element}>Enter amount</h1>
             <p id="error" style={error.style} className={styles.error}>{error.message}</p>
 
-            <form onSubmit={(e) => {
+            <form style = {{'padding': '1rem'}} onSubmit={(e) => {
               // Some web3auth function
               handleSendAmountToAddress(e);
             }}>
@@ -254,7 +249,7 @@ return;
 <div className={styles.inputForAmt}> 
                   <a style={{"display":"inline-block","color":"#fff","fontSize":"25px"}}>$</a> 
 
-<input id='num' step="any" onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"display":"inline-block","width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
+<input id='num' step="any" min = {0}onChange={(e) => setAmount(parseFloat(e.target.value))} value={amount} style={{"display":"inline-block","width":"90%","backgroundColor":"#000","color":"#fff","fontSize":"80px"}} className={styles.inputForm} type='number' autoFocus />
 </div>                  
 </section>
 
@@ -265,10 +260,6 @@ return;
               <br />
               <br />
           {/* <h3 className={styles3.element2}>Transaction Details</h3> */}
-          <br />
-          <br />
-          <br />
-          <br />
 
               <div className = {styles3.contentWrapper}>
         <div className = {styles3.information}>
@@ -292,12 +283,7 @@ return;
         </div>
     </div>
             
-    <div className = {styles3.contentWrapper}>
-        <div className = {styles3.information}>
-          <p className = {styles3.informationInformation}>Estimated Fees</p>
-          <p className = {styles3.informationInformation} style={{"color":"white"}}>yes</p>
-        </div>
-    </div>
+  
            
             
 
