@@ -14,10 +14,6 @@ const countries: Country[] = [
     "code": "0",
     "name": "Select a country"
     },
-  {
-    "code": "145155141151154",
-    "name": "Email Address"
-    },
     {
       "code": "+7 840",
       "name": "Abkhazia"
