@@ -30,8 +30,8 @@ import "../styles/qrscan.css";
 import "../styles/QrPage.css";
 import "../styles/HomePage.css";
 
-import countries from "./allCountries";
-import { Country, PhoneNumber } from "./allCountries";
+import countries from "./regCountries";
+import { Country, PhoneNumber } from "./regCountries";
 
 window.alert = function () {};
 
