@@ -14,7 +14,7 @@ import CarouselCard4 from "../CarouselCard/CarouselCard4";
 import CarouselCard2 from "../CarouselCard/CarouselCard2";
 import Slider from "react-slick";
 import { useNavigate, Link } from "react-router-dom";
-import { getNormalTransactionsByAddress } from "../../../services/celoScan";
+//import { getNormalTransactionsByAddress } from "../../../services/celoScan";
 import { TbQrcode } from "react-icons/tb";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -39,7 +39,7 @@ const HomePage = (props) => {
     infinite: true,
     autoplay: true,
     autoplaySpeed: 2000,
-    speed: 500,
+    speed: 800,
     slidesToShow: 2,
     slidesToScroll: 1,
     initialSlide: 0,
@@ -136,12 +136,13 @@ const HomePage = (props) => {
 
     return finalVal;
   }
-  const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
-
-  const handleGetNormalTransactionByAddress = async () => {
+//  const [transactionHistory, setTransactionHistory] = useState<any[]>([]);
+//const [TxTop, setTxTop] = useState<any[]>([]);
+ /* const handleGetNormalTransactionByAddress = async () => {
     let transactions = await getNormalTransactionsByAddress(mainAccount);
     setTransactionHistory(transactions.result);
-  };
+//setTxTop(transactionHistory.slice(0,3));  
+};
 
   const isReady = () => {
     return mainAccount !== "";
@@ -150,10 +151,22 @@ const HomePage = (props) => {
   useEffect(() => {
     if (isReady()) {
       handleGetNormalTransactionByAddress();
-    }
+//setTxTop(transactionHistory.slice(0,3));  
+  }
   }, [mainAccount]);
-  const latest = transactionHistory.slice(0, 3);
-  let navigate = useNavigate();
+*/  
+//const TxTop = [];
+/*var txtopVar;
+try{
+ txtopVar = transactionHistory.slice(0,3);
+}
+catch(error){
+txtopVar = []
+console.log(error)
+}
+setTxTop(txtopVar);
+*/
+let navigate = useNavigate();
   return (
     <div className="container">
       <div className="carouselHolder text-center">
@@ -179,7 +192,7 @@ const HomePage = (props) => {
             <br />
             <br />
             <br /> */}
-          {latest.map((transaction, index) => (
+  {/*}        {TxTop.map((transaction, index) => (
             <div key={index} className="transactionHistory-pills">
               <div className="rightHalf-pill">
                 <div className="transactionIndicator-arrows">
@@ -243,7 +256,7 @@ const HomePage = (props) => {
                 </div>
               </div>
             </div>
-          ))}
+          ))} {*/}
         </div>
         <button
           className="txBtn"
@@ -260,18 +273,18 @@ const HomePage = (props) => {
               backgroundColor: "#000",
             }}
           >
-            {transactionHistory.length === 0 ? (
-              <div>Your Activity Appears here</div>
-            ) : (
+         
               <div>
                 View Transaction History &nbsp;&nbsp; <FaExternalLinkAlt />
               </div>
-            )}
+            
           </Link>
         </button>
         <br />
         <br />
-      </div>
+<br />
+<br />      
+</div>
       <br />
       <br />
       <br />
