@@ -14,22 +14,11 @@ const SendQR = (props) => {
   const { provider } = useWeb3Auth();
   const params = useParams();
   let [current, setCurrent] = React.useState(0); // Phone number accept
-  const addr = params.address;
-  const [username, setUser] = React.useState<any>("");
+  const userInfo = params.user;
 
-  let xhr3 = new XMLHttpRequest();
+const userQR = userInfo.split("@")[0]
 
-  xhr3.onreadystatechange = function () {
-    if (xhr3.readyState == XMLHttpRequest.DONE) {
-      if (xhr3.status == 200) {
-        setUser(xhr3.responseText);
-      } else {
-        setUser("");
-      }
-    }
-  };
-  xhr3.open("GET", `https://user.api.xade.finance?address=${addr}`, true);
-  xhr3.send(null);
+const addr = userInfo.split("@")[1]
 
   let [receipt, setReceipt] = React.useState<any>(null);
   let [amount, setAmount] = React.useState(0);
@@ -139,7 +128,7 @@ const SendQR = (props) => {
                   className={styles3.informationInformation}
                   style={{ color: "white" }}
                 >
-                  {username}
+                  {userQR}
                 </p>
               </div>
             </div>

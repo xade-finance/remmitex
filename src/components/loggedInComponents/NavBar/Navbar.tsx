@@ -29,7 +29,11 @@ const Navbar = (props: Props) => {
   return (
     <>
       <nav className="navbar">
-        <div className="navbar-container">
+<div className="vela announcement">
+<b>📢 RemmiteX V2 and DeriveX V1 will go live on Testnet on 5th January 2023</b></div>
+        
+<div className="navbar-container">
+
           <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
             XADE
           </Link>

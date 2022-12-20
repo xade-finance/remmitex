@@ -570,7 +570,7 @@ const Main = () => {
                 }
               />
               <Route path="/send" element={<Send />} />
-              <Route path="/sendQR/:address" element={<SendQR />} />
+              <Route path="/sendQR/:user" element={<SendQR />} />
               <Route
                 path="/history"
                 element={<TxHistory account={mainAccount} />}
