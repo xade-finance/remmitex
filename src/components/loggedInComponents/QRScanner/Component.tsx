@@ -29,8 +29,8 @@ const Scan = () => {
       // handle the scanned code as you like, for example:
       console.log(`Code matched = ${decodedText}`, decodedResult);
       // setScannedCodes(scannedCodes.concat([{ decodedText, decodedResult }]));
-      const walletAddr = decodedText.split("@")[1];
-      window.location.href = "/sendQR/" + walletAddr;
+      const userInfo = decodedText;
+      window.location.href = "/sendQR/" + userInfo;
     }
 
     function onScanFailure(error) {

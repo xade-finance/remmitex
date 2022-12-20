@@ -54,7 +54,7 @@ function storenum(c, n) {
 const Main = () => {
   const { provider, getUserInfo, userData, isLoading, userPic } = useWeb3Auth();
   const Register = () => {
-    const [state, setState] = React.useState(0);
+    const [state, setState] = React.useState(2);
     const [cc, setCC] = React.useState("");
     const [pnum, setPnum] = React.useState("");
     const { login, loginWithWalletConnect } = useWeb3Auth();
@@ -570,7 +570,7 @@ const Main = () => {
                 }
               />
               <Route path="/send" element={<Send />} />
-              <Route path="/sendQR/:address" element={<SendQR />} />
+              <Route path="/sendQR/:user" element={<SendQR />} />
               <Route
                 path="/history"
                 element={<TxHistory account={mainAccount} />}
