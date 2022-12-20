@@ -6,6 +6,7 @@ import tickStyles2 from "../../../styles/tickStyles2.module.css";
 import "../../../styles/qrscan.css"
 import "../../../styles/QrPage.css"
 import "../../../styles/HomePage.css"
+import "../../../styles/NewLogin.css"
 import { useWeb3Auth } from "../../../services/web3auth";
 import { FormEvent } from "react";
 import { WALLET_ADAPTERS } from "@web3auth/base";
