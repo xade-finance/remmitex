@@ -1,0 +1,9 @@
+.announcement-bar{
+	font-size:2.5rem;
+	background:#222222;
+}
+@media screen and (max-width: 960px) {
+	.announcement-bar{
+		font-size:10px;
+	}
+}

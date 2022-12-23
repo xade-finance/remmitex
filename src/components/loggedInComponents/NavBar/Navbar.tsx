@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
+import { AnnouncementBar } from 'react-announcement-bar';
 
 type Props = {};
 
@@ -28,12 +29,21 @@ const Navbar = (props: Props) => {
   window.addEventListener("resize", showButton);
   return (
     <>
-      <nav className="navbar">
+{/*}
 <div className="vela announcement">
-<b>📢 RemmiteX V2 and DeriveX V1 will go live on Testnet on 5th January 2023</b></div>
-        
-<div className="navbar-container">
+<b>📢 RemmiteX V2 and DeriveX V1 will go live on Testnet on 5th January 2023 <ImCross /></b></div>
+{*/}    
+  <nav className="navbar">
+   {/*} <AnnouncementBar height="60" backgroundColor="#000000" relative={false} width="100%">
+       
+            <div style={{width: "80%", margin: "auto", color: "#ffffff" }}>
+                 Want to recieve notifications
+                 <a href="#" style={{ fontWeight: "bold", color: "#ffffff" }}>ENABLE !</a>
+             </div>
+     
+      </AnnouncementBar>    
 
+{*/}<div className="navbar-container">
           <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
             XADE
           </Link>
@@ -106,6 +116,7 @@ const Navbar = (props: Props) => {
           </div>
         </div>
       </nav>
+
     </>
   );
 };

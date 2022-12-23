@@ -587,7 +587,7 @@ const Main = () => {
                 path="/register"
                 element={
                   <Layout>
-                    <HomePage />
+                    <HomePage account={mainAccount}/>
                   </Layout>
                 }
               />
@@ -595,7 +595,7 @@ const Main = () => {
                 path="/login"
                 element={
                   <Layout>
-                    <HomePage />
+                    <HomePage account={mainAccount}/>
                   </Layout>
                 }
               />
